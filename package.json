@@ -1,0 +1,12 @@
+{
+  "name": "asha-books-wholesale",
+  "version": "1.0.0",
+  "description": "Asha Books wholesale catalogue & order enquiry website",
+  "private": true,
+  "scripts": {
+    "generate": "node gen_products.js"
+  },
+  "devDependencies": {
+    "xlsx": "^0.18.5"
+  }
+}

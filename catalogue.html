@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asha Books — Wholesale Catalogue</title>
+  <style>
+    :root {
+      --red:      #C82035;
+      --red-dark: #A81A2C;
+      --dark:     #1A1A1A;
+      --text:     #333;
+      --muted:    #777;
+      --bg:       #FFFFFF;
+      --light:    #F6F6F6;
+      --border:   #E0E0E0;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); }
+
+    /* ── Header ─────────────────────────────────────── */
+    .site-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 28px; border-bottom: 1px solid var(--border);
+      background: var(--bg); position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 1px 6px rgba(0,0,0,.06);
+    }
+    .header-left { display: flex; align-items: center; gap: 14px; }
+    .site-logo { height: 46px; object-fit: contain; display: block; }
+    .header-divider { width: 1px; height: 32px; background: var(--border); }
+    .header-title { font-size: .95rem; font-weight: 700; color: var(--dark); }
+    .header-sub { font-size: .74rem; color: var(--muted); }
+
+    .order-toggle {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--red); color: #fff;
+      border: none; border-radius: 8px; padding: 9px 18px;
+      font-size: .88rem; font-weight: 700; cursor: pointer;
+      transition: background .18s;
+    }
+    .order-toggle:hover { background: var(--red-dark); }
+    .order-badge {
+      background: #fff; color: var(--red);
+      border-radius: 12px; padding: 1px 7px;
+      font-size: .72rem; font-weight: 800;
+    }
+
+    /* ── Main wrapper ────────────────────────────────── */
+    .cat-wrapper { max-width: 1480px; margin: 0 auto; padding: 24px 28px; }
+
+    /* ── Controls ────────────────────────────────────── */
+    .cat-controls {
+      display: flex; gap: 20px; align-items: flex-end;
+      flex-wrap: wrap; margin-bottom: 14px;
+    }
+    .ctrl-label {
+      font-size: .72rem; font-weight: 700; color: var(--muted);
+      text-transform: uppercase; letter-spacing: .06em;
+      display: block; margin-bottom: 6px;
+    }
+    .search-wrap { flex: 1; min-width: 240px; }
+    .cat-search {
+      width: 100%; padding: 10px 14px; font-size: .95rem;
+      border: 1px solid var(--border); border-radius: 8px; outline: none;
+      transition: border-color .18s;
+    }
+    .cat-search:focus { border-color: var(--red); }
+
+    .price-filter { min-width: 230px; }
+    .price-range-vals {
+      display: flex; justify-content: space-between;
+      font-size: .8rem; font-weight: 700; color: var(--dark);
+      margin-bottom: 6px;
+    }
+    .slider-wrap { position: relative; height: 24px; }
+    .slider-track {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      left: 0; right: 0; height: 4px; background: var(--border); border-radius: 2px;
+    }
+    .slider-fill {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      height: 4px; background: var(--red); border-radius: 2px;
+    }
+    input[type=range].r-min, input[type=range].r-max {
+      position: absolute; width: 100%; top: 50%; transform: translateY(-50%);
+      -webkit-appearance: none; appearance: none;
+      background: transparent; pointer-events: none; margin: 0; height: 4px;
+    }
+    input[type=range].r-min::-webkit-slider-thumb,
+    input[type=range].r-max::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none;
+      width: 18px; height: 18px; border-radius: 50%;
+      background: var(--red); cursor: pointer;
+      pointer-events: all; border: 2px solid #fff;
+      box-shadow: 0 1px 5px rgba(0,0,0,.22);
+    }
+    input[type=range].r-min::-moz-range-thumb,
+    input[type=range].r-max::-moz-range-thumb {
+      width: 18px; height: 18px; border-radius: 50%;
+      background: var(--red); cursor: pointer;
+      pointer-events: all; border: 2px solid #fff;
+    }
+
+    /* ── Meta bar ────────────────────────────────────── */
+    .cat-meta {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 22px; flex-wrap: wrap;
+    }
+    .cat-count { color: var(--muted); font-size: .86rem; }
+    .cat-reset {
+      background: none; border: none; font-size: .8rem;
+      color: var(--red); cursor: pointer; text-decoration: underline; padding: 0;
+    }
+
+    /* ── Translation select ──────────────────────────── */
+    .trans-wrap { min-width: 190px; }
+    .cat-select {
+      width: 100%; padding: 10px 14px; font-size: .95rem;
+      border: 1px solid var(--border); border-radius: 8px;
+      background: var(--bg); outline: none; cursor: pointer;
+      transition: border-color .18s; color: var(--text);
+    }
+    .cat-select:focus { border-color: var(--red); }
+
+    /* ── Stock badges ────────────────────────────────── */
+    .stock-badge {
+      display: inline-block; font-size: .65rem; font-weight: 700;
+      padding: 2px 7px; border-radius: 4px; margin-top: 4px;
+    }
+    .stock-in  { background: #e8f5e9; color: #2e7d32; }
+    .stock-low { background: #fff3e0; color: #bf5900; }
+    .stock-out { background: #fde8eb; color: var(--red); }
+    .book-card.out-of-stock { opacity: .72; }
+    .book-card.out-of-stock .book-img-wrap { filter: grayscale(.3); }
+
+    /* ── Book Grid ───────────────────────────────────── */
+    .book-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
+      gap: 18px;
+    }
+    .book-card {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 10px; overflow: hidden;
+      display: flex; flex-direction: column;
+      cursor: pointer; transition: box-shadow .2s, transform .2s;
+    }
+    .book-card:hover { box-shadow: 0 6px 22px rgba(0,0,0,.1); transform: translateY(-2px); }
+    .book-img-wrap {
+      background: var(--light); aspect-ratio: 2/3;
+      display: flex; align-items: center; justify-content: center; overflow: hidden;
+    }
+    .book-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+    .book-info { padding: 10px 12px 14px; flex: 1; display: flex; flex-direction: column; gap: 3px; }
+    .book-title {
+      font-size: .77rem; font-weight: 600; color: var(--dark);
+      line-height: 1.35; flex: 1;
+      display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .book-isbn { font-size: .66rem; color: var(--muted); }
+    .book-prices { display: flex; flex-direction: column; gap: 1px; margin-top: 4px; }
+    .book-mrp { font-size: .68rem; color: var(--muted); text-decoration: line-through; }
+    .book-price { font-size: .9rem; font-weight: 700; color: var(--red); }
+    .btn-add {
+      margin-top: 8px; width: 100%; padding: 6px 0;
+      font-size: .74rem; font-weight: 600;
+      background: var(--light); border: 1px solid var(--border);
+      border-radius: 6px; cursor: pointer; transition: all .15s;
+    }
+    .btn-add:hover:not(:disabled), .btn-add.in-order {
+      background: var(--red); color: #fff; border-color: var(--red);
+    }
+    .btn-add:disabled { background: var(--light); color: var(--muted); border-color: var(--border); cursor: not-allowed; }
+    .cat-empty {
+      display: none; text-align: center; padding: 60px 20px;
+      color: var(--muted); font-size: 1rem;
+    }
+
+    /* ── Order Panel ─────────────────────────────────── */
+    .order-panel {
+      position: fixed; top: 0; right: -360px; width: 340px; height: 100vh;
+      background: var(--bg); box-shadow: -4px 0 24px rgba(0,0,0,.12);
+      z-index: 950; display: flex; flex-direction: column;
+      transition: right .26s ease;
+    }
+    .order-panel.open { right: 0; }
+    .panel-header {
+      padding: 16px 18px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      font-weight: 700; font-size: .98rem; color: var(--dark);
+    }
+    .panel-close { background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--muted); line-height: 1; }
+    .panel-close:hover { color: var(--dark); }
+    .panel-items { flex: 1; overflow-y: auto; padding: 12px; }
+    .panel-empty { color: var(--muted); text-align: center; margin-top: 40px; font-size: .86rem; }
+
+    .order-item { border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; }
+    .oi-title { font-size: .77rem; font-weight: 600; color: var(--dark); margin-bottom: 3px; line-height: 1.35; }
+    .oi-isbn { font-size: .67rem; color: var(--muted); margin-bottom: 7px; }
+    .oi-row { display: flex; align-items: center; gap: 6px; }
+    .oi-qty-btn {
+      width: 26px; height: 26px; border: 1px solid var(--border);
+      border-radius: 4px; background: var(--light); cursor: pointer;
+      font-size: .9rem; display: flex; align-items: center; justify-content: center;
+    }
+    .oi-qty-btn:hover { background: var(--border); }
+    .oi-qty { width: 40px; height: 26px; text-align: center; border: 1px solid var(--border); border-radius: 4px; font-size: .84rem; }
+    .oi-subtotal { flex: 1; text-align: right; font-size: .8rem; font-weight: 700; color: var(--dark); }
+    .oi-remove { background: none; border: none; color: var(--border); cursor: pointer; font-size: 1rem; padding: 0 2px; }
+    .oi-remove:hover { color: var(--red); }
+
+    .panel-footer { padding: 14px 18px; border-top: 1px solid var(--border); }
+    .total-row {
+      font-size: .95rem; font-weight: 600; color: var(--dark);
+      margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center;
+    }
+    .total-amount { font-size: 1.1rem; color: var(--red); font-weight: 800; }
+    .panel-btns { display: flex; gap: 8px; }
+    .btn-clear {
+      flex: 1; padding: 9px; background: var(--light);
+      border: 1px solid var(--border); border-radius: 8px;
+      cursor: pointer; font-size: .82rem; font-weight: 600;
+    }
+    .btn-clear:hover { background: var(--border); }
+    .btn-proceed {
+      flex: 2; padding: 9px; background: var(--red); color: #fff;
+      border: none; border-radius: 8px; cursor: pointer;
+      font-size: .86rem; font-weight: 700; transition: background .18s;
+    }
+    .btn-proceed:hover { background: var(--red-dark); }
+    .btn-proceed:disabled { background: var(--border); color: var(--muted); cursor: not-allowed; }
+
+    /* ── Lightbox ────────────────────────────────────── */
+    .lightbox {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,.72); z-index: 1000;
+      align-items: center; justify-content: center; padding: 20px;
+    }
+    .lightbox.active { display: flex; }
+    .lb-box {
+      background: var(--bg); border-radius: 14px;
+      max-width: 400px; width: 100%; overflow: hidden;
+      position: relative; animation: lb-in .18s ease;
+    }
+    @keyframes lb-in { from { opacity: 0; transform: scale(.93); } to { opacity: 1; transform: scale(1); } }
+    .lb-close {
+      position: absolute; top: 10px; right: 12px;
+      background: none; border: none; font-size: 1.5rem;
+      cursor: pointer; color: var(--muted); z-index: 1; line-height: 1;
+    }
+    .lb-close:hover { color: var(--dark); }
+    .lb-img { width: 100%; max-height: 340px; object-fit: contain; background: var(--light); display: block; }
+    .lb-body { padding: 16px 20px 22px; }
+    .lb-title { font-size: 1rem; font-weight: 700; color: var(--dark); margin-bottom: 4px; line-height: 1.4; }
+    .lb-isbn { font-size: .76rem; color: var(--muted); margin-bottom: 10px; }
+    .lb-prices { margin-bottom: 14px; }
+    .lb-stock { font-size: .78rem; font-weight: 700; margin-bottom: 10px; }
+    .lb-mrp { font-size: .8rem; color: var(--muted); text-decoration: line-through; }
+    .lb-price { font-size: 1.2rem; font-weight: 800; color: var(--red); }
+    .lb-order-row { display: flex; align-items: center; gap: 8px; }
+    .lb-qty-btn {
+      width: 32px; height: 32px; border: 1px solid var(--border);
+      border-radius: 6px; background: var(--light); cursor: pointer;
+      font-size: 1rem; display: flex; align-items: center; justify-content: center;
+    }
+    .lb-qty-btn:hover { background: var(--border); }
+    .lb-qty { width: 52px; height: 32px; text-align: center; border: 1px solid var(--border); border-radius: 6px; font-size: .95rem; }
+    .lb-add {
+      flex: 1; padding: 8px; background: var(--red); color: #fff;
+      border: none; border-radius: 6px; cursor: pointer;
+      font-size: .88rem; font-weight: 700; transition: background .18s;
+    }
+    .lb-add:hover { background: var(--red-dark); }
+
+    /* ── Responsive ──────────────────────────────────── */
+    @media (max-width: 640px) {
+      .book-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .order-panel { width: 100%; right: -100%; }
+      .site-header { padding: 10px 16px; }
+      .cat-wrapper { padding: 16px; }
+    }
+    @media print {
+      .site-header, .cat-controls, .cat-meta,
+      .order-panel, .order-toggle, .lightbox { display: none; }
+      .book-card { break-inside: avoid; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Header ── -->
+  <header class="site-header">
+    <div class="header-left">
+      <img src="ashabookslogo.JPG" alt="Asha Books" class="site-logo">
+      <div class="header-divider"></div>
+      <div>
+        <div class="header-title">Wholesale Catalogue</div>
+        <div class="header-sub">Bibles &amp; Christian Literature</div>
+      </div>
+    </div>
+    <button class="order-toggle" id="orderToggle">
+      &#128722; Order&nbsp;<span class="order-badge" id="orderBadge">0</span>
+    </button>
+  </header>
+
+  <!-- ── Catalogue ── -->
+  <div class="cat-wrapper">
+    <div class="cat-controls">
+      <div class="search-wrap">
+        <label class="ctrl-label" for="catSearch">Search</label>
+        <input type="search" class="cat-search" id="catSearch" placeholder="Title or ISBN…">
+      </div>
+      <div class="trans-wrap">
+        <label class="ctrl-label" for="catTranslation">Translation</label>
+        <select class="cat-select" id="catTranslation">
+          <option value="">All Translations</option>
+          <option value="KJV">KJV (291)</option>
+          <option value="NIV">NIV (265)</option>
+          <option value="NKJV">NKJV (163)</option>
+          <option value="NASB">NASB (38)</option>
+          <option value="RSV">RSV (35)</option>
+          <option value="NRSV">NRSV (26)</option>
+          <option value="NET">NET (20)</option>
+          <option value="AMP">AMP (16)</option>
+          <option value="ESV">ESV (13)</option>
+          <option value="ICB">ICB (5)</option>
+          <option value="NLT">NLT (2)</option>
+          <option value="Other">Other / General (204)</option>
+        </select>
+      </div>
+      <div class="price-filter">
+        <label class="ctrl-label">Wholesale Price</label>
+        <div class="price-range-vals">
+          <span id="priceMinLabel"></span>
+          <span id="priceMaxLabel"></span>
+        </div>
+        <div class="slider-wrap">
+          <div class="slider-track"></div>
+          <div class="slider-fill" id="sliderFill"></div>
+          <input type="range" class="r-min" id="priceMin">
+          <input type="range" class="r-max" id="priceMax">
+        </div>
+      </div>
+    </div>
+
+    <div class="cat-meta">
+      <span class="cat-count" id="catCount"></span>
+      <button class="cat-reset" id="catReset">Reset filters</button>
+    </div>
+
+    <div class="book-grid" id="bookGrid"></div>
+    <p class="cat-empty" id="catEmpty">No products match your filters.</p>
+  </div>
+
+  <!-- ── Order Panel ── -->
+  <aside class="order-panel" id="orderPanel">
+    <div class="panel-header">
+      <span>Order List</span>
+      <button class="panel-close" id="panelClose">&times;</button>
+    </div>
+    <div class="panel-items" id="orderItems">
+      <p class="panel-empty">No items added yet.</p>
+    </div>
+    <div class="panel-footer">
+      <div class="total-row">
+        <span>Total</span>
+        <span class="total-amount" id="orderTotal">&#8377;0</span>
+      </div>
+      <div class="panel-btns">
+        <button class="btn-clear" id="clearOrder">Clear All</button>
+        <button class="btn-proceed" id="proceedBtn" disabled>Proceed to Enquiry &#8594;</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ── Lightbox ── -->
+  <div class="lightbox" id="lightbox">
+    <div class="lb-box" id="lbBox">
+      <button class="lb-close" id="lbClose">&times;</button>
+      <img class="lb-img" id="lbImg" src="" alt="">
+      <div class="lb-body">
+        <p class="lb-title" id="lbTitle"></p>
+        <p class="lb-isbn" id="lbIsbn"></p>
+        <p class="lb-stock" id="lbStock"></p>
+        <div class="lb-prices">
+          <p class="lb-mrp" id="lbMrp"></p>
+          <p class="lb-price" id="lbPrice"></p>
+        </div>
+        <div class="lb-order-row">
+          <button class="lb-qty-btn" id="lbMinus">&#8722;</button>
+          <input type="number" class="lb-qty" id="lbQty" value="1" min="1">
+          <button class="lb-qty-btn" id="lbPlus">&#43;</button>
+          <button class="lb-add" id="lbAdd">+ Add to Order</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="products.js"></script>
+  <script>
+    (function () {
+      const order = {};
+      let activeIsbn = null;
+
+      // ── Translation detection ────────────────────────
+      function detectTranslation(title) {
+        const u = title.toUpperCase();
+        if (u.includes('NKJV')) return 'NKJV';
+        if (u.includes('NRSV')) return 'NRSV';
+        if (u.includes('NIV'))  return 'NIV';
+        if (u.includes('NASB')) return 'NASB';
+        if (u.includes('KJV'))  return 'KJV';
+        if (u.includes('ESV'))  return 'ESV';
+        if (u.includes('NLT'))  return 'NLT';
+        if (u.includes('AMP'))  return 'AMP';
+        if (u.includes('NET'))  return 'NET';
+        if (u.includes('RSV'))  return 'RSV';
+        if (u.includes('ICB'))  return 'ICB';
+        return 'Other';
+      }
+
+      // ── Stock info helper ────────────────────────────
+      function stockInfo(qty) {
+        if (qty <= 0)  return { label: 'Out of Stock', cls: 'stock-out', available: 0 };
+        if (qty <= 3)  return { label: `Low Stock: ${qty} left`, cls: 'stock-low', available: qty };
+        return { label: `In Stock: ${qty}`, cls: 'stock-in', available: qty };
+      }
+
+      // ── Product lookup map ───────────────────────────
+      const productMap = {};
+      PRODUCTS.forEach(p => {
+        p.translation = detectTranslation(p.title);
+        productMap[p.isbn] = p;
+      });
+
+      // ── Price range init ─────────────────────────────
+      const prices = PRODUCTS.filter(p => p.discounted > 0).map(p => p.discounted);
+      const PRICE_MIN = Math.floor(Math.min(...prices));
+      const PRICE_MAX = Math.ceil(Math.max(...prices));
+
+      const rMin = document.getElementById('priceMin');
+      const rMax = document.getElementById('priceMax');
+      const fill = document.getElementById('sliderFill');
+      const minLbl = document.getElementById('priceMinLabel');
+      const maxLbl = document.getElementById('priceMaxLabel');
+
+      [rMin, rMax].forEach(r => { r.min = PRICE_MIN; r.max = PRICE_MAX; r.step = 1; });
+      rMin.value = PRICE_MIN;
+      rMax.value = PRICE_MAX;
+
+      function fmtRupee(n) {
+        return '₹' + Math.round(n).toLocaleString('en-IN');
+      }
+
+      function updateSlider() {
+        const lo = +rMin.value, hi = +rMax.value;
+        const range = PRICE_MAX - PRICE_MIN;
+        fill.style.left  = ((lo - PRICE_MIN) / range * 100) + '%';
+        fill.style.right = ((PRICE_MAX - hi) / range * 100) + '%';
+        minLbl.textContent = fmtRupee(lo);
+        maxLbl.textContent = fmtRupee(hi);
+      }
+      updateSlider();
+
+      rMin.addEventListener('input', () => {
+        if (+rMin.value > +rMax.value) rMin.value = rMax.value;
+        updateSlider(); applyFilters();
+      });
+      rMax.addEventListener('input', () => {
+        if (+rMax.value < +rMin.value) rMax.value = rMin.value;
+        updateSlider(); applyFilters();
+      });
+
+      // ── Placeholder for missing covers ───────────────
+      function genPlaceholder(title) {
+        const c = (title || 'B')[0].toUpperCase();
+        const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="200" height="300">
+          <rect width="200" height="300" fill="#f8ecec"/>
+          <text x="100" y="175" font-size="90" text-anchor="middle" fill="#C82035"
+            font-family="Georgia,serif" font-weight="bold">${c}</text>
+        </svg>`;
+        return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+      }
+
+      function escHtml(s) {
+        return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+      }
+
+      // ── Render grid ──────────────────────────────────
+      const grid = document.getElementById('bookGrid');
+      const emptyMsg = document.getElementById('catEmpty');
+      const catCount = document.getElementById('catCount');
+
+      function renderGrid(products) {
+        catCount.textContent = products.length.toLocaleString() + ' product' + (products.length !== 1 ? 's' : '');
+        if (products.length === 0) {
+          grid.innerHTML = '';
+          emptyMsg.style.display = 'block';
+          return;
+        }
+        emptyMsg.style.display = 'none';
+        grid.innerHTML = products.map(p => {
+          const stock   = stockInfo(p.qty);
+          const isOOS   = stock.available === 0;
+          const inOrder = (!isOOS && order[p.isbn]) ? ' in-order' : '';
+          const btnTxt  = isOOS ? 'Out of Stock' : (order[p.isbn] ? '✓ In Order' : '+ Add to Order');
+          const cardCls = isOOS ? ' out-of-stock' : '';
+          const placeholder = genPlaceholder(p.title);
+          return `<div class="book-card${cardCls}" data-isbn="${p.isbn}">
+            <div class="book-img-wrap">
+              <img src="covers/${p.isbn}.jpg"
+                   alt="${escHtml(p.title)}" loading="lazy"
+                   onerror="this.onerror=null;this.src='${placeholder}'">
+            </div>
+            <div class="book-info">
+              <p class="book-title">${escHtml(p.title)}</p>
+              <p class="book-isbn">ISBN: ${p.isbn}</p>
+              <span class="stock-badge ${stock.cls}">${stock.label}</span>
+              <div class="book-prices">
+                ${p.mrp > 0 ? `<p class="book-mrp">MRP ₹${p.mrp.toLocaleString('en-IN')}</p>` : ''}
+                <p class="book-price">${p.discounted > 0 ? fmtRupee(p.discounted) : '—'}</p>
+              </div>
+              <button class="btn-add${inOrder}" data-isbn="${p.isbn}"${isOOS ? ' disabled' : ''}>${btnTxt}</button>
+            </div>
+          </div>`;
+        }).join('');
+      }
+
+      // ── Filters ──────────────────────────────────────
+      const searchInput = document.getElementById('catSearch');
+      const transSelect = document.getElementById('catTranslation');
+
+      function applyFilters() {
+        const q     = searchInput.value.trim().toLowerCase();
+        const lo    = +rMin.value, hi = +rMax.value;
+        const trans = transSelect.value;
+        const filtered = PRODUCTS.filter(p => {
+          if (q && !p.title.toLowerCase().includes(q) && !p.isbn.includes(q)) return false;
+          if (p.discounted > 0 && (p.discounted < lo || p.discounted > hi)) return false;
+          if (trans && p.translation !== trans) return false;
+          return true;
+        });
+        renderGrid(filtered);
+      }
+
+      searchInput.addEventListener('input', applyFilters);
+      transSelect.addEventListener('change', applyFilters);
+      document.getElementById('catReset').addEventListener('click', () => {
+        searchInput.value = '';
+        transSelect.value = '';
+        rMin.value = PRICE_MIN;
+        rMax.value = PRICE_MAX;
+        updateSlider(); applyFilters();
+      });
+
+      renderGrid(PRODUCTS);
+
+      // ── Order management ─────────────────────────────
+      const orderItems  = document.getElementById('orderItems');
+      const orderTotal  = document.getElementById('orderTotal');
+      const orderBadge  = document.getElementById('orderBadge');
+      const proceedBtn  = document.getElementById('proceedBtn');
+
+      function recalc() {
+        let total = 0, count = 0;
+        Object.values(order).forEach(it => { total += it.price * it.qty; count += it.qty; });
+        orderTotal.textContent = fmtRupee(total);
+        orderBadge.textContent = count;
+        proceedBtn.disabled = count === 0;
+      }
+
+      function renderOrder() {
+        const keys = Object.keys(order);
+        if (keys.length === 0) {
+          orderItems.innerHTML = '<p class="panel-empty">No items added yet.</p>';
+          recalc(); return;
+        }
+        orderItems.innerHTML = keys.map(isbn => {
+          const it  = order[isbn];
+          const max = (productMap[isbn] || {}).qty || 99;
+          return `<div class="order-item" data-isbn="${isbn}">
+            <div class="oi-title">${escHtml(it.title)}</div>
+            <div class="oi-isbn">ISBN: ${isbn} &nbsp;·&nbsp; Max: ${max}</div>
+            <div class="oi-row">
+              <button class="oi-qty-btn oi-minus">&#8722;</button>
+              <input type="number" class="oi-qty" value="${it.qty}" min="1" max="${max}">
+              <button class="oi-qty-btn oi-plus">&#43;</button>
+              <span class="oi-subtotal">${fmtRupee(it.price * it.qty)}</span>
+              <button class="oi-remove" title="Remove">&times;</button>
+            </div>
+          </div>`;
+        }).join('');
+        recalc();
+
+        orderItems.querySelectorAll('.order-item').forEach(el => {
+          const isbn = el.dataset.isbn;
+          const maxQty = (productMap[isbn] || {}).qty || 99;
+          el.querySelector('.oi-minus').addEventListener('click', () => {
+            if (order[isbn].qty > 1) { order[isbn].qty--; renderOrder(); updateBtn(isbn); }
+          });
+          el.querySelector('.oi-plus').addEventListener('click', () => {
+            if (order[isbn].qty < maxQty) { order[isbn].qty++; renderOrder(); updateBtn(isbn); }
+          });
+          el.querySelector('.oi-qty').addEventListener('change', function () {
+            const v = Math.min(Math.max(parseInt(this.value) || 1, 1), maxQty);
+            order[isbn].qty = v; renderOrder();
+          });
+          el.querySelector('.oi-remove').addEventListener('click', () => {
+            delete order[isbn]; renderOrder(); updateBtn(isbn);
+          });
+        });
+      }
+
+      function addToOrder(isbn, qty = 1) {
+        const p = productMap[isbn]; if (!p || p.qty <= 0) return;
+        const already  = order[isbn] ? order[isbn].qty : 0;
+        const canAdd   = Math.min(qty, p.qty - already);
+        if (canAdd <= 0) {
+          document.getElementById('orderPanel').classList.add('open');
+          return;
+        }
+        if (order[isbn]) order[isbn].qty += canAdd;
+        else order[isbn] = { title: p.title, isbn, price: p.discounted || p.mrp || 0, mrp: p.mrp, qty: canAdd };
+        renderOrder(); updateBtn(isbn);
+        document.getElementById('orderPanel').classList.add('open');
+      }
+
+      function updateBtn(isbn) {
+        const btn = grid.querySelector(`[data-isbn="${isbn}"] .btn-add`);
+        if (!btn) return;
+        if (order[isbn]) { btn.textContent = '✓ In Order'; btn.classList.add('in-order'); }
+        else { btn.textContent = '+ Add to Order'; btn.classList.remove('in-order'); }
+      }
+
+      // ── Grid click delegation ────────────────────────
+      grid.addEventListener('click', e => {
+        const addBtn = e.target.closest('.btn-add');
+        if (addBtn) { e.stopPropagation(); if (!addBtn.disabled) addToOrder(addBtn.dataset.isbn); return; }
+        const card = e.target.closest('.book-card');
+        if (card) openLightbox(card.dataset.isbn);
+      });
+
+      // ── Panel controls ───────────────────────────────
+      document.getElementById('orderToggle').addEventListener('click', () =>
+        document.getElementById('orderPanel').classList.toggle('open'));
+      document.getElementById('panelClose').addEventListener('click', () =>
+        document.getElementById('orderPanel').classList.remove('open'));
+      document.getElementById('clearOrder').addEventListener('click', () => {
+        Object.keys(order).forEach(k => delete order[k]);
+        renderOrder();
+        grid.querySelectorAll('.btn-add').forEach(b => { b.textContent = '+ Add to Order'; b.classList.remove('in-order'); });
+      });
+
+      proceedBtn.addEventListener('click', () => {
+        if (!Object.keys(order).length) return;
+        localStorage.setItem('ashaOrder', JSON.stringify(order));
+        window.location.href = 'order.html';
+      });
+
+      // ── Lightbox ─────────────────────────────────────
+      const lightbox = document.getElementById('lightbox');
+      const lbBox    = document.getElementById('lbBox');
+      const lbImg    = document.getElementById('lbImg');
+      const lbTitle  = document.getElementById('lbTitle');
+      const lbIsbn   = document.getElementById('lbIsbn');
+      const lbMrp    = document.getElementById('lbMrp');
+      const lbPrice  = document.getElementById('lbPrice');
+      const lbQty    = document.getElementById('lbQty');
+      const lbAdd    = document.getElementById('lbAdd');
+      const lbStock  = document.getElementById('lbStock');
+
+      function openLightbox(isbn) {
+        const p = productMap[isbn]; if (!p) return;
+        activeIsbn = isbn;
+        lbImg.src = `covers/${isbn}.jpg`;
+        lbImg.onerror = () => { lbImg.src = genPlaceholder(p.title); lbImg.onerror = null; };
+        lbTitle.textContent = p.title;
+        lbIsbn.textContent  = 'ISBN: ' + isbn;
+        const stock = stockInfo(p.qty);
+        lbStock.textContent  = stock.label;
+        lbStock.className    = 'lb-stock ' + stock.cls;
+        lbMrp.textContent    = p.mrp > 0 ? 'MRP ₹' + p.mrp.toLocaleString('en-IN') : '';
+        lbPrice.textContent  = p.discounted > 0 ? 'Wholesale: ' + fmtRupee(p.discounted) : '—';
+        lbQty.max   = p.qty || 1;
+        lbQty.value = Math.min(1, p.qty);
+        lbAdd.disabled    = p.qty <= 0;
+        lbAdd.textContent = p.qty <= 0 ? 'Out of Stock' : '+ Add to Order';
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+        activeIsbn = null;
+      }
+
+      document.getElementById('lbClose').addEventListener('click', closeLightbox);
+      lightbox.addEventListener('click', e => { if (!lbBox.contains(e.target)) closeLightbox(); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+      document.getElementById('lbMinus').addEventListener('click', () => {
+        if (+lbQty.value > 1) lbQty.value = +lbQty.value - 1;
+      });
+      document.getElementById('lbPlus').addEventListener('click', () => {
+        const maxQty = activeIsbn ? (productMap[activeIsbn] || {}).qty || 1 : 1;
+        if (+lbQty.value < maxQty) lbQty.value = +lbQty.value + 1;
+      });
+      lbAdd.addEventListener('click', () => {
+        if (!activeIsbn) return;
+        addToOrder(activeIsbn, parseInt(lbQty.value) || 1);
+        lbAdd.textContent = '✓ Added!';
+        setTimeout(() => { lbAdd.textContent = '+ Add to Order'; }, 1200);
+      });
+
+    })();
+  </script>
+</body>
+</html>
