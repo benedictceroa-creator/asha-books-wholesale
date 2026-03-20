@@ -315,11 +315,12 @@
     //   {{customer_address}}, {{order_date}}, {{order_items}},
     //   {{order_total}}, {{to_email}}
     // ============================================================
-    const EMAILJS_PUBLIC_KEY         = 'YOUR_PUBLIC_KEY';
-    const EMAILJS_SERVICE_ID         = 'YOUR_SERVICE_ID';
-    const EMAILJS_TEMPLATE_BUSINESS  = 'YOUR_BUSINESS_TEMPLATE_ID';
-    const EMAILJS_TEMPLATE_CUSTOMER  = 'YOUR_CUSTOMER_TEMPLATE_ID';
-    const BUSINESS_EMAIL             = 'orders@ashabooks.in'; // ← change this
+    const EMAILJS_PUBLIC_KEY         = 'ZMOqGe0V4vSDL1ux8';
+    const EMAILJS_SERVICE_ID         = 'service_weohyw4';
+    const EMAILJS_TEMPLATE_BUSINESS  = 'template_yczizqa';
+    const EMAILJS_TEMPLATE_CUSTOMER  = 'template_hquvh86';
+    const BUSINESS_EMAIL             = 'bened.john@gmail.com';
+    const DRIVE_SCRIPT_URL           = 'https://script.google.com/macros/s/AKfycbxR5bY0xMin1HC0U6LdX9febSBP3rMzAxc8q90MvaypLbM0gWzSXKllWYW_C9QpZSfi/exec';
     // ============================================================
 
     emailjs.init(EMAILJS_PUBLIC_KEY);
@@ -425,8 +426,30 @@
           // 2. Confirmation to customer
           emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_CUSTOMER, { ...params, to_email: customerData.customer_email })
         )
-        .catch(err => console.warn('EmailJS:', err)) // still show success
-        .finally(() => showSuccess());
+        .then(() => {
+          // 1. Auto-download PDF for the buyer
+          try {
+            const fname = `Asha-Books-Order-${new Date().toISOString().slice(0,10)}-${customerData.customer_name.replace(/\s+/g,'-')}.pdf`;
+            buildPdf().save(fname);
+          } catch(err) { console.warn('PDF download error:', err); }
+
+          // 2. Log order to Google Sheets (fire-and-forget)
+          try {
+            fetch(DRIVE_SCRIPT_URL, {
+              method:  'POST',
+              headers: { 'Content-Type': 'text/plain' },
+              body:    JSON.stringify(params),
+            }).catch(err => console.warn('Sheets log (CORS on response is normal):', err));
+          } catch(err) { console.warn('Sheets log error:', err); }
+
+          showSuccess();
+        })
+        .catch(err => {
+          console.error('EmailJS error:', err);
+          const msg = (err && (err.text || err.message)) ? (err.text || err.message) : JSON.stringify(err);
+          alert('Email could not be sent: ' + msg + '\n\nPlease contact us directly at bened.john@gmail.com');
+          showSuccess(); // still show success so order isn't lost
+        });
     });
 
     function showSuccess() {
@@ -438,8 +461,8 @@
       localStorage.removeItem('ashaOrder');
     }
 
-    // ── PDF Download ─────────────────────────────────────
-    document.getElementById('downloadPdf').addEventListener('click', () => {
+    // ── PDF Builder (shared by email attach + download button) ───
+    function buildPdf() {
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF();
 
@@ -504,7 +527,12 @@
       doc.setFontSize(8); doc.setTextColor(160,160,160);
       doc.text('This is an order enquiry. Final pricing subject to confirmation by Asha Books.', 14, finalY);
 
-      doc.save(`Asha-Books-Order-${new Date().toISOString().slice(0,10)}.pdf`);
+      return doc;
+    }
+
+    // ── PDF Download ─────────────────────────────────────
+    document.getElementById('downloadPdf').addEventListener('click', () => {
+      buildPdf().save(`Asha-Books-Order-${new Date().toISOString().slice(0,10)}.pdf`);
     });
 
     // ── Excel Download ────────────────────────────────────
