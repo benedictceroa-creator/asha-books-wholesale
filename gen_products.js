@@ -81,7 +81,7 @@ const js    = [
 fs.writeFileSync(OUT_PATH, js, 'utf8');
 
 // Update cache-busting version in HTML files
-const version = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+const version = new Date().toISOString().replace(/[-:T]/g, '').slice(0, 14); // YYYYMMDDHHmmss
 const htmlFiles = ['index.html', 'catalogue.html'].map(f => path.resolve(__dirname, f));
 htmlFiles.forEach(file => {
   if (!fs.existsSync(file)) return;
