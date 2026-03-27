@@ -80,6 +80,17 @@ const js    = [
 
 fs.writeFileSync(OUT_PATH, js, 'utf8');
 
+// Update cache-busting version in HTML files
+const version = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+const htmlFiles = ['index.html', 'catalogue.html'].map(f => path.resolve(__dirname, f));
+htmlFiles.forEach(file => {
+  if (!fs.existsSync(file)) return;
+  const html = fs.readFileSync(file, 'utf8');
+  const updated = html.replace(/products\.js(\?v=\d+)?/g, `products.js?v=${version}`);
+  fs.writeFileSync(file, updated, 'utf8');
+  console.log(`✓ Updated cache version in ${path.basename(file)}`);
+});
+
 const prices = products.filter(p => p.discounted > 0).map(p => p.discounted);
 console.log(`✓ Written ${products.length} products to products.js`);
 if (prices.length) {
