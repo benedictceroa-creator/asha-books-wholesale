@@ -1,10 +1,9 @@
 // Asha Books — Product Data
 // Auto-generated from Mrp.xlsx — do not edit manually.
 // To regenerate: node gen_products.js
-// Generated: 2026-03-27 — 716 products
+// Generated: 2026-03-27 — 705 products
 const PRODUCTS = [
   {"isbn":"9780061441714","title":"The Holy Bible","mrp":999,"discounted":649.35,"qty":3},
-  {"isbn":"9780061441721","title":"NRSV Catholic Edition","mrp":999,"discounted":649.35,"qty":1},
   {"isbn":"9780310080008","title":"Revolution Bible","mrp":2799,"discounted":1819.35,"qty":1},
   {"isbn":"9780310080046","title":"True Images Bible","mrp":2999,"discounted":1949.35,"qty":1},
   {"isbn":"9780310080053","title":"NIV, True Images Bible, Imitation Leather, Pink: The Bible for Teen Girls","mrp":2999,"discounted":1949.35,"qty":1},
@@ -265,7 +264,6 @@ const PRODUCTS = [
   {"isbn":"9780310465980","title":"NASB, Personal Size Bible, Large Print, Genuine Leather, Calfskin, Black, Red Letter, 1995 Text, Comfort Print","mrp":4999,"discounted":3249.35,"qty":3},
   {"isbn":"9780310466017","title":"New Revised Standard Version, Holy Bible, Compact","mrp":1799,"discounted":1169.35,"qty":1},
   {"isbn":"9780310466031","title":"New Revised Standard Version ue Holy Bible","mrp":1799,"discounted":1169.35,"qty":3},
-  {"isbn":"9780310466055","title":"New Revised Standard Version, Holy Bible with Apocrypha","mrp":1999,"discounted":1299.35,"qty":3},
   {"isbn":"9780310466062","title":"New International Version Beautiful Word Bible Peel-Stick Bible Tabs","mrp":3499,"discounted":2274.35,"qty":2},
   {"isbn":"9780310466482","title":"The Jesus Bible","mrp":2999,"discounted":1949.35,"qty":2},
   {"isbn":"9780310466994","title":"Adventure Bible for Early Readers","mrp":2499,"discounted":1624.35,"qty":3},
@@ -451,14 +449,6 @@ const PRODUCTS = [
   {"isbn":"9780785230328","title":"NASB, MacArthur Study Bible, 2nd Edition, Leathersoft, Brown, Thumb Indexed, Comfort Print","mrp":3999,"discounted":2599.35,"qty":1},
   {"isbn":"9780785230335","title":"NASB, MacArthur Study Bible, 2nd Edition, Leathersoft, Black, Comfort Print","mrp":3999,"discounted":2599.35,"qty":63},
   {"isbn":"9780785230342","title":"NASB, MacArthur Study Bible, 2nd Edition, Leathersoft, Black, Thumb Indexed, Comfort Print","mrp":4499,"discounted":2924.35,"qty":1},
-  {"isbn":"9780785230380","title":"NRSV, Catholic Bible, Gift Edition, Leathersoft, White, Comfort Print","mrp":1999,"discounted":1299.35,"qty":4},
-  {"isbn":"9780785230397","title":"NRSV, Catholic Bible, Gift Edition, Leathersoft, Brown, Comfort Print","mrp":1999,"discounted":1299.35,"qty":3},
-  {"isbn":"9780785230403","title":"NRSV, Catholic Bible, Gift Edition, Leathersoft, Black, Comfort Print","mrp":1999,"discounted":1299.35,"qty":1},
-  {"isbn":"9780785230410","title":"NRSV, Catholic Bible, Gift Edition, Leathersoft, Teal, Comfort Print","mrp":1999,"discounted":1299.35,"qty":3},
-  {"isbn":"9780785230434","title":"NRSV, Catholic Bible, Standard Large Print, Leathersoft, Black, Comfort Print","mrp":2799,"discounted":1819.35,"qty":3},
-  {"isbn":"9780785230441","title":"NRSV, Catholic Bible, Journal Edition, Cloth over Board, Blue, Comfort Print","mrp":2499,"discounted":1624.35,"qty":3},
-  {"isbn":"9780785230502","title":"NRSV, Catholic Bible, Standard Personal Size, Leathersoft, Black, Comfort Print","mrp":2499,"discounted":1624.35,"qty":1},
-  {"isbn":"9780785230533","title":"NRSV, Catholic Bible, Standard Personal Size, Leathersoft, Red, Comfort Print","mrp":2499,"discounted":1624.35,"qty":1},
   {"isbn":"9780785231660","title":"KJV, Thinline Bible, Giant Print, Leathersoft, Brown, Thumb Indexed, Red Letter Edition, Comfort Print","mrp":2499,"discounted":1624.35,"qty":2},
   {"isbn":"9780785231721","title":"NKJV, Thinline Bible, Giant Print, Leathersoft, Black, Thumb Indexed, Red Letter Edition, Comfort Print","mrp":2999,"discounted":1949.35,"qty":2},
   {"isbn":"9780785233268","title":"NET, Abide Bible, Leathersoft, Brown, Comfort Print","mrp":3999,"discounted":2599.35,"qty":3},
@@ -466,7 +456,6 @@ const PRODUCTS = [
   {"isbn":"9780785233602","title":"NKJV, Reference Bible, Personal Size Large Print, Leathersoft, Purple, Red Letter Edition, Comfort Print","mrp":1999,"discounted":1299.35,"qty":2},
   {"isbn":"9780785233619","title":"NKJV, Reference Bible, Personal Size Large Print, Leathersoft, Black, Red Letter Edition, Comfort Print","mrp":1999,"discounted":1299.35,"qty":1},
   {"isbn":"9780785233633","title":"NKJV, Reference Bible, Personal Size Large Print, Leathersoft, Pink, Red Letter Edition, Comfort Print","mrp":2499,"discounted":1624.35,"qty":1},
-  {"isbn":"9780785233923","title":"NABRE, New American Bible, Revised Edition, Catholic Bible, Large Print Edition, Leathersoft, Brown, Comfort Print","mrp":2999,"discounted":1949.35,"qty":8},
   {"isbn":"9780785235507","title":"ESV, MacArthur Study Bible, 2nd Edition, Hardcover","mrp":3999,"discounted":2599.35,"qty":4},
   {"isbn":"9780785235514","title":"ESV, MacArthur Study Bible, 2nd Edition, Leathersoft, Black","mrp":3999,"discounted":2599.35,"qty":1},
   {"isbn":"9780785235521","title":"ESV, MacArthur Study Bible, 2nd Edition, Leathersoft, Brown","mrp":4499,"discounted":2924.35,"qty":3},
