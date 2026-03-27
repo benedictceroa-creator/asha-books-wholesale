@@ -1,9 +1,8 @@
 // Asha Books — Product Data
 // Auto-generated from Mrp.xlsx — do not edit manually.
 // To regenerate: node gen_products.js
-// Generated: 2026-03-27 — 705 products
+// Generated: 2026-03-27 — 696 products
 const PRODUCTS = [
-  {"isbn":"9780061441714","title":"The Holy Bible","mrp":999,"discounted":649.35,"qty":3},
   {"isbn":"9780310080008","title":"Revolution Bible","mrp":2799,"discounted":1819.35,"qty":1},
   {"isbn":"9780310080046","title":"True Images Bible","mrp":2999,"discounted":1949.35,"qty":1},
   {"isbn":"9780310080053","title":"NIV, True Images Bible, Imitation Leather, Pink: The Bible for Teen Girls","mrp":2999,"discounted":1949.35,"qty":1},
@@ -526,7 +525,6 @@ const PRODUCTS = [
   {"isbn":"9780785290148","title":"Net, Timeless Truths Bible, Leathersoft, Blue, Comfort Print","mrp":3999,"discounted":2599.35,"qty":16},
   {"isbn":"9780785290155","title":"Net, Timeless Truths Bible, Leathersoft, Brown, Comfort Print","mrp":3999,"discounted":2599.35,"qty":1},
   {"isbn":"9780785290162","title":"NKJV, the Prayer Bible, Leathersoft, Brown, Red Letter, Comfort Print","mrp":5899,"discounted":3834.35,"qty":2},
-  {"isbn":"9780785290919","title":"NABRE XL, Catholic Edition, Leathersoft, Brown, Comfort Print","mrp":3499,"discounted":2274.35,"qty":1},
   {"isbn":"9780785291107","title":"KJV, End-Of-Verse Reference Bible, Personal Size Large Print, Leathersoft, Purple, Red Letter, Comfort Print","mrp":1999,"discounted":1299.35,"qty":21},
   {"isbn":"9780785291121","title":"KJV, End-Of-Verse Reference Bible, Personal Size Large Print, Leathersoft, Pink, Red Letter, Comfort Print","mrp":1799,"discounted":1169.35,"qty":3},
   {"isbn":"9780785291169","title":"NKJV, the Prayer Bible, Hardcover, Red Letter, Comfort Print","mrp":3699,"discounted":2404.35,"qty":53},
@@ -622,18 +620,11 @@ const PRODUCTS = [
   {"isbn":"9781400336036","title":"NKJV, Color Code Bible for Kids, Blue Leathersoft, Comfort Print","mrp":6199,"discounted":4029.35,"qty":1},
   {"isbn":"9781400336746","title":"New King James Version","mrp":1799,"discounted":1169.35,"qty":1},
   {"isbn":"9781400336753","title":"Armor of God Bible","mrp":1799,"discounted":1169.35,"qty":1},
-  {"isbn":"9781400336760","title":"NRSV Catholic Edition Bible, Eucalyptus Hardcover","mrp":2299,"discounted":1494.35,"qty":1},
   {"isbn":"9781400336777","title":"Armor of God Bible","mrp":2299,"discounted":1494.35,"qty":4},
   {"isbn":"9781400336784","title":"Armor of God Bible","mrp":2499,"discounted":1624.35,"qty":2},
-  {"isbn":"9781400336807","title":"NRSV Catholic Edition Bible, Magnolia Paperback","mrp":2299,"discounted":1494.35,"qty":2},
   {"isbn":"9781400336821","title":"Nkjv Armor of God Bible, Softcover - New King James Version","mrp":2499,"discounted":1624.35,"qty":1},
-  {"isbn":"9781400337132","title":"NRSV Catholic Edition Bible, Eucalyptus Hardcover","mrp":3099,"discounted":2014.35,"qty":1},
-  {"isbn":"9781400337170","title":"Holy Bible NRSV Catholic Edition Bible","mrp":2999,"discounted":1949.35,"qty":8},
-  {"isbn":"9781400337200","title":"NRSV Catholic Edition Bible, Magnolia Paperback","mrp":1499,"discounted":974.35,"qty":1},
   {"isbn":"9781400337545","title":"RSV Personal Size Bible with Cross References, Brown Leathersoft, Thumb Indexed, (Sovereign Collection)","mrp":2499,"discounted":1624.35,"qty":2},
   {"isbn":"9781400337569","title":"RSV Personal Size Bible with Cross References, Purple Leathersoft, (Sovereign Collection)","mrp":2499,"discounted":1624.35,"qty":1},
-  {"isbn":"9781400337606","title":"NRSVCE Sacraments of Initiation Catholic Bible, White Leathersoft, Comfort Print","mrp":2799,"discounted":1819.35,"qty":1},
-  {"isbn":"9781400337613","title":"NRSVCE Sacraments of Initiation Catholic Bible, Purple Leathersoft, Comfort Print","mrp":3999,"discounted":2599.35,"qty":1},
   {"isbn":"9781400337941","title":"RSV Personal Size Bible with Cross References, Purple Leathersoft, Thumb Indexed, (Sovereign Collection)","mrp":3999,"discounted":2599.35,"qty":7},
   {"isbn":"9781400338283","title":"KJV Holy Bible, Value Ultra Thinline, Charcoal Leathersoft, Red Letter, Comfort Print","mrp":1499,"discounted":974.35,"qty":3},
   {"isbn":"9781400338290","title":"KJV Holy Bible, Value Ultra Thinline, Pink Leathersoft, Red Letter, Comfort Print","mrp":1799,"discounted":1169.35,"qty":2},
