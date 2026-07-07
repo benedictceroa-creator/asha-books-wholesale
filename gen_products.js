@@ -48,7 +48,7 @@ for (const row of rows) {
   const title      = String(get('titles', 'title') ?? '').trim();
   const mrpRaw     = get('mrp');
   const discRaw    = get('after discount', 'afterdiscount', 'discounted');
-  const qtyRaw     = get('qty', 'quantity');
+  const qtyRaw     = get('qty', 'quantity', 'present stock', 'stock');
 
   // Skip blank / header echo rows
   if (!isbn || !title || title === '0' || title.toLowerCase() === 'titles') continue;
