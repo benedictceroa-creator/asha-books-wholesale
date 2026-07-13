@@ -349,6 +349,12 @@
           <option value="Other">Other / General (204)</option>
         </select>
       </div>
+      <div class="trans-wrap">
+        <label class="ctrl-label" for="catBinding">Binding</label>
+        <select class="cat-select" id="catBinding">
+          <option value="">All Bindings</option>
+        </select>
+      </div>
       <div class="price-filter">
         <label class="ctrl-label">Wholesale Price</label>
         <div class="price-range-vals">
@@ -440,6 +446,20 @@
         return 'Other';
       }
 
+      // ── Binding detection ────────────────────────────
+      function detectBinding(title) {
+        const t = title.toLowerCase();
+        if (t.includes('leathersoft'))       return 'Leathersoft';
+        if (t.includes('bonded leather'))    return 'Bonded Leather';
+        if (t.includes('imitation leather')) return 'Imitation Leather';
+        if (t.includes('leather'))           return 'Leather';
+        if (t.includes('hardcover'))         return 'Hardcover';
+        if (t.includes('paperback'))         return 'Paperback';
+        if (t.includes('cloth'))             return 'Cloth';
+        if (t.includes('flexi'))             return 'Flexi';
+        return 'Unknown';
+      }
+
       // ── Stock info helper ────────────────────────────
       function stockInfo(qty) {
         if (qty <= 0)  return { label: 'Out of Stock', cls: 'stock-out', available: 0 };
@@ -451,8 +471,24 @@
       const productMap = {};
       PRODUCTS.forEach(p => {
         p.translation = detectTranslation(p.title);
+        p.binding     = detectBinding(p.title);
         productMap[p.isbn] = p;
       });
+
+      // ── Populate binding dropdown with counts ────────
+      (function buildBindingSelect() {
+        const counts = {};
+        PRODUCTS.forEach(p => { counts[p.binding] = (counts[p.binding] || 0) + 1; });
+        const order = ['Leathersoft','Bonded Leather','Imitation Leather','Leather','Hardcover','Paperback','Cloth','Flexi','Unknown'];
+        const sel = document.getElementById('catBinding');
+        order.forEach(b => {
+          if (!counts[b]) return;
+          const opt = document.createElement('option');
+          opt.value = b;
+          opt.textContent = `${b} (${counts[b]})`;
+          sel.appendChild(opt);
+        });
+      })();
 
       // ── Price range init ─────────────────────────────
       const prices = PRODUCTS.filter(p => p.discounted > 0).map(p => p.discounted);
@@ -548,17 +584,20 @@
       }
 
       // ── Filters ──────────────────────────────────────
-      const searchInput = document.getElementById('catSearch');
-      const transSelect = document.getElementById('catTranslation');
+      const searchInput   = document.getElementById('catSearch');
+      const transSelect   = document.getElementById('catTranslation');
+      const bindingSelect = document.getElementById('catBinding');
 
       function applyFilters() {
-        const q     = searchInput.value.trim().toLowerCase();
-        const lo    = +rMin.value, hi = +rMax.value;
-        const trans = transSelect.value;
+        const q       = searchInput.value.trim().toLowerCase();
+        const lo      = +rMin.value, hi = +rMax.value;
+        const trans   = transSelect.value;
+        const binding = bindingSelect.value;
         const filtered = PRODUCTS.filter(p => {
           if (q && !p.title.toLowerCase().includes(q) && !p.isbn.includes(q)) return false;
           if (p.discounted > 0 && (p.discounted < lo || p.discounted > hi)) return false;
-          if (trans && p.translation !== trans) return false;
+          if (trans   && p.translation !== trans)   return false;
+          if (binding && p.binding     !== binding) return false;
           return true;
         });
         renderGrid(filtered);
@@ -566,9 +605,11 @@
 
       searchInput.addEventListener('input', applyFilters);
       transSelect.addEventListener('change', applyFilters);
+      bindingSelect.addEventListener('change', applyFilters);
       document.getElementById('catReset').addEventListener('click', () => {
-        searchInput.value = '';
-        transSelect.value = '';
+        searchInput.value   = '';
+        transSelect.value   = '';
+        bindingSelect.value = '';
         rMin.value = PRICE_MIN;
         rMax.value = PRICE_MAX;
         updateSlider(); applyFilters();
