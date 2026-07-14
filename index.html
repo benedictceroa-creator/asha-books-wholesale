@@ -355,6 +355,38 @@
           <option value="">All Bindings</option>
         </select>
       </div>
+      <div class="trans-wrap">
+        <label class="ctrl-label" for="catSize">Size</label>
+        <select class="cat-select" id="catSize">
+          <option value="">All Sizes</option>
+          <option value="Pocket">Pocket (7)</option>
+          <option value="Compact">Compact (29)</option>
+          <option value="Personal">Personal (17)</option>
+          <option value="Standard">Standard (457)</option>
+          <option value="Large Print">Large Print (76)</option>
+          <option value="Giant Print">Giant Print (36)</option>
+          <option value="Family / Pulpit">Family / Pulpit (3)</option>
+        </select>
+      </div>
+      <div class="trans-wrap">
+        <label class="ctrl-label" for="catFormat">Format</label>
+        <select class="cat-select" id="catFormat">
+          <option value="">All Formats</option>
+          <option value="Standard Bible">Standard Bible (305)</option>
+          <option value="Study Bible">Study Bible (97)</option>
+          <option value="Thinline">Thinline (72)</option>
+          <option value="Reference Bible">Reference Bible (91)</option>
+          <option value="Journaling Bible">Journaling Bible (12)</option>
+          <option value="Outreach Bible">Outreach Bible (14)</option>
+          <option value="Devotional Bible">Devotional Bible (3)</option>
+          <option value="Parallel Bible">Parallel Bible (3)</option>
+          <option value="Daily Bible">Daily Bible (4)</option>
+          <option value="Preacher's Bible">Preacher's Bible (1)</option>
+          <option value="New Testament">New Testament (19)</option>
+          <option value="Psalms &amp; Proverbs">Psalms &amp; Proverbs (2)</option>
+          <option value="Family Bible">Family Bible (2)</option>
+        </select>
+      </div>
       <div class="price-filter">
         <label class="ctrl-label">Wholesale Price</label>
         <div class="price-range-vals">
@@ -446,6 +478,37 @@
         return 'Other';
       }
 
+      // ── Format detection ─────────────────────────────
+      function detectFormat(title) {
+        const t = title.toLowerCase();
+        if (t.includes('thinline'))                                   return 'Thinline';
+        if (t.includes('study bible'))                                return 'Study Bible';
+        if (t.includes('reference bible'))                            return 'Reference Bible';
+        if (t.includes('journal') || t.includes('journaling'))        return 'Journaling Bible';
+        if (t.includes('outreach'))                                   return 'Outreach Bible';
+        if (t.includes('devotional'))                                 return 'Devotional Bible';
+        if (t.includes('parallel'))                                   return 'Parallel Bible';
+        if (t.includes('chronological'))                              return 'Chronological Bible';
+        if (t.includes('daily bible') || t.includes('daily reading')) return 'Daily Bible';
+        if (t.includes("preacher's") || t.includes('preacher'))       return "Preacher's Bible";
+        if (t.includes('new testament'))                              return 'New Testament';
+        if (t.includes('psalms') || t.includes('proverbs'))           return 'Psalms & Proverbs';
+        if (t.includes('family bible'))                               return 'Family Bible';
+        return 'Standard Bible';
+      }
+
+      // ── Size detection ───────────────────────────────
+      function detectSize(title) {
+        const t = title.toLowerCase();
+        if (t.includes('tiny testament') || t.includes('pocket-sized') || t.includes('pocket sized') || t.includes('pocket size')) return 'Pocket';
+        if (t.includes('personal size giant print') || t.includes('giant print')) return 'Giant Print';
+        if (t.includes('large print') || t.includes('larger print') || t.includes('large-print')) return 'Large Print';
+        if (t.includes('personal size') || t.includes('personal-size')) return 'Personal';
+        if (t.includes('compact')) return 'Compact';
+        if (t.includes('family bible') || t.includes('preacher') || t.includes('pulpit')) return 'Family / Pulpit';
+        return 'Standard';
+      }
+
       // ── Binding detection ────────────────────────────
       function detectBinding(title) {
         const t = title.toLowerCase();
@@ -472,6 +535,8 @@
       PRODUCTS.forEach(p => {
         p.translation = detectTranslation(p.title);
         p.binding     = detectBinding(p.title);
+        p.size        = detectSize(p.title);
+        p.format      = detectFormat(p.title);
         productMap[p.isbn] = p;
       });
 
@@ -587,17 +652,23 @@
       const searchInput   = document.getElementById('catSearch');
       const transSelect   = document.getElementById('catTranslation');
       const bindingSelect = document.getElementById('catBinding');
+      const sizeSelect    = document.getElementById('catSize');
+      const formatSelect  = document.getElementById('catFormat');
 
       function applyFilters() {
         const q       = searchInput.value.trim().toLowerCase();
         const lo      = +rMin.value, hi = +rMax.value;
         const trans   = transSelect.value;
         const binding = bindingSelect.value;
+        const size    = sizeSelect.value;
+        const format  = formatSelect.value;
         const filtered = PRODUCTS.filter(p => {
           if (q && !p.title.toLowerCase().includes(q) && !p.isbn.includes(q)) return false;
           if (p.discounted > 0 && (p.discounted < lo || p.discounted > hi)) return false;
           if (trans   && p.translation !== trans)   return false;
           if (binding && p.binding     !== binding) return false;
+          if (size    && p.size        !== size)    return false;
+          if (format  && p.format      !== format)  return false;
           return true;
         });
         renderGrid(filtered);
@@ -606,10 +677,14 @@
       searchInput.addEventListener('input', applyFilters);
       transSelect.addEventListener('change', applyFilters);
       bindingSelect.addEventListener('change', applyFilters);
+      sizeSelect.addEventListener('change', applyFilters);
+      formatSelect.addEventListener('change', applyFilters);
       document.getElementById('catReset').addEventListener('click', () => {
         searchInput.value   = '';
         transSelect.value   = '';
         bindingSelect.value = '';
+        sizeSelect.value    = '';
+        formatSelect.value  = '';
         rMin.value = PRICE_MIN;
         rMax.value = PRICE_MAX;
         updateSlider(); applyFilters();
