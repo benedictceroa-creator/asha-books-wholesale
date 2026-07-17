@@ -340,6 +340,14 @@
   <div class="wrapper">
     <div class="section-meta">
       <span class="section-count" id="productCount">Loading…</span>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <label style="font-size:.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;">Style</label>
+        <select class="cat-select" id="styleFilter" style="padding:7px 12px;font-size:.84rem;min-width:150px;">
+          <option value="">All Styles</option>
+          <option value="Box Fit">Box Fit</option>
+          <option value="Crew Neck">Crew Neck</option>
+        </select>
+      </div>
     </div>
     <div class="product-grid" id="productGrid">
       <div class="state-box" style="grid-column:1/-1">
@@ -405,10 +413,20 @@
 
   <script>
   (function () {
-    const API_URL   = 'https://www.ashabooks.com/collections/male-nigc-sfa-x-ab/products.json?limit=50';
-    const DISCOUNT  = 0.25; // 25% bulk discount
+    const API_URLS = [
+      'https://www.ashabooks.com/collections/male-nigc-sfa-x-ab/products.json?limit=50',
+      'https://www.ashabooks.com/collections/male-nigc-sfa-x-ab-copy/products.json?limit=50',
+    ];
+    const DISCOUNT = 0.25; // 25% bulk discount
 
     function discountedPrice(price) { return Math.round(price * (1 - DISCOUNT)); }
+
+    function detectStyle(title) {
+      const t = title.toLowerCase();
+      if (t.includes('crew neck')) return 'Crew Neck';
+      if (t.includes('box fit'))   return 'Box Fit';
+      return 'Box Fit'; // default for existing products
+    }
 
     const COLOR_MAP = {
       'black':       '#222',
@@ -540,6 +558,7 @@
         const img1 = p.images[0] ? p.images[0].src : '';
         const img2 = p.images[1] ? p.images[1].src : img1;
         const shortTitle = p.title.split('|')[0].trim();
+        const style      = detectStyle(p.title);
 
         const swatches = colors.map(c =>
           `<span class="color-swatch" style="background:${colorCss(c)}" title="${escHtml(c)}" data-color="${escHtml(c)}"></span>`
@@ -558,6 +577,7 @@
           </div>
           <div class="card-body">
             <p class="card-title">${escHtml(shortTitle)}</p>
+            <span style="display:inline-block;font-size:.62rem;font-weight:700;padding:2px 7px;border-radius:4px;background:#f0e8fe;color:#6b21a8;align-self:flex-start;">${escHtml(style)}</span>
             <span class="stock-badge ${anyAvail ? 'stock-in' : 'stock-out'}">${anyAvail ? 'In Stock' : 'Sold Out'}</span>
             ${colors.length ? `<div class="card-colors">${swatches}</div>` : ''}
             ${sizes.length  ? `<div class="card-sizes">${sizeBtns}</div>` : ''}
@@ -756,10 +776,28 @@
       window.location.href = 'order.html';
     });
 
-    // ── Fetch products ───────────────────────────────
-    fetch(API_URL)
-      .then(r => { if (!r.ok) throw new Error(); return r.json(); })
-      .then(data => { renderGrid(data.products || []); renderOrder(); })
+    // ── Style filter ─────────────────────────────────
+    let allProductsRaw = [];
+
+    document.getElementById('styleFilter').addEventListener('change', () => {
+      const sel = document.getElementById('styleFilter').value;
+      const filtered = sel ? allProductsRaw.filter(p => detectStyle(p.title) === sel) : allProductsRaw;
+      renderGrid(filtered);
+    });
+
+    // ── Fetch both collections in parallel ───────────
+    Promise.all(API_URLS.map(url => fetch(url).then(r => { if (!r.ok) throw new Error(); return r.json(); })))
+      .then(([data1, data2]) => {
+        // Deduplicate by handle in case any product appears in both collections
+        const seen = new Set();
+        const combined = [...(data1.products || []), ...(data2.products || [])].filter(p => {
+          if (seen.has(p.handle)) return false;
+          seen.add(p.handle); return true;
+        });
+        allProductsRaw = combined;
+        renderGrid(combined);
+        renderOrder();
+      })
       .catch(() => {
         document.getElementById('productGrid').innerHTML =
           `<div class="state-box" style="grid-column:1/-1">Unable to load products. Please try again later.</div>`;
