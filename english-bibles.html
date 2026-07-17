@@ -730,9 +730,6 @@
         updateSlider(); applyFilters();
       });
 
-      renderGrid(PRODUCTS);
-      renderOrder();
-
       // ── Order management ─────────────────────────────
       const orderItems  = document.getElementById('orderItems');
       const orderTotal  = document.getElementById('orderTotal');
@@ -833,6 +830,10 @@
         if (!Object.keys(order).length) return;
         window.location.href = 'order.html';
       });
+
+      // ── Initial render ───────────────────────────────
+      renderGrid(PRODUCTS);
+      renderOrder();
 
       // ── Lightbox ─────────────────────────────────────
       const lightbox = document.getElementById('lightbox');
