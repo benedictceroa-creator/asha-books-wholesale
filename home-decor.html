@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Asha Books — Shop For Asha T-Shirts</title>
-  <meta name="description" content="Shop For Asha faith-inspired T-shirts wholesale — Box Fit and Crew Neck styles. Designs inspired by Scripture. 25% wholesale discount. Asha Books India.">
-  <meta name="keywords" content="Christian T-shirts wholesale India, faith apparel bulk, Shop For Asha T-shirts, Christian clothing wholesale, Bible verse T-shirts bulk">
-  <link rel="canonical" href="https://wholesale.ashabooks.com/tshirts.html">
+  <title>Asha Books — Minimalist Christian Home Decor</title>
+  <meta name="description" content="Wholesale minimalist Christian home decor — Bible verse frames, wall art and scripture prints. Asha Books India.">
+  <meta name="keywords" content="Christian wall decor wholesale, Bible verse frames India, minimalist Christian decor, scripture wall art wholesale, Christian home decor bulk India">
+  <link rel="canonical" href="https://wholesale.ashabooks.com/home-decor.html">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Faith-Inspired T-Shirts Wholesale — Shop For Asha | Asha Books">
-  <meta property="og:description" content="Shop For Asha faith-inspired T-shirts wholesale. Box Fit and Crew Neck styles, Scripture-inspired designs. 25% wholesale discount from Asha Books India.">
+  <meta property="og:title" content="Christian Home Decor Wholesale — Bible Verse Frames | Asha Books">
+  <meta property="og:description" content="Wholesale minimalist Christian home decor. Bible verse frames, wall art and scripture prints from Asha Books India.">
   <meta property="og:image" content="https://wholesale.ashabooks.com/ashabookslogo.JPG">
-  <meta property="og:url" content="https://wholesale.ashabooks.com/tshirts.html">
+  <meta property="og:url" content="https://wholesale.ashabooks.com/home-decor.html">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="robots" content="index, follow">
   <link rel="icon" href="favicon.png" type="image/png">
@@ -74,7 +74,7 @@
 
     /* ── Hero banner ─────────────────────────────────── */
     .hero {
-      background: linear-gradient(135deg, #1A1A1A 0%, #2d1a1e 100%);
+      background: linear-gradient(135deg, #1a1a1a 0%, #1a2a1e 100%);
       padding: 48px 28px 40px; text-align: center;
     }
     .hero-tag {
@@ -117,7 +117,7 @@
 
     .card-img-wrap {
       position: relative; background: var(--light);
-      aspect-ratio: 2/3; overflow: hidden; cursor: pointer;
+      aspect-ratio: 1/1; overflow: hidden; cursor: pointer;
     }
     .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: opacity .25s; }
     .card-img-wrap img.secondary { position: absolute; inset: 0; opacity: 0; }
@@ -129,41 +129,33 @@
       font-size: .84rem; font-weight: 700; color: var(--dark); line-height: 1.4;
       display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
     }
-    .card-mrp   { font-size: .75rem; color: var(--muted); text-decoration: line-through; margin-top: 2px; }
-    .card-price { font-size: 1rem; font-weight: 800; color: var(--red); }
-    .card-discount-tag { font-size: .65rem; font-weight: 700; color: #2e7d32; background: #e8f5e9; padding: 1px 6px; border-radius: 4px; }
-
-    /* ── Colour swatches ────────────────────────────── */
-    .card-colors { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 2px; }
-    .color-swatch {
-      width: 18px; height: 18px; border-radius: 50%;
-      border: 2px solid var(--border); cursor: pointer;
-      transition: transform .15s, border-color .15s;
-    }
-    .color-swatch:hover, .color-swatch.active { border-color: var(--dark); transform: scale(1.15); }
-
-    /* ── Size selector ──────────────────────────────── */
-    .card-sizes { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 2px; }
-    .size-btn {
-      font-size: .68rem; font-weight: 700; padding: 3px 8px;
-      border: 1px solid var(--border); border-radius: 5px;
-      background: var(--light); color: var(--text); cursor: pointer;
-      transition: all .15s;
-    }
-    .size-btn:hover { background: var(--dark); color: #fff; border-color: var(--dark); }
-    .size-btn.active { background: var(--dark); color: #fff; border-color: var(--dark); }
-    .size-btn.unavailable { opacity: .38; cursor: not-allowed; text-decoration: line-through; pointer-events: none; }
+    .card-price { font-size: 1rem; font-weight: 800; color: var(--red); margin-top: 2px; }
 
     /* ── Stock badge ────────────────────────────────── */
     .stock-badge {
       display: inline-block; font-size: .65rem; font-weight: 700;
-      padding: 2px 7px; border-radius: 4px;
-      align-self: flex-start;
+      padding: 2px 7px; border-radius: 4px; align-self: flex-start;
     }
     .stock-in  { background: #e8f5e9; color: #2e7d32; }
     .stock-out { background: #fde8eb; color: var(--red); }
 
-    /* ── Add to order button ────────────────────────── */
+    /* ── Variant selector ───────────────────────────── */
+    .variant-label {
+      font-size: .68rem; font-weight: 700; color: var(--muted);
+      text-transform: uppercase; letter-spacing: .05em; margin-top: 4px;
+    }
+    .card-variants { display: flex; flex-wrap: wrap; gap: 5px; }
+    .variant-btn {
+      font-size: .68rem; font-weight: 600; padding: 4px 9px;
+      border: 1px solid var(--border); border-radius: 5px;
+      background: var(--light); color: var(--text); cursor: pointer;
+      transition: all .15s; line-height: 1.3;
+    }
+    .variant-btn:hover { background: var(--dark); color: #fff; border-color: var(--dark); }
+    .variant-btn.active { background: var(--dark); color: #fff; border-color: var(--dark); }
+    .variant-btn.unavailable { opacity: .38; cursor: not-allowed; text-decoration: line-through; pointer-events: none; }
+
+    /* ── Add button ─────────────────────────────────── */
     .btn-add {
       margin-top: 8px; width: 100%; padding: 8px 0;
       font-size: .78rem; font-weight: 700;
@@ -174,8 +166,8 @@
       background: var(--red); color: #fff; border-color: var(--red);
     }
     .btn-add:disabled { background: var(--light); color: var(--muted); border-color: var(--border); cursor: not-allowed; }
-    .size-hint { font-size: .68rem; color: var(--muted); text-align: center; margin-top: 4px; display: none; }
-    .size-hint.visible { display: block; }
+    .variant-hint { font-size: .68rem; color: var(--red); text-align: center; margin-top: 4px; display: none; }
+    .variant-hint.visible { display: block; }
 
     /* ── Order Panel ────────────────────────────────── */
     .order-panel {
@@ -254,7 +246,7 @@
     .lb-gallery {
       width: 50%; background: var(--light); flex-shrink: 0; display: flex; flex-direction: column;
     }
-    .lb-main-img { width: 100%; aspect-ratio: 2/3; object-fit: cover; display: block; }
+    .lb-main-img { width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block; }
     .lb-thumbs {
       display: flex; gap: 6px; padding: 10px;
       overflow-x: auto; background: var(--bg); border-top: 1px solid var(--border);
@@ -267,21 +259,15 @@
     .lb-body { padding: 24px; overflow-y: auto; flex: 1; display: flex; flex-direction: column; gap: 12px; }
     .lb-title { font-size: 1.05rem; font-weight: 800; color: var(--dark); line-height: 1.4; }
     .lb-price { font-size: 1.3rem; font-weight: 800; color: var(--red); }
-    .lb-label { font-size: .7rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 4px; }
-    .lb-colors { display: flex; gap: 8px; flex-wrap: wrap; }
-    .lb-color-btn {
-      padding: 5px 12px; border-radius: 6px; border: 1px solid var(--border);
+    .lb-label { font-size: .7rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 6px; }
+    .lb-variants { display: flex; flex-wrap: wrap; gap: 7px; }
+    .lb-variant-btn {
+      padding: 6px 13px; border-radius: 7px; border: 1px solid var(--border);
       font-size: .78rem; font-weight: 600; cursor: pointer; background: var(--light); transition: all .15s;
+      line-height: 1.3;
     }
-    .lb-color-btn:hover, .lb-color-btn.active { background: var(--dark); color: #fff; border-color: var(--dark); }
-    .lb-sizes { display: flex; gap: 6px; flex-wrap: wrap; }
-    .lb-size-btn {
-      width: 46px; height: 40px; border-radius: 7px; border: 1px solid var(--border);
-      font-size: .8rem; font-weight: 700; cursor: pointer; background: var(--light); transition: all .15s;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .lb-size-btn:hover:not(.unavailable), .lb-size-btn.active { background: var(--dark); color: #fff; border-color: var(--dark); }
-    .lb-size-btn.unavailable { opacity: .35; cursor: not-allowed; text-decoration: line-through; }
+    .lb-variant-btn:hover:not(.unavailable), .lb-variant-btn.active { background: var(--dark); color: #fff; border-color: var(--dark); }
+    .lb-variant-btn.unavailable { opacity: .35; cursor: not-allowed; text-decoration: line-through; }
     .lb-add {
       padding: 11px; background: var(--red); color: #fff;
       border: none; border-radius: 9px; cursor: pointer;
@@ -289,11 +275,9 @@
     }
     .lb-add:hover:not(:disabled) { background: var(--red-dark); }
     .lb-add:disabled { background: var(--border); color: var(--muted); cursor: not-allowed; }
-    .lb-size-note { font-size: .74rem; color: var(--red); display: none; }
-    .lb-size-note.visible { display: block; }
+    .lb-variant-note { font-size: .74rem; color: var(--red); display: none; }
+    .lb-variant-note.visible { display: block; }
     .lb-desc { font-size: .8rem; color: var(--muted); line-height: 1.6; padding-top: 12px; border-top: 1px solid var(--border); }
-    .lb-specs { font-size: .76rem; color: var(--muted); padding-left: 16px; }
-    .lb-specs li { margin-bottom: 3px; }
 
     /* ── Loading state ──────────────────────────────── */
     .state-box { text-align: center; padding: 80px 20px; color: var(--muted); font-size: .95rem; }
@@ -316,16 +300,14 @@
       .hero-title { font-size: 1.3rem; }
       .hero-sub { font-size: .82rem; }
       .wrapper { padding: 16px 12px; }
-      .section-meta { flex-direction: column; align-items: flex-start; gap: 8px; }
       .product-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
       .card-title { font-size: .75rem; }
       .card-body { padding: 10px 10px 14px; }
       .btn-add { font-size: .68rem; min-height: 36px; }
-      .size-btn { font-size: .62rem; padding: 4px 6px; min-height: 32px; }
       .order-panel { width: 100%; right: -100%; }
       .lb-box { flex-direction: column; max-height: 95vh; overflow-y: auto; }
       .lb-gallery { width: 100%; }
-      .lb-main-img { aspect-ratio: 4/3; }
+      .lb-main-img { aspect-ratio: 1/1; }
     }
   </style>
 </head>
@@ -337,14 +319,14 @@
       <a href="index.html"><img src="ashabookslogo.JPG" alt="Asha Books" class="site-logo"></a>
       <div class="header-divider"></div>
       <div>
-        <div class="header-title">Shop For Asha</div>
-        <div class="header-sub">Faith-Inspired Apparel</div>
+        <div class="header-title">Home Decor</div>
+        <div class="header-sub">Minimalist Christian Decor</div>
       </div>
     </div>
     <div class="header-right">
       <a href="english-bibles.html" class="nav-link">English Bibles</a>
       <a href="indian-bibles.html" class="nav-link">Indian Bibles</a>
-      <a href="home-decor.html" class="nav-link">Home Decor</a>
+      <a href="tshirts.html" class="nav-link">T-Shirts</a>
       <button class="order-toggle" id="orderToggle">
         &#128722; Order&nbsp;<span class="order-badge" id="orderBadge">0</span>
       </button>
@@ -353,24 +335,16 @@
 
   <!-- ── Hero ── -->
   <div class="hero">
-    <div class="hero-tag">Shop For Asha × Asha Books</div>
-    <h1 class="hero-title">Faith-Inspired Apparel</h1>
-    <p class="hero-sub">Box fit T-shirts crafted for everyday wear with a purpose</p>
-    <div class="hero-badge">100% Cotton · 200–220 GSM · Sizes S–2XL</div>
+    <div class="hero-tag">Minimalist Christian Decor</div>
+    <h1 class="hero-title">Decor With Purpose</h1>
+    <p class="hero-sub">Bible verse frames and wall art crafted to inspire every day</p>
+    <div class="hero-badge">Glass Frames · Canvas Prints · Scripture Wall Art</div>
   </div>
 
   <!-- ── Products ── -->
   <div class="wrapper">
     <div class="section-meta">
       <span class="section-count" id="productCount">Loading…</span>
-      <div style="display:flex;gap:8px;align-items:center;">
-        <label style="font-size:.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;">Style</label>
-        <select class="cat-select" id="styleFilter" style="padding:7px 12px;font-size:.84rem;min-width:150px;">
-          <option value="">All Styles</option>
-          <option value="Box Fit">Box Fit</option>
-          <option value="Crew Neck">Crew Neck</option>
-        </select>
-      </div>
     </div>
     <div class="product-grid" id="productGrid">
       <div class="state-box" style="grid-column:1/-1">
@@ -412,24 +386,13 @@
       <div class="lb-body">
         <p class="lb-title" id="lbTitle"></p>
         <p class="lb-price" id="lbPrice"></p>
-        <div id="lbColorWrap">
-          <p class="lb-label">Colour</p>
-          <div class="lb-colors" id="lbColors"></div>
-        </div>
         <div>
-          <p class="lb-label">Size</p>
-          <div class="lb-sizes" id="lbSizes"></div>
-          <p class="lb-size-note" id="lbSizeNote">Please select a size</p>
+          <p class="lb-label">Select Option</p>
+          <div class="lb-variants" id="lbVariants"></div>
+          <p class="lb-variant-note" id="lbVariantNote">Please select an option</p>
         </div>
         <button class="lb-add" id="lbAdd">+ Add to Order</button>
         <p class="lb-desc" id="lbDesc"></p>
-        <ul class="lb-specs">
-          <li>100% Cotton French Terry, 200–220 GSM</li>
-          <li>Oversized box fit with dropped shoulders</li>
-          <li>Round neck · Sleeve falls at elbow</li>
-          <li>Cold wash 30°C · Line dry in shade</li>
-          <li>Delivery within 3–7 business days</li>
-        </ul>
       </div>
     </div>
   </div>
@@ -448,77 +411,27 @@
 </script>
   <script>
   (function () {
-    const API_URLS = [
-      'https://www.ashabooks.com/collections/male-nigc-sfa-x-ab/products.json?limit=50',
-      'https://www.ashabooks.com/collections/male-nigc-sfa-x-ab-copy/products.json?limit=50',
-    ];
-    const DISCOUNT = 0.25; // 25% bulk discount
+    const API_URL = 'https://www.ashabooks.com/collections/minimalist-christian-decor/products.json?limit=250';
 
-    function discountedPrice(price) { return Math.round(price * (1 - DISCOUNT)); }
-
-    function detectStyle(title) {
-      const t = title.toLowerCase();
-      if (t.includes('crew neck')) return 'Crew Neck';
-      if (t.includes('box fit'))   return 'Box Fit';
-      return 'Box Fit'; // default for existing products
-    }
-
-    const COLOR_MAP = {
-      'black':       '#222',
-      'white':       '#f5f5f5',
-      'burgundy':    '#6e1423',
-      'grey':        '#9e9e9e',
-      'gray':        '#9e9e9e',
-      'navy':        '#1a2a4a',
-      'forest green':'#2d5a27',
-      'green':       '#2d5a27',
-      'sage green':  '#8aab7e',
-      'peachy pink': '#f4a58a',
-      'pink':        '#f4a58a',
-    };
-    function colorCss(name) { return COLOR_MAP[name.toLowerCase()] || '#ccc'; }
+    const DISCOUNT = 0.10;
+    function discounted(price) { return Math.round(price * (1 - DISCOUNT)); }
 
     function escHtml(s) {
       return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
     }
-
     function fmtRupee(n) { return '₹' + Math.round(n).toLocaleString('en-IN'); }
 
-    // ── Parse variants into unique colors + sizes ────
-    function getOptions(variants) {
-      const colors = [], sizes = [], sc = new Set(), ss = new Set();
-      const hasColor = variants.some(v => v.option2 && v.option2 !== 'Default Title');
-      variants.forEach(v => {
-        if (!ss.has(v.option1)) { ss.add(v.option1); sizes.push(v.option1); }
-        if (hasColor && v.option2 && !sc.has(v.option2)) { sc.add(v.option2); colors.push(v.option2); }
-      });
-      return { colors, sizes };
-    }
-
-    function isAvailable(variants, size, color) {
-      return variants.some(v =>
-        v.option1 === size && (!color || v.option2 === color) && v.available
-      );
-    }
-
-    // ── Order (shared with catalogue via localStorage) ─
-    // Load existing order (may contain Bible items added from index.html)
+    // ── Shared order via localStorage ───────────────
     const order = JSON.parse(localStorage.getItem('ashaOrder') || '{}');
 
-    function orderKey(handle, size, color) {
-      return 'sfa:' + handle + ':' + size + (color ? ':' + color : '');
-    }
-
-    function saveOrder() {
-      localStorage.setItem('ashaOrder', JSON.stringify(order));
-    }
+    function saveOrder() { localStorage.setItem('ashaOrder', JSON.stringify(order)); }
 
     function recalc() {
       let total = 0, count = 0;
       Object.values(order).forEach(it => { total += it.price * it.qty; count += it.qty; });
-      document.getElementById('orderTotal').textContent  = fmtRupee(total);
-      document.getElementById('orderBadge').textContent  = count;
-      document.getElementById('proceedBtn').disabled     = count === 0;
+      document.getElementById('orderTotal').textContent = fmtRupee(total);
+      document.getElementById('orderBadge').textContent = count;
+      document.getElementById('proceedBtn').disabled    = count === 0;
     }
 
     function renderOrder() {
@@ -562,11 +475,9 @@
       });
     }
 
-    function addToOrder(handle, size, color, title, price) {
-      const k = orderKey(handle, size, color);
-      const ref = color ? `Size: ${size} · ${color}` : `Size: ${size}`;
-      if (order[k]) order[k].qty++;
-      else order[k] = { title, ref, price, qty: 1 };
+    function addToOrder(key, title, ref, price) {
+      if (order[key]) order[key].qty++;
+      else order[key] = { title, ref, price, qty: 1 };
       saveOrder(); renderOrder();
       document.getElementById('orderPanel').classList.add('open');
     }
@@ -578,6 +489,9 @@
       else { btn.textContent = '+ Add to Order'; btn.classList.remove('in-order'); }
     }
 
+    // ── Short title (before first pipe) ─────────────
+    function shortTitle(title) { return title.split('|')[0].trim(); }
+
     // ── Render product grid ──────────────────────────
     let allProducts = [];
 
@@ -588,101 +502,72 @@
       count.textContent = products.length + ' product' + (products.length !== 1 ? 's' : '');
 
       grid.innerHTML = products.map((p, idx) => {
-        const { colors, sizes } = getOptions(p.variants);
         const anyAvail = p.variants.some(v => v.available);
-        const img1 = p.images[0] ? p.images[0].src : '';
-        const img2 = p.images[1] ? p.images[1].src : img1;
-        const shortTitle = p.title.split('|')[0].trim();
-        const style      = detectStyle(p.title);
+        const img1     = p.images[0] ? p.images[0].src : '';
+        const img2     = p.images[1] ? p.images[1].src : img1;
+        const st       = shortTitle(p.title);
+        const minMrp  = Math.min(...p.variants.map(v => parseFloat(v.price)));
+        const minDisc = discounted(minMrp);
 
-        const swatches = colors.map(c =>
-          `<span class="color-swatch" style="background:${colorCss(c)}" title="${escHtml(c)}" data-color="${escHtml(c)}"></span>`
+        const variantBtns = p.variants.map(v =>
+          `<button class="variant-btn${v.available ? '' : ' unavailable'}" data-variant-id="${v.id}" data-price="${v.price}" data-title="${escHtml(v.title)}">${escHtml(v.title)}</button>`
         ).join('');
 
-        const sizeBtns = sizes.map(s => {
-          const avail = isAvailable(p.variants, s, colors[0] || null);
-          return `<button class="size-btn${avail ? '' : ' unavailable'}" data-size="${escHtml(s)}">${escHtml(s)}</button>`;
-        }).join('');
-
-        // Determine initial order key (no size/color selected yet)
         return `<div class="product-card" data-idx="${idx}">
           <div class="card-img-wrap" data-idx="${idx}">
-            <img class="primary"   src="${escHtml(img1)}" alt="${escHtml(shortTitle)}" loading="lazy">
-            <img class="secondary" src="${escHtml(img2)}" alt="${escHtml(shortTitle)}" loading="lazy">
+            <img class="primary"   src="${escHtml(img1)}" alt="${escHtml(st)}" loading="lazy">
+            <img class="secondary" src="${escHtml(img2)}" alt="${escHtml(st)}" loading="lazy">
           </div>
           <div class="card-body">
-            <p class="card-title">${escHtml(shortTitle)}</p>
-            <span style="display:inline-block;font-size:.62rem;font-weight:700;padding:2px 7px;border-radius:4px;background:#f0e8fe;color:#6b21a8;align-self:flex-start;">${escHtml(style)}</span>
+            <p class="card-title">${escHtml(st)}</p>
             <span class="stock-badge ${anyAvail ? 'stock-in' : 'stock-out'}">${anyAvail ? 'In Stock' : 'Sold Out'}</span>
-            ${colors.length ? `<div class="card-colors">${swatches}</div>` : ''}
-            ${sizes.length  ? `<div class="card-sizes">${sizeBtns}</div>` : ''}
-            <p class="card-mrp">MRP ${fmtRupee(parseFloat(p.variants[0].price))}</p>
-            <p class="card-price">${fmtRupee(discountedPrice(parseFloat(p.variants[0].price)))} <span class="card-discount-tag">25% off</span></p>
-            <button class="btn-add" data-idx="${idx}"${!anyAvail ? ' disabled' : ''}>${!anyAvail ? 'Out of Stock' : '+ Add to Order'}</button>
-            <p class="size-hint" id="hint-${idx}">Please select a size first</p>
+            <p class="card-mrp" style="font-size:.72rem;color:var(--muted);text-decoration:line-through;margin-top:2px;">MRP ${fmtRupee(minMrp)}${p.variants.length > 1 ? '+' : ''}</p>
+            <p class="card-price">${fmtRupee(minDisc)}${p.variants.length > 1 ? '+' : ''} <span style="font-size:.62rem;font-weight:700;color:#2e7d32;background:#e8f5e9;padding:1px 6px;border-radius:4px;">10% off</span></p>
+            <p class="variant-label">Select Option</p>
+            <div class="card-variants">${variantBtns}</div>
+            <button class="btn-add" data-idx="${idx}"${!anyAvail ? ' disabled' : ''}>${!anyAvail ? 'Sold Out' : '+ Add to Order'}</button>
+            <p class="variant-hint" id="hint-${idx}">Please select an option first</p>
           </div>
         </div>`;
       }).join('');
 
-      // ── Card interactions ───────────────────────────
+      // ── Card interactions ──────────────────────────
       grid.querySelectorAll('.card-img-wrap').forEach(el => {
         el.addEventListener('click', () => openLightbox(allProducts[+el.dataset.idx]));
       });
 
       grid.querySelectorAll('.product-card').forEach(card => {
-        const idx  = +card.dataset.idx;
-        const p    = allProducts[idx];
-        const { colors, sizes } = getOptions(p.variants);
-        let selColor = colors[0] || null;
-        let selSize  = null;
+        const idx = +card.dataset.idx;
+        const p   = allProducts[idx];
+        let selVariant = null;
 
-        // Colour swatch clicks
-        card.querySelectorAll('.color-swatch').forEach(sw => {
-          sw.addEventListener('click', e => {
+        card.querySelectorAll('.variant-btn').forEach(btn => {
+          btn.addEventListener('click', e => {
             e.stopPropagation();
-            selColor = sw.dataset.color;
-            card.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
-            sw.classList.add('active');
-            // Update size availability for chosen colour
-            card.querySelectorAll('.size-btn').forEach(sb => {
-              const avail = isAvailable(p.variants, sb.dataset.size, selColor);
-              sb.classList.toggle('unavailable', !avail);
-              if (!avail && sb.dataset.size === selSize) selSize = null;
-            });
-          });
-        });
-
-        // Size button clicks
-        card.querySelectorAll('.size-btn').forEach(sb => {
-          sb.addEventListener('click', e => {
-            e.stopPropagation();
-            if (sb.classList.contains('unavailable')) return;
-            selSize = sb.dataset.size;
-            card.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
-            sb.classList.add('active');
+            if (btn.classList.contains('unavailable')) return;
+            selVariant = { id: btn.dataset.variantId, price: parseFloat(btn.dataset.price), title: btn.dataset.title };
+            card.querySelectorAll('.variant-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
             document.getElementById('hint-' + idx).classList.remove('visible');
           });
         });
 
-        // Add to Order button
         card.querySelector('.btn-add').addEventListener('click', e => {
           e.stopPropagation();
-          if (!selSize) {
+          if (!selVariant) {
             document.getElementById('hint-' + idx).classList.add('visible');
             return;
           }
-          const price = discountedPrice(parseFloat(p.variants[0].price));
-          const shortTitle = p.title.split('|')[0].trim();
-          const k = orderKey(p.handle, selSize, selColor);
-          addToOrder(p.handle, selSize, selColor, shortTitle, price);
+          const key = 'hd:' + p.handle + ':' + selVariant.id;
+          const st  = shortTitle(p.title);
+          addToOrder(key, st, selVariant.title, discounted(selVariant.price));
           const btn = card.querySelector('.btn-add');
-          btn.dataset.key = k;
+          btn.dataset.key = key;
           btn.textContent = '✓ In Order';
           btn.classList.add('in-order');
         });
       });
 
-      // Re-sync any existing order items with button states
       Object.keys(order).forEach(k => refreshBtn(k));
     }
 
@@ -690,19 +575,21 @@
     const lightbox  = document.getElementById('lightbox');
     const lbBox     = document.getElementById('lbBox');
     let   lbProduct = null;
-    let   lbSelColor = null;
-    let   lbSelSize  = null;
+    let   lbSelVariant = null;
 
     function openLightbox(p) {
       lbProduct = p;
-      const { colors, sizes } = getOptions(p.variants);
-      lbSelColor = colors[0] || null;
-      lbSelSize  = null;
+      lbSelVariant = null;
 
-      document.getElementById('lbTitle').textContent = p.title.split('|')[0].trim();
-      const mrp = parseFloat(p.variants[0].price);
+      document.getElementById('lbTitle').textContent = shortTitle(p.title);
+
+      const minMrpLb  = Math.min(...p.variants.map(v => parseFloat(v.price)));
+      const maxMrpLb  = Math.max(...p.variants.map(v => parseFloat(v.price)));
+      const priceRange = p.variants.length > 1 && minMrpLb !== maxMrpLb
+        ? `${fmtRupee(discounted(minMrpLb))} – ${fmtRupee(discounted(maxMrpLb))}`
+        : fmtRupee(discounted(minMrpLb));
       document.getElementById('lbPrice').innerHTML =
-        `<span style="font-size:.9rem;color:var(--muted);text-decoration:line-through;font-weight:400;">MRP ${fmtRupee(mrp)}</span>&nbsp;&nbsp;${fmtRupee(discountedPrice(mrp))} <span style="font-size:.75rem;font-weight:700;color:#2e7d32;background:#e8f5e9;padding:2px 7px;border-radius:4px;">25% off</span>`;
+        `<span style="font-size:.85rem;color:var(--muted);text-decoration:line-through;font-weight:400;">MRP ${fmtRupee(minMrpLb)}${p.variants.length > 1 && minMrpLb !== maxMrpLb ? ' – ' + fmtRupee(maxMrpLb) : ''}</span>&nbsp;&nbsp;${priceRange} <span style="font-size:.72rem;font-weight:700;color:#2e7d32;background:#e8f5e9;padding:2px 7px;border-radius:4px;">10% off</span>`;
 
       // Gallery
       const lbMain   = document.getElementById('lbMainImg');
@@ -723,42 +610,38 @@
       // Description
       const tmp = document.createElement('div');
       tmp.innerHTML = p.body_html || '';
-      document.getElementById('lbDesc').textContent = tmp.textContent.trim().slice(0, 300) + (tmp.textContent.length > 300 ? '…' : '');
+      const desc = tmp.textContent.trim();
+      document.getElementById('lbDesc').textContent = desc.slice(0, 400) + (desc.length > 400 ? '…' : '');
 
-      // Colours
-      const colorWrap = document.getElementById('lbColorWrap');
-      colorWrap.style.display = colors.length ? '' : 'none';
-      const lbColors = document.getElementById('lbColors');
-      lbColors.innerHTML = colors.map(c =>
-        `<button class="lb-color-btn${c === lbSelColor ? ' active' : ''}" data-color="${escHtml(c)}">${escHtml(c)}</button>`
+      // Variants
+      const lbVariants = document.getElementById('lbVariants');
+      lbVariants.innerHTML = p.variants.map(v =>
+        `<button class="lb-variant-btn${v.available ? '' : ' unavailable'}" data-variant-id="${v.id}" data-price="${v.price}" data-title="${escHtml(v.title)}" ${v.available ? '' : 'disabled'}>${escHtml(v.title)}</button>`
       ).join('');
-      lbColors.querySelectorAll('.lb-color-btn').forEach(btn => {
+      lbVariants.querySelectorAll('.lb-variant-btn:not(.unavailable)').forEach(btn => {
         btn.addEventListener('click', () => {
-          lbSelColor = btn.dataset.color;
-          lbColors.querySelectorAll('.lb-color-btn').forEach(b => b.classList.remove('active'));
+          lbSelVariant = { id: btn.dataset.variantId, price: parseFloat(btn.dataset.price), title: btn.dataset.title };
+          lbVariants.querySelectorAll('.lb-variant-btn').forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
-          lbSelSize = null;
-          renderLbSizes(p, sizes);
+          document.getElementById('lbPrice').innerHTML =
+            `<span style="font-size:.85rem;color:var(--muted);text-decoration:line-through;font-weight:400;">MRP ${fmtRupee(lbSelVariant.price)}</span>&nbsp;&nbsp;${fmtRupee(discounted(lbSelVariant.price))} <span style="font-size:.72rem;font-weight:700;color:#2e7d32;background:#e8f5e9;padding:2px 7px;border-radius:4px;">10% off</span>`;
+          document.getElementById('lbVariantNote').classList.remove('visible');
         });
       });
 
-      // Sizes
-      renderLbSizes(p, sizes);
-
       // Add button
       const lbAdd = document.getElementById('lbAdd');
-      lbAdd.disabled = false;
-      lbAdd.textContent = '+ Add to Order';
-      document.getElementById('lbSizeNote').classList.remove('visible');
+      lbAdd.disabled = !p.variants.some(v => v.available);
+      lbAdd.textContent = lbAdd.disabled ? 'Sold Out' : '+ Add to Order';
+      document.getElementById('lbVariantNote').classList.remove('visible');
 
       lbAdd.onclick = () => {
-        if (!lbSelSize) {
-          document.getElementById('lbSizeNote').classList.add('visible');
+        if (!lbSelVariant) {
+          document.getElementById('lbVariantNote').classList.add('visible');
           return;
         }
-        const price      = discountedPrice(parseFloat(p.variants[0].price));
-        const shortTitle = p.title.split('|')[0].trim();
-        addToOrder(p.handle, lbSelSize, lbSelColor, shortTitle, price);
+        const key = 'hd:' + p.handle + ':' + lbSelVariant.id;
+        addToOrder(key, shortTitle(p.title), lbSelVariant.title, discounted(lbSelVariant.price));
         lbAdd.textContent = '✓ Added!';
         setTimeout(() => { lbAdd.textContent = '+ Add to Order'; }, 1200);
       };
@@ -767,26 +650,10 @@
       document.body.style.overflow = 'hidden';
     }
 
-    function renderLbSizes(p, sizes) {
-      const lbSizes = document.getElementById('lbSizes');
-      lbSizes.innerHTML = sizes.map(s => {
-        const avail = isAvailable(p.variants, s, lbSelColor);
-        return `<button class="lb-size-btn${avail ? '' : ' unavailable'}${s === lbSelSize ? ' active' : ''}"
-          data-size="${escHtml(s)}" ${avail ? '' : 'disabled'}>${escHtml(s)}</button>`;
-      }).join('');
-      lbSizes.querySelectorAll('.lb-size-btn:not(.unavailable)').forEach(btn => {
-        btn.addEventListener('click', () => {
-          lbSelSize = btn.dataset.size;
-          lbSizes.querySelectorAll('.lb-size-btn').forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          document.getElementById('lbSizeNote').classList.remove('visible');
-        });
-      });
-    }
-
     function closeLightbox() {
       lightbox.classList.remove('active');
       document.body.style.overflow = '';
+      lbProduct = null; lbSelVariant = null;
     }
 
     document.getElementById('lbClose').addEventListener('click', closeLightbox);
@@ -807,36 +674,21 @@
     });
     document.getElementById('proceedBtn').addEventListener('click', () => {
       if (!Object.keys(order).length) return;
-      saveOrder();
       window.location.href = 'order.html';
     });
 
-    // ── Style filter ─────────────────────────────────
-    let allProductsRaw = [];
-
-    document.getElementById('styleFilter').addEventListener('change', () => {
-      const sel = document.getElementById('styleFilter').value;
-      const filtered = sel ? allProductsRaw.filter(p => detectStyle(p.title) === sel) : allProductsRaw;
-      renderGrid(filtered);
-    });
-
-    // ── Fetch both collections in parallel ───────────
-    Promise.all(API_URLS.map(url => fetch(url).then(r => { if (!r.ok) throw new Error(); return r.json(); })))
-      .then(([data1, data2]) => {
-        // Deduplicate by handle in case any product appears in both collections
-        const seen = new Set();
-        const combined = [...(data1.products || []), ...(data2.products || [])].filter(p => {
-          if (seen.has(p.handle)) return false;
-          seen.add(p.handle); return true;
-        });
-        allProductsRaw = combined;
-        renderGrid(combined);
+    // ── Fetch collection ─────────────────────────────
+    fetch(API_URL)
+      .then(r => { if (!r.ok) throw new Error(); return r.json(); })
+      .then(data => {
+        renderGrid(data.products || []);
         renderOrder();
       })
       .catch(() => {
         document.getElementById('productGrid').innerHTML =
           `<div class="state-box" style="grid-column:1/-1">Unable to load products. Please try again later.</div>`;
         document.getElementById('productCount').textContent = '';
+        renderOrder();
       });
 
   })();
