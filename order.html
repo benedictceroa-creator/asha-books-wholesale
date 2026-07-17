@@ -372,7 +372,7 @@
         return `<div class="summary-item">
           <div class="si-info">
             <div class="si-title">${escHtml(it.title)}</div>
-            <div class="si-isbn">ISBN: ${isbn}</div>
+            <div class="si-isbn">${it.ref ? escHtml(it.ref) : 'ISBN: ' + isbn}</div>
           </div>
           <div class="si-price">
             <span class="si-qty">× ${it.qty}</span>
