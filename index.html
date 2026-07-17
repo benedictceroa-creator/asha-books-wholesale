@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Asha Books — Wholesale</title>
-  <link rel="icon" href="ashabookslogo.JPG" type="image/jpeg">
+  <link rel="icon" href="favicon.png" type="image/png">
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NQQ4C9EQ83"></script>
   <script>
@@ -31,78 +31,83 @@
       background: var(--bg); color: var(--text);
       min-height: 100vh;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      padding: 40px 20px;
+      padding: 48px 20px 36px;
     }
 
     .home-logo {
-      height: 72px; object-fit: contain; display: block; margin: 0 auto 10px;
+      height: 64px; object-fit: contain; display: block; margin: 0 auto 10px;
     }
 
     .home-title {
       font-size: 1.1rem; font-weight: 700; color: var(--dark);
-      text-align: center; margin-bottom: 4px; letter-spacing: .01em;
+      text-align: center; margin-bottom: 4px;
     }
 
     .home-sub {
-      font-size: .82rem; color: var(--muted);
-      text-align: center; margin-bottom: 48px;
+      font-size: .82rem; color: var(--muted); text-align: center; margin-bottom: 0;
     }
 
     .divider {
       width: 48px; height: 3px; background: var(--red);
-      border-radius: 2px; margin: 16px auto 40px;
+      border-radius: 2px; margin: 20px auto 36px;
     }
 
     /* ── Category cards ─────────────────────────────── */
     .categories {
-      display: flex; gap: 20px; flex-wrap: wrap;
-      justify-content: center; width: 100%; max-width: 860px;
+      display: flex; gap: 22px; flex-wrap: wrap;
+      justify-content: center; width: 100%; max-width: 980px;
     }
 
     .cat-card {
-      flex: 1; min-width: 220px; max-width: 260px;
+      flex: 1; min-width: 240px; max-width: 290px;
       background: var(--bg); border: 1px solid var(--border);
-      border-radius: 16px; padding: 32px 24px 28px;
+      border-radius: 16px; overflow: hidden;
       text-decoration: none; color: var(--text);
-      display: flex; flex-direction: column; align-items: center; gap: 14px;
+      display: flex; flex-direction: column;
       transition: box-shadow .2s, transform .2s, border-color .2s;
-      cursor: pointer;
     }
     .cat-card:hover {
-      box-shadow: 0 10px 32px rgba(0,0,0,.1);
+      box-shadow: 0 12px 36px rgba(0,0,0,.12);
       transform: translateY(-4px);
       border-color: var(--red);
     }
 
-    .cat-icon {
-      width: 60px; height: 60px; border-radius: 14px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.8rem;
+    /* ── Product image ──────────────────────────────── */
+    .cat-img-wrap {
+      width: 100%; aspect-ratio: 4/3; overflow: hidden;
+      background: var(--light);
     }
-    .cat-icon.bible    { background: #fde8eb; }
-    .cat-icon.indian   { background: #e8f0fe; }
-    .cat-icon.tshirt   { background: #f0e8fe; }
+    .cat-img-wrap img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .3s ease;
+    }
+    .cat-card:hover .cat-img-wrap img { transform: scale(1.04); }
 
-    .cat-name {
-      font-size: 1rem; font-weight: 800; color: var(--dark); text-align: center;
+    /* ── Card body ──────────────────────────────────── */
+    .cat-body {
+      padding: 20px 20px 22px;
+      display: flex; flex-direction: column; gap: 6px; flex: 1;
     }
-    .cat-desc {
-      font-size: .78rem; color: var(--muted); text-align: center; line-height: 1.5;
-    }
-
+    .cat-name { font-size: 1rem; font-weight: 800; color: var(--dark); }
+    .cat-desc { font-size: .78rem; color: var(--muted); line-height: 1.5; }
     .cat-arrow {
-      margin-top: 6px; font-size: .8rem; font-weight: 700;
+      margin-top: 10px; font-size: .82rem; font-weight: 700;
       color: var(--red); display: flex; align-items: center; gap: 4px;
     }
 
     /* ── Footer ─────────────────────────────────────── */
     .home-footer {
-      margin-top: 52px; font-size: .74rem; color: var(--muted); text-align: center;
+      margin-top: 44px; text-align: center;
     }
+    .home-disclaimer {
+      font-size: .76rem; color: var(--muted); line-height: 1.6;
+    }
+    .home-disclaimer span { margin: 0 8px; color: var(--border); }
 
-    @media (max-width: 540px) {
+    @media (max-width: 580px) {
       .cat-card { min-width: 100%; max-width: 100%; }
-      .home-logo { height: 56px; }
+      .home-logo { height: 52px; }
+      body { padding: 36px 16px 28px; }
     }
   </style>
 </head>
@@ -116,29 +121,47 @@
   <div class="categories">
 
     <a href="english-bibles.html" class="cat-card">
-      <div class="cat-icon bible">&#128218;</div>
-      <p class="cat-name">English Bibles</p>
-      <p class="cat-desc">KJV, NIV, NKJV and more — multiple translations, sizes, and bindings</p>
-      <span class="cat-arrow">Browse &#8594;</span>
+      <div class="cat-img-wrap">
+        <img src="covers/9780310094067.jpg" alt="English Bibles">
+      </div>
+      <div class="cat-body">
+        <p class="cat-name">English Bibles</p>
+        <p class="cat-desc">KJV, NIV, NKJV and more — multiple translations, sizes, and bindings</p>
+        <span class="cat-arrow">Browse &#8594;</span>
+      </div>
     </a>
 
     <a href="indian-bibles.html" class="cat-card">
-      <div class="cat-icon indian">&#127758;</div>
-      <p class="cat-name">Indian Language Bibles</p>
-      <p class="cat-desc">Telugu, Tamil, Hindi, Assamese and more — 10% wholesale discount</p>
-      <span class="cat-arrow">Browse &#8594;</span>
+      <div class="cat-img-wrap">
+        <img src="https://cdn.shopify.com/s/files/1/0406/1629/6616/files/bibles-2023-10-17T142211.228.png?v=1697533533" alt="Indian Language Bibles">
+      </div>
+      <div class="cat-body">
+        <p class="cat-name">Indian Language Bibles</p>
+        <p class="cat-desc">Telugu, Tamil, Hindi, Assamese and more — 10% wholesale discount</p>
+        <span class="cat-arrow">Browse &#8594;</span>
+      </div>
     </a>
 
     <a href="tshirts.html" class="cat-card">
-      <div class="cat-icon tshirt">&#128084;</div>
-      <p class="cat-name">T-Shirts</p>
-      <p class="cat-desc">Shop For Asha faith-inspired apparel — Box Fit &amp; Crew Neck, 25% off</p>
-      <span class="cat-arrow">Browse &#8594;</span>
+      <div class="cat-img-wrap">
+        <img src="https://cdn.shopify.com/s/files/1/0406/1629/6616/files/ABApparelWebsite-06.jpg?v=1780253413" alt="Faith-Inspired T-Shirts">
+      </div>
+      <div class="cat-body">
+        <p class="cat-name">T-Shirts</p>
+        <p class="cat-desc">Shop For Asha faith-inspired apparel — Box Fit &amp; Crew Neck, 25% off</p>
+        <span class="cat-arrow">Browse &#8594;</span>
+      </div>
     </a>
 
   </div>
 
-  <p class="home-footer">For enquiries: +91 9949475491</p>
+  <div class="home-footer">
+    <p class="home-disclaimer">
+      Wholesale discounted prices applicable for orders of ₹25,000 or more.
+      <span>|</span>
+      For any queries, please contact +91 9949475491
+    </p>
+  </div>
 
 </body>
 </html>
