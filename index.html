@@ -4,6 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Asha Books — Wholesale</title>
+  <meta name="description" content="Asha Books — India's trusted wholesale Bible supplier for over 30 years. English Bibles, Indian Language Bibles (Telugu, Tamil, Hindi) and faith-inspired T-Shirts. Serving churches, Bible colleges, mission organisations and corporate gifting. Min order ₹25,000.">
+  <meta name="keywords" content="wholesale Bibles India, bulk Bibles, Telugu Bible wholesale, Tamil Bible wholesale, KJV NIV NKJV wholesale, Christian books wholesale, Bible supplier India, church Bible order">
+  <link rel="canonical" href="https://wholesale.ashabooks.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Asha Books Wholesale — Bibles & Christian Literature">
+  <meta property="og:description" content="India's trusted wholesale Bible supplier for over 30 years. English, Telugu, Tamil, Hindi Bibles and faith apparel. Serving churches, mission organisations and corporate gifting.">
+  <meta property="og:image" content="https://wholesale.ashabooks.com/ashabookslogo.JPG">
+  <meta property="og:url" content="https://wholesale.ashabooks.com/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="robots" content="index, follow">
   <link rel="icon" href="favicon.png" type="image/png">
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NQQ4C9EQ83"></script>
@@ -113,10 +123,18 @@
     }
     .home-disclaimer span { margin: 0 8px; color: var(--border); }
 
-    @media (max-width: 580px) {
-      .cat-card { min-width: 100%; max-width: 100%; }
+    @media (max-width: 640px) {
+      body { padding: 28px 14px 24px; }
       .home-logo { height: 52px; }
-      body { padding: 36px 16px 28px; }
+      .home-title { font-size: 1rem; }
+      .home-sub { font-size: .84rem; }
+      .home-sub strong { font-size: 1rem; }
+      .categories { gap: 14px; }
+      .cat-card { min-width: 100%; max-width: 100%; flex-direction: row; border-radius: 12px; }
+      .cat-img-wrap { width: 120px; min-width: 120px; aspect-ratio: 1/1; border-radius: 12px 0 0 12px; }
+      .cat-body { padding: 14px 16px; }
+      .cat-name { font-size: .92rem; }
+      .home-disclaimer { font-size: .72rem; }
     }
   </style>
 </head>
@@ -176,5 +194,69 @@
     </p>
   </div>
 
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://wholesale.ashabooks.com/#organization",
+      "name": "Asha Books",
+      "url": "https://wholesale.ashabooks.com/",
+      "logo": "https://wholesale.ashabooks.com/ashabookslogo.JPG",
+      "description": "India's trusted wholesale Bible and Christian literature supplier for over 30 years. Serving churches, Bible colleges, mission organisations, Christian bookstores and corporate gifting.",
+      "telephone": "+919949475491",
+      "areaServed": "IN",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Wholesale Bible & Apparel Catalogue",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "English Bibles" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Indian Language Bibles" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Faith-Inspired T-Shirts" } }
+        ]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://wholesale.ashabooks.com/#website",
+      "url": "https://wholesale.ashabooks.com/",
+      "name": "Asha Books Wholesale",
+      "publisher": { "@id": "https://wholesale.ashabooks.com/#organization" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the minimum order for wholesale Bibles?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Wholesale discounted prices are applicable for orders of ₹25,000 or more." }
+        },
+        {
+          "@type": "Question",
+          "name": "What types of Bibles does Asha Books supply wholesale?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Asha Books supplies English Bibles (KJV, NIV, NKJV, NASB, ESV and more) and Indian Language Bibles including Telugu, Tamil, Hindi, and Assamese editions in multiple bindings and sizes." }
+        },
+        {
+          "@type": "Question",
+          "name": "Who does Asha Books serve?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Asha Books serves churches, Bible colleges, Christian bookstores, mission organisations and corporate gifting clients across India for over 30 years." }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I place a wholesale Bible order?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Browse our catalogue, add items to your order list, and submit an enquiry. Our team will confirm availability and pricing within 24 hours. You can also contact us at +91 9949475491." }
+        },
+        {
+          "@type": "Question",
+          "name": "What wholesale discounts are available?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Indian Language Bibles carry a 10% wholesale discount. Shop For Asha faith-inspired T-Shirts carry a 25% wholesale discount. English Bible pricing is already at wholesale rates." }
+        }
+      ]
+    }
+  ]
+}
+</script>
 </body>
 </html>
