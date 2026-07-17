@@ -463,8 +463,10 @@
   <script src="products.js?v=20260713103430"></script>
   <script>
     (function () {
-      const order = {};
+      const order = JSON.parse(localStorage.getItem('ashaOrder') || '{}');
       let activeIsbn = null;
+
+      function saveOrder() { localStorage.setItem('ashaOrder', JSON.stringify(order)); }
 
       // ── Translation detection ────────────────────────
       function detectTranslation(title) {
@@ -696,6 +698,7 @@
       });
 
       renderGrid(PRODUCTS);
+      renderOrder();
 
       // ── Order management ─────────────────────────────
       const orderItems  = document.getElementById('orderItems');
@@ -738,17 +741,17 @@
           const isbn = el.dataset.isbn;
           const maxQty = (productMap[isbn] || {}).qty || 99;
           el.querySelector('.oi-minus').addEventListener('click', () => {
-            if (order[isbn].qty > 1) { order[isbn].qty--; renderOrder(); updateBtn(isbn); }
+            if (order[isbn].qty > 1) { order[isbn].qty--; saveOrder(); renderOrder(); updateBtn(isbn); }
           });
           el.querySelector('.oi-plus').addEventListener('click', () => {
-            if (order[isbn].qty < maxQty) { order[isbn].qty++; renderOrder(); updateBtn(isbn); }
+            if (order[isbn].qty < maxQty) { order[isbn].qty++; saveOrder(); renderOrder(); updateBtn(isbn); }
           });
           el.querySelector('.oi-qty').addEventListener('change', function () {
             const v = Math.min(Math.max(parseInt(this.value) || 1, 1), maxQty);
-            order[isbn].qty = v; renderOrder();
+            order[isbn].qty = v; saveOrder(); renderOrder();
           });
           el.querySelector('.oi-remove').addEventListener('click', () => {
-            delete order[isbn]; renderOrder(); updateBtn(isbn);
+            delete order[isbn]; saveOrder(); renderOrder(); updateBtn(isbn);
           });
         });
       }
@@ -763,7 +766,7 @@
         }
         if (order[isbn]) order[isbn].qty += canAdd;
         else order[isbn] = { title: p.title, isbn, price: p.discounted || p.mrp || 0, mrp: p.mrp, qty: canAdd };
-        renderOrder(); updateBtn(isbn);
+        saveOrder(); renderOrder(); updateBtn(isbn);
         document.getElementById('orderPanel').classList.add('open');
       }
 
@@ -789,13 +792,12 @@
         document.getElementById('orderPanel').classList.remove('open'));
       document.getElementById('clearOrder').addEventListener('click', () => {
         Object.keys(order).forEach(k => delete order[k]);
-        renderOrder();
+        saveOrder(); renderOrder();
         grid.querySelectorAll('.btn-add').forEach(b => { b.textContent = '+ Add to Order'; b.classList.remove('in-order'); });
       });
 
       proceedBtn.addEventListener('click', () => {
         if (!Object.keys(order).length) return;
-        localStorage.setItem('ashaOrder', JSON.stringify(order));
         window.location.href = 'order.html';
       });
 

@@ -44,7 +44,16 @@
     }
 
     .home-sub {
-      font-size: .82rem; color: var(--muted); text-align: center; margin-bottom: 0;
+      font-size: .9rem; color: var(--muted); text-align: center;
+      line-height: 1.7; max-width: 560px; margin-bottom: 0;
+    }
+    .home-sub strong {
+      display: block; font-size: 1.15rem; font-weight: 800;
+      color: var(--dark); margin-bottom: 10px;
+    }
+    .home-sub em {
+      display: block; margin-top: 10px;
+      font-style: normal; color: var(--red); font-weight: 600;
     }
 
     .divider {
@@ -74,11 +83,11 @@
 
     /* ── Product image ──────────────────────────────── */
     .cat-img-wrap {
-      width: 100%; aspect-ratio: 4/3; overflow: hidden;
+      width: 100%; aspect-ratio: 1/1; overflow: hidden;
       background: var(--light);
     }
     .cat-img-wrap img {
-      width: 100%; height: 100%; object-fit: cover;
+      width: 100%; height: 100%; object-fit: cover; object-position: center;
       transition: transform .3s ease;
     }
     .cat-card:hover .cat-img-wrap img { transform: scale(1.04); }
@@ -115,7 +124,11 @@
 
   <img src="ashabookslogo.JPG" alt="Asha Books" class="home-logo">
   <p class="home-title">Asha Books Wholesale</p>
-  <p class="home-sub">Browse our catalogue to place an order enquiry</p>
+  <p class="home-sub">
+    <strong>Looking to buy Bibles in Bulk?</strong>
+    Our experienced team has serviced Churches, Bible Colleges, Christian Bookstores, Mission Organisations and Corporate Gifting for over 30 years.
+    <em>Let us know what you need and we will offer you our lowest Wholesale pricing!</em>
+  </p>
   <div class="divider"></div>
 
   <div class="categories">
