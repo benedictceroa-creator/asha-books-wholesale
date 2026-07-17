@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asha Books — Indian Language Bibles</title>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NQQ4C9EQ83"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-NQQ4C9EQ83');
+  </script>
+  <style>
+    :root {
+      --red:      #C82035;
+      --red-dark: #A81A2C;
+      --dark:     #1A1A1A;
+      --text:     #333;
+      --muted:    #777;
+      --bg:       #FFFFFF;
+      --light:    #F6F6F6;
+      --border:   #E0E0E0;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); }
+
+    /* ── Header ─────────────────────────────────────── */
+    .site-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 28px; border-bottom: 1px solid var(--border);
+      background: var(--bg); position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 1px 6px rgba(0,0,0,.06);
+    }
+    .header-left { display: flex; align-items: center; gap: 14px; }
+    .site-logo { height: 46px; object-fit: contain; display: block; }
+    .header-divider { width: 1px; height: 32px; background: var(--border); }
+    .header-title { font-size: .95rem; font-weight: 700; color: var(--dark); }
+    .header-sub { font-size: .74rem; color: var(--muted); }
+    .header-right { display: flex; align-items: center; gap: 10px; }
+    .nav-link {
+      font-size: .84rem; font-weight: 600; color: var(--muted);
+      text-decoration: none; padding: 7px 14px; border-radius: 7px;
+      transition: background .15s, color .15s;
+    }
+    .nav-link:hover { background: var(--light); color: var(--dark); }
+    .order-toggle {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--red); color: #fff;
+      border: none; border-radius: 8px; padding: 9px 18px;
+      font-size: .88rem; font-weight: 700; cursor: pointer; transition: background .18s;
+    }
+    .order-toggle:hover { background: var(--red-dark); }
+    .order-badge {
+      background: #fff; color: var(--red);
+      border-radius: 12px; padding: 1px 7px;
+      font-size: .72rem; font-weight: 800;
+    }
+
+    /* ── Hero ────────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(135deg, #1a2a1a 0%, #1a1a2d 100%);
+      padding: 48px 28px 40px; text-align: center;
+    }
+    .hero-tag {
+      display: inline-block; background: var(--red); color: #fff;
+      font-size: .7rem; font-weight: 800; letter-spacing: .1em;
+      text-transform: uppercase; padding: 4px 12px; border-radius: 20px; margin-bottom: 14px;
+    }
+    .hero-title { font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 8px; line-height: 1.2; }
+    .hero-sub { font-size: .95rem; color: rgba(255,255,255,.6); margin-bottom: 20px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15);
+      border-radius: 8px; padding: 8px 16px; color: rgba(255,255,255,.8); font-size: .82rem;
+    }
+
+    /* ── Controls ────────────────────────────────────── */
+    .wrapper { max-width: 1280px; margin: 0 auto; padding: 28px 28px; }
+    .cat-controls {
+      display: flex; gap: 16px; align-items: flex-end;
+      flex-wrap: wrap; margin-bottom: 14px;
+    }
+    .ctrl-label {
+      font-size: .72rem; font-weight: 700; color: var(--muted);
+      text-transform: uppercase; letter-spacing: .06em;
+      display: block; margin-bottom: 6px;
+    }
+    .search-wrap { flex: 1; min-width: 220px; }
+    .cat-search {
+      width: 100%; padding: 10px 14px; font-size: .95rem;
+      border: 1px solid var(--border); border-radius: 8px; outline: none; transition: border-color .18s;
+    }
+    .cat-search:focus { border-color: var(--red); }
+    .filter-wrap { min-width: 170px; }
+    .cat-select {
+      width: 100%; padding: 10px 14px; font-size: .95rem;
+      border: 1px solid var(--border); border-radius: 8px;
+      background: var(--bg); outline: none; cursor: pointer;
+      transition: border-color .18s; color: var(--text);
+    }
+    .cat-select:focus { border-color: var(--red); }
+    .cat-meta { display: flex; align-items: center; gap: 14px; margin-bottom: 22px; }
+    .cat-count { color: var(--muted); font-size: .86rem; }
+    .cat-reset { background: none; border: none; font-size: .8rem; color: var(--red); cursor: pointer; text-decoration: underline; padding: 0; }
+
+    /* ── Product grid ────────────────────────────────── */
+    .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 20px; }
+
+    /* ── Product card ────────────────────────────────── */
+    .product-card {
+      background: var(--bg); border: 1px solid var(--border); border-radius: 12px;
+      overflow: hidden; display: flex; flex-direction: column;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .product-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,.1); transform: translateY(-2px); }
+    .card-img-wrap {
+      position: relative; background: var(--light);
+      aspect-ratio: 2/3; overflow: hidden; cursor: pointer;
+    }
+    .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: opacity .25s; }
+    .card-img-wrap img.secondary { position: absolute; inset: 0; opacity: 0; }
+    .card-img-wrap:hover img.primary   { opacity: 0; }
+    .card-img-wrap:hover img.secondary { opacity: 1; }
+
+    .card-body { padding: 12px 14px 16px; flex: 1; display: flex; flex-direction: column; gap: 5px; }
+    .card-title {
+      font-size: .82rem; font-weight: 700; color: var(--dark); line-height: 1.4;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; flex: 1;
+    }
+    .card-lang-tag {
+      display: inline-block; font-size: .62rem; font-weight: 700;
+      padding: 2px 7px; border-radius: 4px; background: #e8f0fe; color: #1a56c4;
+      align-self: flex-start;
+    }
+    .card-mrp   { font-size: .72rem; color: var(--muted); text-decoration: line-through; margin-top: 2px; }
+    .card-price { font-size: .95rem; font-weight: 800; color: var(--red); }
+    .card-discount-tag { font-size: .62rem; font-weight: 700; color: #2e7d32; background: #e8f5e9; padding: 1px 6px; border-radius: 4px; }
+    .card-price-range { font-size: .72rem; color: var(--muted); }
+
+    /* ── Variant selector on card ────────────────────── */
+    .card-variants { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 3px; }
+    .var-btn {
+      font-size: .65rem; font-weight: 600; padding: 3px 7px;
+      border: 1px solid var(--border); border-radius: 5px;
+      background: var(--light); cursor: pointer; transition: all .15s; white-space: nowrap;
+    }
+    .var-btn:hover { background: var(--dark); color: #fff; border-color: var(--dark); }
+    .var-btn.active { background: var(--dark); color: #fff; border-color: var(--dark); }
+    .var-btn.unavailable { opacity: .38; cursor: not-allowed; text-decoration: line-through; pointer-events: none; }
+
+    /* ── Stock badge ────────────────────────────────── */
+    .stock-badge {
+      display: inline-block; font-size: .63rem; font-weight: 700;
+      padding: 2px 7px; border-radius: 4px; align-self: flex-start;
+    }
+    .stock-in  { background: #e8f5e9; color: #2e7d32; }
+    .stock-low { background: #fff3e0; color: #bf5900; }
+    .stock-out { background: #fde8eb; color: var(--red); }
+
+    /* ── Add to order button ────────────────────────── */
+    .btn-add {
+      margin-top: 8px; width: 100%; padding: 8px 0;
+      font-size: .76rem; font-weight: 700;
+      background: var(--light); border: 1px solid var(--border);
+      border-radius: 8px; cursor: pointer; transition: all .15s;
+    }
+    .btn-add:hover:not(:disabled), .btn-add.in-order {
+      background: var(--red); color: #fff; border-color: var(--red);
+    }
+    .btn-add:disabled { background: var(--light); color: var(--muted); border-color: var(--border); cursor: not-allowed; }
+    .var-hint { font-size: .68rem; color: var(--red); text-align: center; margin-top: 3px; display: none; }
+    .var-hint.visible { display: block; }
+
+    /* ── Order Panel ─────────────────────────────────── */
+    .order-panel {
+      position: fixed; top: 0; right: -360px; width: 340px; height: 100vh;
+      background: var(--bg); box-shadow: -4px 0 24px rgba(0,0,0,.12);
+      z-index: 950; display: flex; flex-direction: column; transition: right .26s ease;
+    }
+    .order-panel.open { right: 0; }
+    .panel-header {
+      padding: 16px 18px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      font-weight: 700; font-size: .98rem; color: var(--dark);
+    }
+    .panel-close { background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--muted); line-height: 1; }
+    .panel-close:hover { color: var(--dark); }
+    .panel-items { flex: 1; overflow-y: auto; padding: 12px; }
+    .panel-empty { color: var(--muted); text-align: center; margin-top: 40px; font-size: .86rem; }
+    .order-item { border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; }
+    .oi-title { font-size: .77rem; font-weight: 600; color: var(--dark); margin-bottom: 2px; line-height: 1.35; }
+    .oi-ref   { font-size: .67rem; color: var(--muted); margin-bottom: 7px; }
+    .oi-row   { display: flex; align-items: center; gap: 6px; }
+    .oi-qty-btn {
+      width: 26px; height: 26px; border: 1px solid var(--border);
+      border-radius: 4px; background: var(--light); cursor: pointer;
+      font-size: .9rem; display: flex; align-items: center; justify-content: center;
+    }
+    .oi-qty-btn:hover { background: var(--border); }
+    .oi-qty { width: 40px; height: 26px; text-align: center; border: 1px solid var(--border); border-radius: 4px; font-size: .84rem; }
+    .oi-subtotal { flex: 1; text-align: right; font-size: .8rem; font-weight: 700; color: var(--dark); }
+    .oi-remove { background: none; border: none; color: var(--border); cursor: pointer; font-size: 1rem; padding: 0 2px; }
+    .oi-remove:hover { color: var(--red); }
+    .panel-footer { padding: 14px 18px; border-top: 1px solid var(--border); }
+    .total-row {
+      font-size: .95rem; font-weight: 600; color: var(--dark);
+      margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center;
+    }
+    .total-amount { font-size: 1.1rem; color: var(--red); font-weight: 800; }
+    .panel-btns { display: flex; gap: 8px; }
+    .btn-clear {
+      flex: 1; padding: 9px; background: var(--light);
+      border: 1px solid var(--border); border-radius: 8px;
+      cursor: pointer; font-size: .82rem; font-weight: 600;
+    }
+    .btn-clear:hover { background: var(--border); }
+    .btn-proceed {
+      flex: 2; padding: 9px; background: var(--red); color: #fff;
+      border: none; border-radius: 8px; cursor: pointer;
+      font-size: .86rem; font-weight: 700; transition: background .18s;
+    }
+    .btn-proceed:hover { background: var(--red-dark); }
+    .btn-proceed:disabled { background: var(--border); color: var(--muted); cursor: not-allowed; }
+
+    /* ── Lightbox ────────────────────────────────────── */
+    .lightbox {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,.78); z-index: 1000;
+      align-items: center; justify-content: center; padding: 20px;
+    }
+    .lightbox.active { display: flex; }
+    .lb-box {
+      background: var(--bg); border-radius: 16px;
+      max-width: 860px; width: 100%; overflow: hidden;
+      position: relative; display: flex; animation: lb-in .18s ease; max-height: 90vh;
+    }
+    @keyframes lb-in { from { opacity: 0; transform: scale(.94); } to { opacity: 1; transform: scale(1); } }
+    .lb-close {
+      position: absolute; top: 12px; right: 14px;
+      background: rgba(0,0,0,.08); border: none; font-size: 1.3rem;
+      cursor: pointer; color: var(--dark); z-index: 1;
+      width: 32px; height: 32px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .lb-close:hover { background: rgba(0,0,0,.15); }
+    .lb-gallery { width: 50%; background: var(--light); flex-shrink: 0; display: flex; flex-direction: column; }
+    .lb-main-img { width: 100%; aspect-ratio: 2/3; object-fit: cover; display: block; }
+    .lb-thumbs {
+      display: flex; gap: 6px; padding: 10px;
+      overflow-x: auto; background: var(--bg); border-top: 1px solid var(--border);
+    }
+    .lb-thumb {
+      width: 54px; height: 54px; object-fit: cover; flex-shrink: 0;
+      border-radius: 6px; border: 2px solid var(--border); cursor: pointer; transition: border-color .15s;
+    }
+    .lb-thumb:hover, .lb-thumb.active { border-color: var(--red); }
+    .lb-body { padding: 24px; overflow-y: auto; flex: 1; display: flex; flex-direction: column; gap: 12px; }
+    .lb-title { font-size: 1rem; font-weight: 800; color: var(--dark); line-height: 1.4; }
+    .lb-label { font-size: .7rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 4px; }
+    .lb-price-wrap { display: flex; flex-direction: column; gap: 2px; }
+    .lb-mrp   { font-size: .82rem; color: var(--muted); text-decoration: line-through; }
+    .lb-price { font-size: 1.25rem; font-weight: 800; color: var(--red); }
+    .lb-discount-tag { display: inline-block; font-size: .72rem; font-weight: 700; color: #2e7d32; background: #e8f5e9; padding: 2px 8px; border-radius: 4px; }
+    .lb-variants { display: flex; gap: 6px; flex-wrap: wrap; }
+    .lb-var-btn {
+      padding: 6px 12px; border-radius: 7px; border: 1px solid var(--border);
+      font-size: .78rem; font-weight: 600; cursor: pointer; background: var(--light); transition: all .15s;
+    }
+    .lb-var-btn:hover:not(.unavailable), .lb-var-btn.active { background: var(--dark); color: #fff; border-color: var(--dark); }
+    .lb-var-btn.unavailable { opacity: .35; cursor: not-allowed; text-decoration: line-through; }
+    .lb-add {
+      padding: 11px; background: var(--red); color: #fff;
+      border: none; border-radius: 9px; cursor: pointer;
+      font-size: .9rem; font-weight: 700; transition: background .15s;
+    }
+    .lb-add:hover:not(:disabled) { background: var(--red-dark); }
+    .lb-add:disabled { background: var(--border); color: var(--muted); cursor: not-allowed; }
+    .lb-var-note { font-size: .74rem; color: var(--red); display: none; }
+    .lb-var-note.visible { display: block; }
+    .lb-desc { font-size: .8rem; color: var(--muted); line-height: 1.6; padding-top: 12px; border-top: 1px solid var(--border); }
+
+    /* ── Empty / loading ─────────────────────────────── */
+    .state-box { text-align: center; padding: 80px 20px; color: var(--muted); font-size: .95rem; }
+    .spinner {
+      width: 36px; height: 36px; border: 3px solid var(--border);
+      border-top-color: var(--red); border-radius: 50%;
+      animation: spin .7s linear infinite; margin: 0 auto 16px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .cat-empty { display: none; text-align: center; padding: 60px 20px; color: var(--muted); font-size: 1rem; }
+
+    /* ── Responsive ──────────────────────────────────── */
+    @media (max-width: 640px) {
+      .product-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .site-header { padding: 10px 16px; }
+      .wrapper { padding: 16px; }
+      .hero { padding: 32px 16px 28px; }
+      .hero-title { font-size: 1.4rem; }
+      .order-panel { width: 100%; right: -100%; }
+      .lb-box { flex-direction: column; max-height: 95vh; }
+      .lb-gallery { width: 100%; }
+      .lb-main-img { aspect-ratio: 4/3; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Header ── -->
+  <header class="site-header">
+    <div class="header-left">
+      <img src="ashabookslogo.JPG" alt="Asha Books" class="site-logo">
+      <div class="header-divider"></div>
+      <div>
+        <div class="header-title">Indian Language Bibles</div>
+        <div class="header-sub">Telugu · Tamil · Hindi · Assamese &amp; More</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <a href="index.html" class="nav-link">Wholesale Catalogue</a>
+      <a href="tshirts.html" class="nav-link">T-Shirts</a>
+      <button class="order-toggle" id="orderToggle">
+        &#128722; Order&nbsp;<span class="order-badge" id="orderBadge">0</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ── Hero ── -->
+  <div class="hero">
+    <div class="hero-tag">Indian Language Bibles</div>
+    <h1 class="hero-title">God's Word in Every Language</h1>
+    <p class="hero-sub">Telugu, Tamil, Hindi, Assamese and more — bulk wholesale pricing</p>
+    <div class="hero-badge">10% off · Multiple bindings &amp; editions available</div>
+  </div>
+
+  <!-- ── Catalogue ── -->
+  <div class="wrapper">
+    <div class="cat-controls">
+      <div class="search-wrap">
+        <label class="ctrl-label" for="catSearch">Search</label>
+        <input type="search" class="cat-search" id="catSearch" placeholder="Title or language…">
+      </div>
+      <div class="filter-wrap">
+        <label class="ctrl-label" for="catLang">Language</label>
+        <select class="cat-select" id="catLang">
+          <option value="">All Languages</option>
+        </select>
+      </div>
+    </div>
+    <div class="cat-meta">
+      <span class="cat-count" id="catCount"></span>
+      <button class="cat-reset" id="catReset">Reset filters</button>
+    </div>
+    <div class="product-grid" id="productGrid">
+      <div class="state-box" style="grid-column:1/-1">
+        <div class="spinner"></div>
+        Loading products…
+      </div>
+    </div>
+    <p class="cat-empty" id="catEmpty">No products match your filters.</p>
+  </div>
+
+  <!-- ── Order Panel ── -->
+  <aside class="order-panel" id="orderPanel">
+    <div class="panel-header">
+      <span>Order List</span>
+      <button class="panel-close" id="panelClose">&times;</button>
+    </div>
+    <div class="panel-items" id="orderItems">
+      <p class="panel-empty">No items added yet.</p>
+    </div>
+    <div class="panel-footer">
+      <div class="total-row">
+        <span>Total</span>
+        <span class="total-amount" id="orderTotal">&#8377;0</span>
+      </div>
+      <div class="panel-btns">
+        <button class="btn-clear" id="clearOrder">Clear All</button>
+        <button class="btn-proceed" id="proceedBtn" disabled>Proceed to Enquiry &#8594;</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ── Lightbox ── -->
+  <div class="lightbox" id="lightbox">
+    <div class="lb-box" id="lbBox">
+      <button class="lb-close" id="lbClose">&times;</button>
+      <div class="lb-gallery">
+        <img class="lb-main-img" id="lbMainImg" src="" alt="">
+        <div class="lb-thumbs" id="lbThumbs"></div>
+      </div>
+      <div class="lb-body">
+        <p class="lb-title" id="lbTitle"></p>
+        <div class="lb-price-wrap">
+          <span class="lb-mrp"  id="lbMrp"></span>
+          <span class="lb-price" id="lbPrice"></span>
+          <span class="lb-discount-tag">10% Wholesale Discount</span>
+        </div>
+        <div>
+          <p class="lb-label">Variant</p>
+          <div class="lb-variants" id="lbVariants"></div>
+          <p class="lb-var-note" id="lbVarNote">Please select a variant</p>
+        </div>
+        <button class="lb-add" id="lbAdd">+ Add to Order</button>
+        <p class="lb-desc" id="lbDesc"></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (function () {
+    const API_URL  = 'https://www.ashabooks.com/collections/indian-language-bibles/products.json?limit=250';
+    const DISCOUNT = 0.10; // 10% bulk discount
+
+    function discounted(price) { return Math.round(price * (1 - DISCOUNT)); }
+    function fmtRupee(n)       { return '₹' + Math.round(n).toLocaleString('en-IN'); }
+    function escHtml(s)        { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+    // ── Detect language from title ───────────────────
+    function detectLanguage(title) {
+      const t = title.toLowerCase();
+      if (t.includes('telugu'))    return 'Telugu';
+      if (t.includes('tamil'))     return 'Tamil';
+      if (t.includes('hindi'))     return 'Hindi';
+      if (t.includes('assamese'))  return 'Assamese';
+      if (t.includes('malayalam')) return 'Malayalam';
+      if (t.includes('kannada'))   return 'Kannada';
+      if (t.includes('marathi'))   return 'Marathi';
+      if (t.includes('odia') || t.includes('oriya')) return 'Odia';
+      if (t.includes('punjabi'))   return 'Punjabi';
+      if (t.includes('nepali'))    return 'Nepali';
+      if (t.includes('urdu'))      return 'Urdu';
+      if (t.includes('bengali'))   return 'Bengali';
+      return 'Other';
+    }
+
+    // ── Price helpers ────────────────────────────────
+    function availableVariants(variants) { return variants.filter(v => v.available); }
+
+    function priceRange(variants) {
+      const prices = variants.map(v => parseFloat(v.price));
+      const min = Math.min(...prices), max = Math.max(...prices);
+      return min === max ? fmtRupee(min) : fmtRupee(min) + ' – ' + fmtRupee(max);
+    }
+
+    function discountedRange(variants) {
+      const prices = variants.map(v => parseFloat(v.price));
+      const min = Math.min(...prices), max = Math.max(...prices);
+      return min === max
+        ? fmtRupee(discounted(min))
+        : fmtRupee(discounted(min)) + ' – ' + fmtRupee(discounted(max));
+    }
+
+    // ── Order (shared localStorage with other pages) ─
+    const order = JSON.parse(localStorage.getItem('ashaOrder') || '{}');
+
+    function orderKey(handle, variantTitle) {
+      return 'ilb:' + handle + ':' + variantTitle;
+    }
+
+    function saveOrder() { localStorage.setItem('ashaOrder', JSON.stringify(order)); }
+
+    function recalc() {
+      let total = 0, count = 0;
+      Object.values(order).forEach(it => { total += it.price * it.qty; count += it.qty; });
+      document.getElementById('orderTotal').textContent = fmtRupee(total);
+      document.getElementById('orderBadge').textContent = count;
+      document.getElementById('proceedBtn').disabled    = count === 0;
+    }
+
+    function renderOrder() {
+      const keys = Object.keys(order);
+      const el   = document.getElementById('orderItems');
+      if (keys.length === 0) {
+        el.innerHTML = '<p class="panel-empty">No items added yet.</p>';
+        recalc(); return;
+      }
+      el.innerHTML = keys.map(k => {
+        const it = order[k];
+        return `<div class="order-item" data-key="${escHtml(k)}">
+          <div class="oi-title">${escHtml(it.title)}</div>
+          <div class="oi-ref">${escHtml(it.ref || '')}</div>
+          <div class="oi-row">
+            <button class="oi-qty-btn oi-minus">&#8722;</button>
+            <input type="number" class="oi-qty" value="${it.qty}" min="1">
+            <button class="oi-qty-btn oi-plus">&#43;</button>
+            <span class="oi-subtotal">${fmtRupee(it.price * it.qty)}</span>
+            <button class="oi-remove" title="Remove">&times;</button>
+          </div>
+        </div>`;
+      }).join('');
+      recalc();
+
+      el.querySelectorAll('.order-item').forEach(row => {
+        const k = row.dataset.key;
+        row.querySelector('.oi-minus').addEventListener('click', () => {
+          if (order[k].qty > 1) { order[k].qty--; saveOrder(); renderOrder(); }
+        });
+        row.querySelector('.oi-plus').addEventListener('click', () => {
+          order[k].qty++; saveOrder(); renderOrder();
+        });
+        row.querySelector('.oi-qty').addEventListener('change', function () {
+          order[k].qty = Math.max(parseInt(this.value) || 1, 1);
+          saveOrder(); renderOrder();
+        });
+        row.querySelector('.oi-remove').addEventListener('click', () => {
+          delete order[k]; saveOrder(); renderOrder();
+          document.querySelectorAll(`.btn-add[data-key="${CSS.escape(k)}"]`).forEach(b => {
+            b.textContent = '+ Add to Order'; b.classList.remove('in-order');
+          });
+        });
+      });
+    }
+
+    function addToOrder(handle, variant, productTitle) {
+      const k   = orderKey(handle, variant.title);
+      const ref = variant.title !== 'Default Title' ? variant.title : '';
+      const price = discounted(parseFloat(variant.price));
+      if (order[k]) order[k].qty++;
+      else order[k] = { title: productTitle, ref, price, qty: 1 };
+      saveOrder(); renderOrder();
+      document.getElementById('orderPanel').classList.add('open');
+    }
+
+    // ── Build language dropdown ──────────────────────
+    function buildLangSelect(products) {
+      const counts = {};
+      products.forEach(p => {
+        const l = detectLanguage(p.title);
+        counts[l] = (counts[l] || 0) + 1;
+      });
+      const sel = document.getElementById('catLang');
+      Object.entries(counts).sort((a,b) => b[1]-a[1]).forEach(([lang, n]) => {
+        const opt = document.createElement('option');
+        opt.value = lang; opt.textContent = `${lang} (${n})`;
+        sel.appendChild(opt);
+      });
+    }
+
+    // ── Filter ───────────────────────────────────────
+    let allProducts = [];
+
+    function applyFilters() {
+      const q    = document.getElementById('catSearch').value.trim().toLowerCase();
+      const lang = document.getElementById('catLang').value;
+      const filtered = allProducts.filter(p => {
+        if (q    && !p.title.toLowerCase().includes(q)) return false;
+        if (lang && detectLanguage(p.title) !== lang)   return false;
+        return true;
+      });
+      renderGrid(filtered);
+    }
+
+    document.getElementById('catSearch').addEventListener('input', applyFilters);
+    document.getElementById('catLang').addEventListener('change', applyFilters);
+    document.getElementById('catReset').addEventListener('click', () => {
+      document.getElementById('catSearch').value = '';
+      document.getElementById('catLang').value   = '';
+      applyFilters();
+    });
+
+    // ── Render grid ──────────────────────────────────
+    function renderGrid(products) {
+      const grid  = document.getElementById('productGrid');
+      const count = document.getElementById('catCount');
+      const empty = document.getElementById('catEmpty');
+      count.textContent = products.length + ' product' + (products.length !== 1 ? 's' : '');
+
+      if (products.length === 0) {
+        grid.innerHTML = ''; empty.style.display = 'block'; return;
+      }
+      empty.style.display = 'none';
+
+      grid.innerHTML = products.map((p, idx) => {
+        const lang      = detectLanguage(p.title);
+        const anyAvail  = p.variants.some(v => v.available);
+        const avail     = availableVariants(p.variants);
+        const img1      = p.images[0] ? p.images[0].src : '';
+        const img2      = p.images[1] ? p.images[1].src : img1;
+        const hasVars   = p.variants.length > 1 || p.variants[0].title !== 'Default Title';
+
+        const mrpRange  = priceRange(p.variants);
+        const discRange = discountedRange(p.variants);
+
+        const stockCls = !anyAvail ? 'stock-out' : avail.length <= 2 ? 'stock-low' : 'stock-in';
+        const stockLbl = !anyAvail ? 'Out of Stock' : avail.length <= 2 ? `Low Stock` : 'In Stock';
+
+        const varBtns = hasVars ? p.variants.map(v =>
+          `<button class="var-btn${v.available ? '' : ' unavailable'}" data-var-title="${escHtml(v.title)}" data-var-price="${v.price}">${escHtml(v.title)}</button>`
+        ).join('') : '';
+
+        return `<div class="product-card" data-idx="${idx}">
+          <div class="card-img-wrap" data-idx="${idx}">
+            <img class="primary"   src="${escHtml(img1)}" alt="${escHtml(p.title)}" loading="lazy">
+            <img class="secondary" src="${escHtml(img2)}" alt="${escHtml(p.title)}" loading="lazy">
+          </div>
+          <div class="card-body">
+            <p class="card-title">${escHtml(p.title)}</p>
+            <span class="card-lang-tag">${escHtml(lang)}</span>
+            <span class="stock-badge ${stockCls}">${stockLbl}</span>
+            <p class="card-mrp">MRP ${mrpRange}</p>
+            <p class="card-price">${discRange} <span class="card-discount-tag">10% off</span></p>
+            ${hasVars ? `<div class="card-variants">${varBtns}</div>` : ''}
+            <button class="btn-add" data-idx="${idx}"${!anyAvail ? ' disabled' : ''}>
+              ${!anyAvail ? 'Out of Stock' : '+ Add to Order'}
+            </button>
+            <p class="var-hint" id="vhint-${idx}">${hasVars ? 'Please select a variant first' : ''}</p>
+          </div>
+        </div>`;
+      }).join('');
+
+      // ── Card interactions ───────────────────────────
+      grid.querySelectorAll('.card-img-wrap').forEach(el => {
+        el.addEventListener('click', () => openLightbox(allProducts[+el.dataset.idx]));
+      });
+
+      grid.querySelectorAll('.product-card').forEach(card => {
+        const idx = +card.dataset.idx;
+        const p   = products[idx] || allProducts[+card.querySelector('[data-idx]').dataset.idx];
+        const hasVars = p.variants.length > 1 || p.variants[0].title !== 'Default Title';
+        let selVariant = hasVars ? null : p.variants[0];
+
+        card.querySelectorAll('.var-btn').forEach(btn => {
+          btn.addEventListener('click', e => {
+            e.stopPropagation();
+            selVariant = p.variants.find(v => v.title === btn.dataset.varTitle);
+            card.querySelectorAll('.var-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            // Update displayed price for selected variant
+            const varPrice = parseFloat(btn.dataset.varPrice);
+            card.querySelector('.card-mrp').textContent  = 'MRP ' + fmtRupee(varPrice);
+            card.querySelector('.card-price').innerHTML  = fmtRupee(discounted(varPrice)) + ' <span class="card-discount-tag">10% off</span>';
+            document.getElementById('vhint-' + idx).classList.remove('visible');
+          });
+        });
+
+        card.querySelector('.btn-add').addEventListener('click', e => {
+          e.stopPropagation();
+          if (!selVariant) {
+            document.getElementById('vhint-' + idx).classList.add('visible');
+            return;
+          }
+          const k = orderKey(p.handle, selVariant.title);
+          addToOrder(p.handle, selVariant, p.title);
+          const btn = card.querySelector('.btn-add');
+          btn.dataset.key = k;
+          btn.textContent = '✓ In Order';
+          btn.classList.add('in-order');
+        });
+      });
+    }
+
+    // ── Lightbox ─────────────────────────────────────
+    const lightbox = document.getElementById('lightbox');
+    const lbBox    = document.getElementById('lbBox');
+    let lbProduct  = null;
+    let lbSelVar   = null;
+
+    function openLightbox(p) {
+      lbProduct = p;
+      lbSelVar  = null;
+      const hasVars = p.variants.length > 1 || p.variants[0].title !== 'Default Title';
+      if (!hasVars) lbSelVar = p.variants[0];
+
+      document.getElementById('lbTitle').textContent = p.title;
+
+      // Gallery
+      const lbMain   = document.getElementById('lbMainImg');
+      const lbThumbs = document.getElementById('lbThumbs');
+      lbMain.src = p.images[0] ? p.images[0].src : '';
+      lbMain.alt = p.title;
+      lbThumbs.innerHTML = p.images.map((img, i) =>
+        `<img class="lb-thumb${i === 0 ? ' active' : ''}" src="${escHtml(img.src)}" alt="" loading="lazy" data-src="${escHtml(img.src)}">`
+      ).join('');
+      lbThumbs.querySelectorAll('.lb-thumb').forEach(th => {
+        th.addEventListener('click', () => {
+          lbMain.src = th.dataset.src;
+          lbThumbs.querySelectorAll('.lb-thumb').forEach(t => t.classList.remove('active'));
+          th.classList.add('active');
+        });
+      });
+
+      // Description
+      const tmp = document.createElement('div');
+      tmp.innerHTML = p.body_html || '';
+      document.getElementById('lbDesc').textContent = tmp.textContent.trim().slice(0, 400) + (tmp.textContent.length > 400 ? '…' : '');
+
+      // Price — show range initially
+      updateLbPrice(null, p);
+
+      // Variants
+      const lbVariants = document.getElementById('lbVariants');
+      if (hasVars) {
+        lbVariants.innerHTML = p.variants.map(v =>
+          `<button class="lb-var-btn${v.available ? '' : ' unavailable'}" data-var-title="${escHtml(v.title)}" data-var-price="${v.price}" ${v.available ? '' : 'disabled'}>${escHtml(v.title)}</button>`
+        ).join('');
+        lbVariants.querySelectorAll('.lb-var-btn:not(.unavailable)').forEach(btn => {
+          btn.addEventListener('click', () => {
+            lbSelVar = p.variants.find(v => v.title === btn.dataset.varTitle);
+            lbVariants.querySelectorAll('.lb-var-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            updateLbPrice(lbSelVar, p);
+            document.getElementById('lbVarNote').classList.remove('visible');
+          });
+        });
+        document.getElementById('lbVarNote').classList.remove('visible');
+        document.getElementById('lbVariants').closest('div').style.display = '';
+      } else {
+        lbVariants.innerHTML = '';
+        document.getElementById('lbVariants').closest('div').style.display = 'none';
+      }
+
+      // Add button
+      const lbAdd = document.getElementById('lbAdd');
+      lbAdd.disabled = false;
+      lbAdd.textContent = '+ Add to Order';
+      lbAdd.onclick = () => {
+        if (!lbSelVar) {
+          document.getElementById('lbVarNote').classList.add('visible');
+          return;
+        }
+        addToOrder(p.handle, lbSelVar, p.title);
+        lbAdd.textContent = '✓ Added!';
+        setTimeout(() => { lbAdd.textContent = '+ Add to Order'; }, 1200);
+      };
+
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function updateLbPrice(variant, p) {
+      if (variant) {
+        const mrp  = parseFloat(variant.price);
+        document.getElementById('lbMrp').textContent   = 'MRP ' + fmtRupee(mrp);
+        document.getElementById('lbPrice').textContent = fmtRupee(discounted(mrp));
+      } else {
+        document.getElementById('lbMrp').textContent   = 'MRP ' + priceRange(p.variants);
+        document.getElementById('lbPrice').textContent = discountedRange(p.variants);
+      }
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+      lbProduct = null; lbSelVar = null;
+    }
+
+    document.getElementById('lbClose').addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', e => { if (!lbBox.contains(e.target)) closeLightbox(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+    // ── Panel controls ───────────────────────────────
+    document.getElementById('orderToggle').addEventListener('click', () =>
+      document.getElementById('orderPanel').classList.toggle('open'));
+    document.getElementById('panelClose').addEventListener('click', () =>
+      document.getElementById('orderPanel').classList.remove('open'));
+    document.getElementById('clearOrder').addEventListener('click', () => {
+      Object.keys(order).forEach(k => delete order[k]);
+      saveOrder(); renderOrder();
+      document.querySelectorAll('.btn-add').forEach(b => { b.textContent = '+ Add to Order'; b.classList.remove('in-order'); });
+    });
+    document.getElementById('proceedBtn').addEventListener('click', () => {
+      if (!Object.keys(order).length) return;
+      saveOrder(); window.location.href = 'order.html';
+    });
+
+    // ── Fetch ────────────────────────────────────────
+    fetch(API_URL)
+      .then(r => { if (!r.ok) throw new Error(); return r.json(); })
+      .then(data => {
+        allProducts = data.products || [];
+        buildLangSelect(allProducts);
+        renderGrid(allProducts);
+        renderOrder();
+      })
+      .catch(() => {
+        document.getElementById('productGrid').innerHTML =
+          `<div class="state-box" style="grid-column:1/-1">Unable to load products. Please try again later.</div>`;
+        document.getElementById('catCount').textContent = '';
+      });
+
+  })();
+  </script>
+</body>
+</html>
