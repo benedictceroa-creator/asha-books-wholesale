@@ -307,10 +307,15 @@
       .header-sub { display: none; }
       .order-toggle { padding: 8px 12px; font-size: .78rem; min-height: 44px; }
       .cat-wrapper { padding: 12px; }
-      .cat-controls { gap: 10px; }
-      .search-wrap { min-width: 0; }
-      .trans-wrap { min-width: 0; flex: 1; }
-      .price-filter { min-width: 0; width: 100%; }
+      .cat-controls {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        align-items: end;
+      }
+      .search-wrap { grid-column: 1 / -1; min-width: 0; }
+      .trans-wrap { min-width: 0; }
+      .price-filter { grid-column: 1 / -1; min-width: 0; }
       .book-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
       .book-title { font-size: .72rem; }
       .btn-add { font-size: .68rem; padding: 7px 0; min-height: 36px; }
@@ -337,9 +342,9 @@
       </div>
     </div>
     <div style="display:flex;align-items:center;gap:10px;">
-      <a href="indian-bibles.html" style="font-size:.84rem;font-weight:600;color:var(--muted);text-decoration:none;padding:7px 14px;border-radius:7px;transition:background .15s,color .15s;" onmouseover="this.style.background='#F6F6F6';this.style.color='#1A1A1A'" onmouseout="this.style.background='';this.style.color=''">Indian Bibles</a>
-      <a href="tshirts.html" style="font-size:.84rem;font-weight:600;color:var(--muted);text-decoration:none;padding:7px 14px;border-radius:7px;transition:background .15s,color .15s;" onmouseover="this.style.background='#F6F6F6';this.style.color='#1A1A1A'" onmouseout="this.style.background='';this.style.color=''">T-Shirts</a>
-      <a href="home-decor.html" style="font-size:.84rem;font-weight:600;color:var(--muted);text-decoration:none;padding:7px 14px;border-radius:7px;transition:background .15s,color .15s;" onmouseover="this.style.background='#F6F6F6';this.style.color='#1A1A1A'" onmouseout="this.style.background='';this.style.color=''">Home Decor</a>
+      <a href="indian-bibles.html" class="nav-link" style="font-size:.84rem;font-weight:600;color:var(--muted);text-decoration:none;padding:7px 14px;border-radius:7px;transition:background .15s,color .15s;" onmouseover="this.style.background='#F6F6F6';this.style.color='#1A1A1A'" onmouseout="this.style.background='';this.style.color=''">Indian Bibles</a>
+      <a href="tshirts.html" class="nav-link" style="font-size:.84rem;font-weight:600;color:var(--muted);text-decoration:none;padding:7px 14px;border-radius:7px;transition:background .15s,color .15s;" onmouseover="this.style.background='#F6F6F6';this.style.color='#1A1A1A'" onmouseout="this.style.background='';this.style.color=''">T-Shirts</a>
+      <a href="home-decor.html" class="nav-link" style="font-size:.84rem;font-weight:600;color:var(--muted);text-decoration:none;padding:7px 14px;border-radius:7px;transition:background .15s,color .15s;" onmouseover="this.style.background='#F6F6F6';this.style.color='#1A1A1A'" onmouseout="this.style.background='';this.style.color=''">Home Decor</a>
       <button class="order-toggle" id="orderToggle">
         &#128722; Order&nbsp;<span class="order-badge" id="orderBadge">0</span>
       </button>
