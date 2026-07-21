@@ -11,9 +11,10 @@ function detectTranslation(title) {
   const u = title.toUpperCase();
   if (u.includes('NKJV')) return 'NKJV';
   if (u.includes('NRSV')) return 'NRSV';
+  if (u.includes('NIRV')) return 'NIrV';
   if (u.includes('NIV'))  return 'NIV';
   if (u.includes('NASB')) return 'NASB';
-  if (u.includes('KJV'))  return 'KJV';
+  if (u.includes('KJV') || u.includes('KING JAMES VERSION')) return 'KJV';
   if (u.includes('ESV'))  return 'ESV';
   if (u.includes('NLT'))  return 'NLT';
   if (u.includes('AMP'))  return 'AMP';
@@ -41,14 +42,19 @@ function detectFormat(title) {
   return 'Standard Bible';
 }
 
-function detectSize(title) {
+function detectBibleSize(title) {
   const t = title.toLowerCase();
   if (t.includes('tiny testament') || t.includes('pocket-sized') || t.includes('pocket sized') || t.includes('pocket size')) return 'Pocket';
-  if (t.includes('personal size giant print') || t.includes('giant print')) return 'Giant Print';
-  if (t.includes('large print') || t.includes('larger print') || t.includes('large-print')) return 'Large Print';
   if (t.includes('personal size') || t.includes('personal-size')) return 'Personal';
   if (t.includes('compact')) return 'Compact';
   if (t.includes('family bible') || t.includes('preacher') || t.includes('pulpit')) return 'Family / Pulpit';
+  return 'Standard';
+}
+
+function detectFontSize(title) {
+  const t = title.toLowerCase();
+  if (t.includes('giant print')) return 'Giant Print';
+  if (t.includes('large print') || t.includes('larger print') || t.includes('large-print')) return 'Large Print';
   return 'Standard';
 }
 
@@ -68,7 +74,10 @@ function detectBinding(title) {
 const wb = XLSX.readFile(XLSX_PATH);
 const wsName = wb.SheetNames[0];
 const ws = wb.Sheets[wsName];
-const rows = XLSX.utils.sheet_to_json(ws, { defval: '' });
+const rows = XLSX.utils.sheet_to_json(ws, { defval: '' }).map(r => {
+  const { Size, ...rest } = r; // drop legacy Size column if present
+  return rest;
+});
 
 const updated = rows.map(row => {
   const title = String(row['Titles'] || '').trim();
@@ -76,25 +85,26 @@ const updated = rows.map(row => {
     ...row,
     Translation: detectTranslation(title),
     Binding:     detectBinding(title),
-    Size:        detectSize(title),
+    'Bible Size': detectBibleSize(title),
+    'Font Size':  detectFontSize(title),
     Format:      detectFormat(title),
   };
 });
 
 const newWs = XLSX.utils.json_to_sheet(updated, {
-  header: ['ISBN', 'Present stock', 'Titles', 'Mrp', 'After Discount', 'Translation', 'Binding', 'Size', 'Format'],
+  header: ['ISBN', 'Present stock', 'Titles', 'Mrp', 'After Discount', 'Translation', 'Binding', 'Bible Size', 'Font Size', 'Format'],
 });
 wb.Sheets[wsName] = newWs;
 XLSX.writeFile(wb, XLSX_PATH);
 
 // Count stats
-const stats = { Translation: {}, Binding: {}, Size: {}, Format: {} };
+const stats = { Translation: {}, Binding: {}, 'Bible Size': {}, 'Font Size': {}, Format: {} };
 updated.forEach(r => {
-  ['Translation', 'Binding', 'Size', 'Format'].forEach(k => {
+  ['Translation', 'Binding', 'Bible Size', 'Font Size', 'Format'].forEach(k => {
     stats[k][r[k]] = (stats[k][r[k]] || 0) + 1;
   });
 });
-['Translation', 'Binding', 'Size', 'Format'].forEach(k => {
+['Translation', 'Binding', 'Bible Size', 'Font Size', 'Format'].forEach(k => {
   console.log(`\n${k}:`);
   Object.entries(stats[k]).sort((a,b) => b[1]-a[1]).forEach(([v,c]) => console.log(`  ${v}: ${c}`));
 });
