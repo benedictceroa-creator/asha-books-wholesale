@@ -367,18 +367,19 @@
         <label class="ctrl-label" for="catTranslation">Translation</label>
         <select class="cat-select" id="catTranslation">
           <option value="">All Translations</option>
-          <option value="KJV">KJV (291)</option>
-          <option value="NIV">NIV (265)</option>
-          <option value="NKJV">NKJV (163)</option>
-          <option value="NASB">NASB (38)</option>
-          <option value="RSV">RSV (35)</option>
-          <option value="NRSV">NRSV (26)</option>
-          <option value="NET">NET (20)</option>
-          <option value="AMP">AMP (16)</option>
-          <option value="ESV">ESV (13)</option>
-          <option value="ICB">ICB (5)</option>
-          <option value="NLT">NLT (2)</option>
-          <option value="Other">Other / General (204)</option>
+          <option value="KJV">KJV (195)</option>
+          <option value="NIV">NIV (155)</option>
+          <option value="NKJV">NKJV (132)</option>
+          <option value="Other">Other / General (58)</option>
+          <option value="NASB">NASB (20)</option>
+          <option value="ESV">ESV (20)</option>
+          <option value="NET">NET (16)</option>
+          <option value="NIrV">NIrV (11)</option>
+          <option value="NRSV">NRSV (7)</option>
+          <option value="ICB">ICB (3)</option>
+          <option value="RSV">RSV (3)</option>
+          <option value="NLT">NLT (3)</option>
+          <option value="AMP">AMP (2)</option>
         </select>
       </div>
       <div class="trans-wrap">
@@ -512,9 +513,10 @@
         const u = title.toUpperCase();
         if (u.includes('NKJV')) return 'NKJV';
         if (u.includes('NRSV')) return 'NRSV';
+        if (u.includes('NIRV')) return 'NIrV';
         if (u.includes('NIV'))  return 'NIV';
         if (u.includes('NASB')) return 'NASB';
-        if (u.includes('KJV'))  return 'KJV';
+        if (u.includes('KJV') || u.includes('KING JAMES VERSION')) return 'KJV';
         if (u.includes('ESV'))  return 'ESV';
         if (u.includes('NLT'))  return 'NLT';
         if (u.includes('AMP'))  return 'AMP';
