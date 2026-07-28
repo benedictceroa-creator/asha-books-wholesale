@@ -111,6 +111,14 @@
       font-size: .72rem; color: var(--muted); margin-top: 12px;
       text-align: center; line-height: 1.5;
     }
+    .min-order-error {
+      display: none;
+      background: #FFF3CD; border: 1px solid #FBBF24;
+      color: #92400E; border-radius: 8px;
+      padding: 10px 14px; font-size: .82rem;
+      line-height: 1.5; margin-top: 10px; text-align: center;
+    }
+    .min-order-error strong { display: block; margin-bottom: 2px; }
 
     /* ── Summary Panel ───────────────────────────────── */
     .summary-panel {
@@ -270,6 +278,10 @@
         <button type="submit" class="btn-place-order" id="placeOrderBtn" disabled>
           Place Order Enquiry &#8594;
         </button>
+        <div class="min-order-error" id="minOrderError">
+          <strong>Minimum order not reached</strong>
+          Please add more items until your cart total reaches ₹25,000.
+        </div>
         <p class="form-disclaimer">
           This is an order enquiry. Our team will confirm availability and final pricing before dispatch.
         </p>
@@ -335,10 +347,13 @@
     emailjs.init(EMAILJS_PUBLIC_KEY);
 
     // ── Read order from localStorage ────────────────────
+    const MIN_ORDER = 25000;
+
     const saved = localStorage.getItem('ashaOrder');
     const order = saved ? JSON.parse(saved) : {};
     const orderKeys = Object.keys(order);
     let customerData = {};
+    let grandTotal = 0;
 
     const enquiryMain = document.getElementById('enquiryMain');
     const emptyState  = document.getElementById('emptyState');
@@ -365,11 +380,11 @@
       const total = document.getElementById('summaryTotal');
       const count = document.getElementById('summaryCount');
 
-      let grand = 0;
+      grandTotal = 0;
       list.innerHTML = orderKeys.map(isbn => {
         const it = order[isbn];
         const sub = it.price * it.qty;
-        grand += sub;
+        grandTotal += sub;
         return `<div class="summary-item">
           <div class="si-info">
             <div class="si-title">${escHtml(it.title)}</div>
@@ -382,7 +397,7 @@
         </div>`;
       }).join('');
 
-      total.textContent = fmtRupee(grand);
+      total.textContent = fmtRupee(grandTotal);
       count.textContent = orderKeys.length + ' item' + (orderKeys.length !== 1 ? 's' : '');
     }
 
@@ -393,7 +408,16 @@
 
     function checkForm() {
       const allValid = [...formFields].every(f => f.value.trim() !== '' && f.validity.valid);
-      placeBtn.disabled = !allValid;
+      const minMet = grandTotal >= MIN_ORDER;
+      const minOrderError = document.getElementById('minOrderError');
+
+      if (allValid && !minMet) {
+        minOrderError.style.display = 'block';
+      } else {
+        minOrderError.style.display = 'none';
+      }
+
+      placeBtn.disabled = !(allValid && minMet);
     }
     formFields.forEach(f => f.addEventListener('input', checkForm));
 
