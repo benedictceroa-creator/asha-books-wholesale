@@ -1,7 +1,7 @@
 // Asha Books — Product Data
 // Auto-generated from Mrp.xlsx — do not edit manually.
 // To regenerate: node gen_products.js
-// Generated: 2026-07-28 — 570 products
+// Generated: 2026-08-04 — 569 products
 const PRODUCTS = [
   {"isbn":"9780061441714","title":"The Holy Bible","mrp":999,"discounted":649.35,"qty":3},
   {"isbn":"9780310080008","title":"NIV, Revolution Bible, Leathersoft, Gray/Navy: The Bible for Teen Guys","mrp":2799,"discounted":1819.35,"qty":1},
@@ -178,7 +178,7 @@ const PRODUCTS = [
   {"isbn":"9780529100221","title":"Super Giant Print Bible-NKJV","mrp":1499,"discounted":974.35,"qty":226},
   {"isbn":"9780529106537","title":"KJV Study Bible, Large Print, Leathersoft, Tan, Thumb Indexed, Red Letter: Second Edition (Signature)","mrp":3999,"discounted":2599.35,"qty":1},
   {"isbn":"9780718002435","title":"Lighting the Way Home Family Bible","mrp":2499,"discounted":1624.35,"qty":6},
-  {"isbn":"9780718003593","title":"The Orthodox Study Bible 2025","mrp":2499,"discounted":1624.35,"qty":23},
+  {"isbn":"9780718003593","title":"The Orthodox Study Bible 2025","mrp":2499,"discounted":1624.35,"qty":18},
   {"isbn":"9780718034320","title":"Foundation Study Bible","mrp":1799,"discounted":1169.35,"qty":33},
   {"isbn":"9780718035730","title":"Foundation Study Bible","mrp":2799,"discounted":1819.35,"qty":1},
   {"isbn":"9780718042523","title":"Apply the Word Study Bible","mrp":2299,"discounted":1494.35,"qty":2},
@@ -398,7 +398,7 @@ const PRODUCTS = [
   {"isbn":"9781400332571","title":"Kjv, the Woman\\'s Study Bible, Genuine Leather, Black, Red Letter, Full-Color Edition, Comfort Print","mrp":7899,"discounted":5134.35,"qty":5},
   {"isbn":"9781400333028","title":"NKJV Compact Center-Column Reference Bible, Hardcover, Red Letter, Comfort Print","mrp":2499,"discounted":1624.35,"qty":106},
   {"isbn":"9781400333035","title":"NKJV, Compact Center-Column Reference Bible, Leathersoft, Brown, Red Letter, Comfort Print","mrp":3699,"discounted":2404.35,"qty":42},
-  {"isbn":"9781400333097","title":"NKJV, Compact Center-Column Reference Bible, Genuine Leather, Black, Red Letter, Comfort Print","mrp":5899,"discounted":3834.35,"qty":3},
+  {"isbn":"9781400333097","title":"NKJV, Compact Center-Column Reference Bible, Genuine Leather, Black, Red Letter, Comfort Print","mrp":5899,"discounted":3834.35,"qty":2},
   {"isbn":"9781400333110","title":"Kjv, Compact Center-Column Reference Bible, Hardcover, Red Letter, Comfort Print","mrp":3499,"discounted":2274.35,"qty":108},
   {"isbn":"9781400333127","title":"Kjv, Compact Center-Column Reference Bible, Leathersoft, Brown, Red Letter, Comfort Print","mrp":2999,"discounted":1949.35,"qty":13},
   {"isbn":"9781400333141","title":"Kjv, Compact Center-Column Reference Bible, Leathersoft, Gray, Red Letter, Comfort Print","mrp":2999,"discounted":1949.35,"qty":57},
@@ -453,7 +453,7 @@ const PRODUCTS = [
   {"isbn":"9781400345496","title":"KJV Holy Bible : Personal Size Giant Print, Brown Leathersoft, Red Letter, Comfort Print","mrp":2499,"discounted":1624.35,"qty":10},
   {"isbn":"9781400346325","title":"NKJV Bible: Personal Size Giant Print, Brown Leathersoft, Holy Bible, Red Letter, Comfort Print: New King James Version","mrp":2499,"discounted":1624.35,"qty":3},
   {"isbn":"9781400346332","title":"NKJV Bible: Personal Size Giant Print, Purple Leathersoft, Holy Bible, Red Letter, Comfort Print: New King James Version","mrp":2499,"discounted":1624.35,"qty":1},
-  {"isbn":"9781400349081","title":"NKJV Bible: Single-Column Verse-by-Verse w/ 72,000 Cross-References, Black Goatskin Leather, Premier Collection, Comfort Print","mrp":10899,"discounted":7084.35,"qty":26},
+  {"isbn":"9781400349081","title":"NKJV Bible: Single-Column Verse-by-Verse w/ 72,000 Cross-References, Black Goatskin Leather, Premier Collection, Comfort Print","mrp":10899,"discounted":7084.35,"qty":25},
   {"isbn":"9781400349432","title":"1611 KJV with Apocrypha, Black Leathersoft","mrp":1999,"discounted":1299.35,"qty":1},
   {"isbn":"9781400349715","title":"NKJV GIANT PRINT Holy Bible Indexed Edition Red Letter Brown Leathersoft NEW","mrp":2499,"discounted":1624.35,"qty":62},
   {"isbn":"9781400349821","title":"KJV GP Bible Index","mrp":2499,"discounted":1624.35,"qty":6},
@@ -571,6 +571,5 @@ const PRODUCTS = [
   {"isbn":"9780718098230","title":"KJV Holy Bible: Thinline, Black Leathersoft, Red Letter, Comfort Print: King James Version","mrp":1999,"discounted":1299.35,"qty":1},
   {"isbn":"9780785227557","title":"Love God Greatly Bible: A SOAP Method Study Bible for Women (NET, Pink Cloth-over-Board, Comfort Print)","mrp":2799,"discounted":1819.35,"qty":3},
   {"isbn":"9781400333417","title":"KJV Holy Bible: Compact with 43,000 Cross References, Black Leatherflex with flap, Red Letter, Comfort Print: King James Version","mrp":3259,"discounted":2118.35,"qty":1},
-  {"isbn":"9780310458227","title":"NIV, Adventure Bible, Leathersoft, Blue, Full Color","mrp":3799,"discounted":2469.35,"qty":3},
   {"isbn":"9780718098124","title":"KJV Holy Bible: Compact Thinline, Black Leathersoft, Red Letter, Comfort Print","mrp":1999,"discounted":1299.35,"qty":24}
 ];
