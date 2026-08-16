@@ -23,6 +23,8 @@
     gtag('js', new Date());
     gtag('config', 'G-NQQ4C9EQ83');
   </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
   <style>
     :root {
       --red:      #C82035;
@@ -322,6 +324,32 @@
       .order-panel { width: 100%; right: -100%; }
       .nav-link { display: none; }
     }
+    /* ── Min-order progress bar ─────────────────────── */
+    .progress-wrap { margin-bottom: 14px; }
+    .progress-row {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 6px; font-size: .76rem;
+    }
+    .progress-lbl { font-weight: 700; color: var(--dark); }
+    .progress-amt { color: var(--muted); }
+    .progress-track {
+      height: 6px; background: var(--border); border-radius: 3px;
+      overflow: hidden; margin-bottom: 6px;
+    }
+    .progress-fill {
+      height: 100%; width: 0%; background: var(--red); border-radius: 3px;
+      transition: width .35s ease, background .35s;
+    }
+    .progress-note { font-size: .71rem; color: var(--muted); text-align: center; }
+
+    /* ── Download Catalogue button ──────────────────── */
+    .btn-catalogue {
+      margin-left: auto; background: var(--dark); color: #fff;
+      border: none; border-radius: 8px; padding: 6px 14px;
+      font-size: .8rem; font-weight: 700; cursor: pointer; transition: background .18s;
+    }
+    .btn-catalogue:hover { background: #333; }
+
     @media print {
       .site-header, .cat-controls, .cat-meta,
       .order-panel, .order-toggle, .lightbox { display: none; }
@@ -433,11 +461,31 @@
           <input type="range" class="r-max" id="priceMax">
         </div>
       </div>
+      <div class="trans-wrap">
+        <label class="ctrl-label" for="catAudience">Popular With</label>
+        <select class="cat-select" id="catAudience">
+          <option value="">All Buyers</option>
+          <option value="church">Churches</option>
+          <option value="college">Bible Colleges</option>
+          <option value="bookstore">Christian Bookstores</option>
+        </select>
+      </div>
+      <div class="trans-wrap">
+        <label class="ctrl-label" for="catSort">Sort By</label>
+        <select class="cat-select" id="catSort">
+          <option value="">Default</option>
+          <option value="price-asc">Price: Low &#8594; High</option>
+          <option value="price-desc">Price: High &#8594; Low</option>
+          <option value="name-asc">Name: A &#8594; Z</option>
+          <option value="name-desc">Name: Z &#8594; A</option>
+        </select>
+      </div>
     </div>
 
     <div class="cat-meta">
       <span class="cat-count" id="catCount"></span>
       <button class="cat-reset" id="catReset">Reset filters</button>
+      <button class="btn-catalogue" id="downloadCatalogue">&#11015; Catalogue PDF</button>
     </div>
 
     <div class="book-grid" id="bookGrid"></div>
@@ -454,6 +502,16 @@
       <p class="panel-empty">No items added yet.</p>
     </div>
     <div class="panel-footer">
+      <div class="progress-wrap">
+        <div class="progress-row">
+          <span class="progress-lbl">Min. Order</span>
+          <span class="progress-amt" id="progressAmt">₹0 / ₹25,000</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <p class="progress-note" id="progressNote">Add items to reach the ₹25,000 minimum.</p>
+      </div>
       <div class="total-row">
         <span>Total</span>
         <span class="total-amount" id="orderTotal">&#8377;0</span>
@@ -598,6 +656,9 @@
         productMap[p.isbn] = p;
       });
 
+      // Tracks currently visible products for catalogue download
+      let currentFiltered = [...PRODUCTS];
+
       // ── Populate binding dropdown with counts ────────
       (function buildBindingSelect() {
         const counts = {};
@@ -707,29 +768,55 @@
       }
 
       // ── Filters ──────────────────────────────────────
-      const searchInput   = document.getElementById('catSearch');
-      const transSelect   = document.getElementById('catTranslation');
-      const bindingSelect = document.getElementById('catBinding');
-      const sizeSelect    = document.getElementById('catSize');
-      const formatSelect  = document.getElementById('catFormat');
+      const searchInput    = document.getElementById('catSearch');
+      const transSelect    = document.getElementById('catTranslation');
+      const bindingSelect  = document.getElementById('catBinding');
+      const sizeSelect     = document.getElementById('catSize');
+      const formatSelect   = document.getElementById('catFormat');
+      const audienceSelect = document.getElementById('catAudience');
+      const sortSelect     = document.getElementById('catSort');
+
+      function matchesAudience(p, aud) {
+        if (!aud) return true;
+        if (aud === 'church')    return p.format === 'Outreach Bible' || p.size === 'Pocket' ||
+          (p.format === 'Standard Bible' && (p.translation === 'KJV' || p.translation === 'NIV' || p.translation === 'NKJV'));
+        if (aud === 'college')   return p.format === 'Study Bible' || p.format === 'Reference Bible' || p.format === 'Thinline';
+        if (aud === 'bookstore') return ['Family Bible','Devotional Bible','Journaling Bible','Parallel Bible',
+          'Daily Bible',"Preacher's Bible",'Psalms & Proverbs'].includes(p.format) ||
+          p.size === 'Large Print' || p.size === 'Giant Print' || p.size === 'Family / Pulpit';
+        return true;
+      }
+
+      function sortProducts(list, val) {
+        if (!val) return list;
+        const s = [...list];
+        if (val === 'price-asc')  s.sort((a,b) => (a.discounted||a.mrp||0) - (b.discounted||b.mrp||0));
+        if (val === 'price-desc') s.sort((a,b) => (b.discounted||b.mrp||0) - (a.discounted||a.mrp||0));
+        if (val === 'name-asc')   s.sort((a,b) => a.title.localeCompare(b.title));
+        if (val === 'name-desc')  s.sort((a,b) => b.title.localeCompare(a.title));
+        return s;
+      }
 
       function applyFilters() {
-        const q       = searchInput.value.trim().toLowerCase();
-        const lo      = +rMin.value, hi = +rMax.value;
-        const trans   = transSelect.value;
-        const binding = bindingSelect.value;
-        const size    = sizeSelect.value;
-        const format  = formatSelect.value;
-        const filtered = PRODUCTS.filter(p => {
+        const q        = searchInput.value.trim().toLowerCase();
+        const lo       = +rMin.value, hi = +rMax.value;
+        const trans    = transSelect.value;
+        const binding  = bindingSelect.value;
+        const size     = sizeSelect.value;
+        const format   = formatSelect.value;
+        const audience = audienceSelect.value;
+        const sortVal  = sortSelect.value;
+        currentFiltered = PRODUCTS.filter(p => {
           if (q && !p.title.toLowerCase().includes(q) && !p.isbn.includes(q)) return false;
           if (p.discounted > 0 && (p.discounted < lo || p.discounted > hi)) return false;
           if (trans   && p.translation !== trans)   return false;
           if (binding && p.binding     !== binding) return false;
           if (size    && p.size        !== size)    return false;
           if (format  && p.format      !== format)  return false;
+          if (!matchesAudience(p, audience)) return false;
           return true;
         });
-        renderGrid(filtered);
+        renderGrid(sortProducts(currentFiltered, sortVal));
       }
 
       searchInput.addEventListener('input', applyFilters);
@@ -737,12 +824,16 @@
       bindingSelect.addEventListener('change', applyFilters);
       sizeSelect.addEventListener('change', applyFilters);
       formatSelect.addEventListener('change', applyFilters);
+      audienceSelect.addEventListener('change', applyFilters);
+      sortSelect.addEventListener('change', applyFilters);
       document.getElementById('catReset').addEventListener('click', () => {
-        searchInput.value   = '';
-        transSelect.value   = '';
-        bindingSelect.value = '';
-        sizeSelect.value    = '';
-        formatSelect.value  = '';
+        searchInput.value    = '';
+        transSelect.value    = '';
+        bindingSelect.value  = '';
+        sizeSelect.value     = '';
+        formatSelect.value   = '';
+        audienceSelect.value = '';
+        sortSelect.value     = '';
         rMin.value = PRICE_MIN;
         rMax.value = PRICE_MAX;
         updateSlider(); applyFilters();
@@ -760,6 +851,22 @@
         orderTotal.textContent = fmtRupee(total);
         orderBadge.textContent = count;
         proceedBtn.disabled = count === 0;
+
+        const MIN = 25000;
+        const pct  = Math.min(total / MIN * 100, 100);
+        const fill = document.getElementById('progressFill');
+        const note = document.getElementById('progressNote');
+        document.getElementById('progressAmt').textContent = fmtRupee(total) + ' / ₹25,000';
+        fill.style.width = pct + '%';
+        if (total >= MIN) {
+          fill.style.background = '#4caf50';
+          note.textContent = 'Minimum reached — ready to proceed!';
+          note.style.color = '#2e7d32';
+        } else {
+          fill.style.background = '';
+          note.textContent = fmtRupee(MIN - total) + ' more to reach the minimum.';
+          note.style.color = '';
+        }
       }
 
       function renderOrder() {
@@ -852,6 +959,64 @@
       // ── Initial render ───────────────────────────────
       renderGrid(PRODUCTS);
       renderOrder();
+
+      // ── Download Catalogue PDF ───────────────────────
+      const AUDIENCE_LABELS = {
+        church: 'Churches', college: 'Bible Colleges', bookstore: 'Christian Bookstores'
+      };
+
+      document.getElementById('downloadCatalogue').addEventListener('click', () => {
+        if (!window.jspdf) { alert('PDF library not yet loaded. Please try again in a moment.'); return; }
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF({ orientation: 'landscape' });
+
+        const filterParts = [];
+        if (transSelect.value)    filterParts.push(transSelect.value);
+        if (bindingSelect.value)  filterParts.push(bindingSelect.value);
+        if (sizeSelect.value)     filterParts.push(sizeSelect.value);
+        if (formatSelect.value)   filterParts.push(formatSelect.value);
+        if (audienceSelect.value) filterParts.push(AUDIENCE_LABELS[audienceSelect.value] || audienceSelect.value);
+
+        doc.setFontSize(20); doc.setTextColor(200, 32, 53);
+        doc.text('Asha Books', 14, 16);
+        doc.setFontSize(9); doc.setTextColor(100, 100, 100);
+        doc.text('Wholesale Bible Catalogue  |  wholesale.ashabooks.com  |  +91 9949475491', 14, 23);
+        if (filterParts.length) {
+          doc.text('Showing: ' + filterParts.join(', '), 14, 30);
+        }
+
+        function pdfRs(n) { return 'Rs. ' + Math.round(n).toLocaleString('en-IN'); }
+        const rows = currentFiltered.map(p => [
+          p.isbn, p.title,
+          p.translation || '—', p.size || '—', p.binding || '—',
+          p.mrp > 0 ? pdfRs(p.mrp) : '—',
+          p.discounted > 0 ? pdfRs(p.discounted) : '—',
+          p.qty > 3 ? 'In Stock' : (p.qty > 0 ? 'Low' : 'Out'),
+        ]);
+
+        doc.autoTable({
+          startY: filterParts.length ? 35 : 28,
+          head: [['ISBN', 'Title', 'Translation', 'Size', 'Binding', 'MRP', 'Wholesale', 'Stock']],
+          body: rows,
+          headStyles: { fillColor: [200, 32, 53], textColor: 255, fontStyle: 'bold', fontSize: 7 },
+          bodyStyles: { fontSize: 7 },
+          columnStyles: {
+            0: { cellWidth: 30 }, 1: { cellWidth: 92 }, 2: { cellWidth: 22 },
+            3: { cellWidth: 22 }, 4: { cellWidth: 28 },
+            5: { cellWidth: 22, halign: 'right' }, 6: { cellWidth: 24, halign: 'right' },
+            7: { cellWidth: 18 },
+          },
+          margin: { left: 14, right: 14 },
+          alternateRowStyles: { fillColor: [252, 252, 252] },
+        });
+
+        const finalY = doc.lastAutoTable.finalY + 6;
+        doc.setFontSize(7); doc.setTextColor(160, 160, 160);
+        doc.text(currentFiltered.length + ' products  |  Min. order Rs. 25,000  |  Prices subject to confirmation by Asha Books', 14, finalY);
+
+        const slug = filterParts.length ? '-' + filterParts.join('-').replace(/[\s&/]/g, '') : '';
+        doc.save('Asha-Books-Catalogue' + slug + '-' + new Date().toISOString().slice(0, 10) + '.pdf');
+      });
 
       // ── Lightbox ─────────────────────────────────────
       const lightbox = document.getElementById('lightbox');

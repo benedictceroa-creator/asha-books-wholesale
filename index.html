@@ -123,6 +123,41 @@
     }
     .home-disclaimer span { margin: 0 8px; color: var(--border); }
 
+    /* ── Who We Serve ─────────────────────────────── */
+    .serve-section {
+      width: 100%; max-width: 920px;
+      border-top: 1px solid var(--border);
+      padding-top: 44px; margin-top: 44px;
+    }
+    .serve-title {
+      font-size: .72rem; font-weight: 700; color: var(--muted);
+      text-transform: uppercase; letter-spacing: .1em;
+      text-align: center; margin-bottom: 20px;
+    }
+    .serve-grid {
+      display: flex; gap: 18px; flex-wrap: wrap; justify-content: center;
+    }
+    .serve-card {
+      flex: 1; min-width: 220px; max-width: 272px;
+      background: var(--light); border: 1px solid var(--border);
+      border-radius: 14px; padding: 22px 20px;
+    }
+    .serve-icon {
+      width: 40px; height: 40px; background: #fde8eb;
+      border-radius: 10px; display: flex; align-items: center; justify-content: center;
+      margin-bottom: 14px; color: var(--red);
+    }
+    .serve-name {
+      font-size: .92rem; font-weight: 800; color: var(--dark); margin-bottom: 8px;
+    }
+    .serve-list {
+      list-style: none; padding: 0; margin: 0;
+      font-size: .78rem; color: var(--muted); line-height: 1.75;
+    }
+    .serve-list li::before {
+      content: '–'; margin-right: 6px; color: var(--red); font-weight: 700;
+    }
+
     @media (max-width: 640px) {
       body { padding: 28px 14px 24px; }
       .home-logo { height: 52px; }
@@ -135,6 +170,9 @@
       .cat-body { padding: 14px 16px; }
       .cat-name { font-size: .92rem; }
       .home-disclaimer { font-size: .72rem; }
+      .serve-section { margin-top: 32px; padding-top: 32px; }
+      .serve-grid { gap: 12px; }
+      .serve-card { min-width: 100%; }
     }
   </style>
 </head>
@@ -195,6 +233,64 @@
       </div>
     </a>
 
+  </div>
+
+  <!-- ── Who We Serve ── -->
+  <div class="serve-section">
+    <p class="serve-title">Who We Serve</p>
+    <div class="serve-grid">
+
+      <div class="serve-card">
+        <div class="serve-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2v6M9 5h6"/>
+            <path d="M4 20v-8l8-6 8 6v8H4z"/>
+            <path d="M9 20v-5h6v5"/>
+          </svg>
+        </div>
+        <p class="serve-name">Churches</p>
+        <ul class="serve-list">
+          <li>Outreach Bibles for Sunday distribution</li>
+          <li>Pocket Bibles for mission trips</li>
+          <li>Standard KJV / NIV for congregation gifts</li>
+          <li>Large Print Bibles for elderly members</li>
+        </ul>
+      </div>
+
+      <div class="serve-card">
+        <div class="serve-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V2H6.5A2.5 2.5 0 0 0 4 4.5v15z"/>
+            <path d="M4 19.5V21h16"/>
+          </svg>
+        </div>
+        <p class="serve-name">Bible Colleges</p>
+        <ul class="serve-list">
+          <li>Course Bible sets for incoming students</li>
+          <li>Study Bibles &amp; Reference Bibles for academics</li>
+          <li>Thinline editions for daily carry</li>
+          <li>Indian Language Bibles for vernacular ministry</li>
+        </ul>
+      </div>
+
+      <div class="serve-card">
+        <div class="serve-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v2a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0V6l-3-4z"/>
+            <path d="M4 10v10h16V10"/>
+            <path d="M9 21v-6h6v6"/>
+          </svg>
+        </div>
+        <p class="serve-name">Christian Bookstores</p>
+        <ul class="serve-list">
+          <li>Full range of translations &amp; bindings to stock</li>
+          <li>Journaling, Devotional &amp; Family Bibles</li>
+          <li>Telugu, Tamil, Hindi &amp; other Indian Language Bibles</li>
+          <li>Faith-inspired apparel &amp; home decor</li>
+        </ul>
+      </div>
+
+    </div>
   </div>
 
   <div class="home-footer">
