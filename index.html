@@ -6,12 +6,12 @@
   <title>Asha Books — Wholesale</title>
   <meta name="description" content="Asha Books — India's trusted wholesale Bible supplier for over 30 years. English Bibles, Indian Language Bibles (Telugu, Tamil, Hindi) and faith-inspired T-Shirts. Serving churches, Bible colleges, mission organisations and corporate gifting. Min order ₹25,000.">
   <meta name="keywords" content="wholesale Bibles India, bulk Bibles, Telugu Bible wholesale, Tamil Bible wholesale, KJV NIV NKJV wholesale, Christian books wholesale, Bible supplier India, church Bible order">
-  <link rel="canonical" href="https://wholesale.ashabooks.com/">
+  <link rel="canonical" href="https://www.ashabookswholesale.com/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Asha Books Wholesale — Bibles & Christian Literature">
   <meta property="og:description" content="India's trusted wholesale Bible supplier for over 30 years. English, Telugu, Tamil, Hindi Bibles and faith apparel. Serving churches, mission organisations and corporate gifting.">
-  <meta property="og:image" content="https://wholesale.ashabooks.com/ashabookslogo.JPG">
-  <meta property="og:url" content="https://wholesale.ashabooks.com/">
+  <meta property="og:image" content="https://www.ashabookswholesale.com/ashabookslogo.JPG">
+  <meta property="og:url" content="https://www.ashabookswholesale.com/">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="robots" content="index, follow">
   <link rel="icon" href="favicon.png" type="image/png">
@@ -158,6 +158,63 @@
       content: '–'; margin-right: 6px; color: var(--red); font-weight: 700;
     }
 
+    /* ── Trust Stats Strip ── */
+    .trust-strip {
+      display: flex; width: 100%; max-width: 640px;
+      background: var(--light); border: 1px solid var(--border);
+      border-radius: 16px; overflow: hidden;
+      margin-bottom: 40px;
+    }
+    .trust-stat {
+      flex: 1; padding: 20px 12px; text-align: center;
+      border-right: 1px solid var(--border);
+    }
+    .trust-stat:last-child { border-right: none; }
+    .trust-num {
+      display: block; font-size: 1.6rem; font-weight: 900;
+      color: var(--red); line-height: 1;
+    }
+    .trust-label {
+      display: block; margin-top: 6px;
+      font-size: .7rem; font-weight: 600; color: var(--muted);
+      text-transform: uppercase; letter-spacing: .07em; line-height: 1.4;
+    }
+
+    /* ── FAQ Section ── */
+    .faq-section {
+      width: 100%; max-width: 700px;
+      border-top: 1px solid var(--border);
+      padding-top: 44px; margin-top: 44px;
+    }
+    .faq-title {
+      font-size: .72rem; font-weight: 700; color: var(--muted);
+      text-transform: uppercase; letter-spacing: .1em;
+      text-align: center; margin-bottom: 20px;
+    }
+    .faq-item {
+      border: 1px solid var(--border);
+      border-radius: 12px; margin-bottom: 10px;
+      background: var(--bg);
+    }
+    .faq-item[open] { border-color: #e8b4bc; }
+    .faq-item summary {
+      list-style: none; cursor: pointer;
+      padding: 18px 20px;
+      font-size: .88rem; font-weight: 700; color: var(--dark);
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 12px; user-select: none;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-chevron {
+      width: 20px; height: 20px; flex-shrink: 0;
+      color: var(--red); transition: transform .22s ease;
+    }
+    .faq-item[open] .faq-chevron { transform: rotate(180deg); }
+    .faq-answer {
+      padding: 0 20px 18px;
+      font-size: .83rem; color: var(--muted); line-height: 1.75;
+    }
+
     @media (max-width: 640px) {
       body { padding: 28px 14px 24px; }
       .home-logo { height: 52px; }
@@ -173,6 +230,12 @@
       .serve-section { margin-top: 32px; padding-top: 32px; }
       .serve-grid { gap: 12px; }
       .serve-card { min-width: 100%; }
+      .trust-strip { border-radius: 12px; }
+      .trust-num { font-size: 1.25rem; }
+      .trust-label { font-size: .65rem; }
+      .faq-section { margin-top: 28px; padding-top: 28px; }
+      .faq-item summary { font-size: .83rem; padding: 15px 16px; }
+      .faq-answer { padding: 0 16px 14px; font-size: .8rem; }
     }
   </style>
 </head>
@@ -186,6 +249,22 @@
     <em>Let us know what you need and we will offer you our lowest Wholesale pricing!</em>
   </p>
   <div class="divider"></div>
+
+  <!-- ── Trust Stats Strip ── -->
+  <div class="trust-strip">
+    <div class="trust-stat">
+      <span class="trust-num">30+</span>
+      <span class="trust-label">Years in Business</span>
+    </div>
+    <div class="trust-stat">
+      <span class="trust-num">10+</span>
+      <span class="trust-label">Bible Languages</span>
+    </div>
+    <div class="trust-stat">
+      <span class="trust-num">24hr</span>
+      <span class="trust-label">Quote Response</span>
+    </div>
+  </div>
 
   <div class="categories">
 
@@ -293,6 +372,52 @@
     </div>
   </div>
 
+  <!-- ── FAQ Section ── -->
+  <div class="faq-section">
+    <p class="faq-title">Frequently Asked Questions</p>
+
+    <details class="faq-item">
+      <summary>
+        What is the minimum order for wholesale Bibles?
+        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </summary>
+      <p class="faq-answer">Wholesale discounted prices are applicable for orders of ₹25,000 or more. Contact us and we'll confirm the best pricing for your order size.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>
+        What types of Bibles does Asha Books supply wholesale?
+        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </summary>
+      <p class="faq-answer">We supply English Bibles in major translations (KJV, NIV, NKJV, NASB, ESV and more) across multiple sizes and bindings — pocket, standard, large print, study, journaling, and thinline. We also carry Indian Language Bibles including Telugu, Tamil, Hindi, Assamese and several other regional languages.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>
+        What wholesale discounts are available?
+        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </summary>
+      <p class="faq-answer">Indian Language Bibles carry a 10% wholesale discount. Shop For Asha faith-inspired T-Shirts carry a 25% wholesale discount. English Bible pricing is already offered at wholesale rates for qualifying orders.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>
+        How do I place a wholesale order?
+        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </summary>
+      <p class="faq-answer">Browse our catalogue, add items to your order list, and submit an enquiry. Our team will confirm availability and pricing within 24 hours. You can also reach us directly on WhatsApp at +91 9949475491.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>
+        Who does Asha Books serve?
+        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </summary>
+      <p class="faq-answer">We serve churches, Bible colleges, Christian bookstores, mission organisations, and corporate gifting clients across India — and have done so for over 30 years. Whether you need 50 Bibles for a mission trip or 2,000 for a church anniversary, we can help.</p>
+    </details>
+
+  </div>
+
   <div class="home-footer">
     <p class="home-disclaimer">
       Wholesale discounted prices applicable for orders of ₹25,000 or more.
@@ -308,10 +433,10 @@
   "@graph": [
     {
       "@type": "Organization",
-      "@id": "https://wholesale.ashabooks.com/#organization",
+      "@id": "https://www.ashabookswholesale.com/#organization",
       "name": "Asha Books",
-      "url": "https://wholesale.ashabooks.com/",
-      "logo": "https://wholesale.ashabooks.com/ashabookslogo.JPG",
+      "url": "https://www.ashabookswholesale.com/",
+      "logo": "https://www.ashabookswholesale.com/ashabookslogo.JPG",
       "description": "India's trusted wholesale Bible and Christian literature supplier for over 30 years. Serving churches, Bible colleges, mission organisations, Christian bookstores and corporate gifting.",
       "telephone": "+919949475491",
       "areaServed": ["IN", "AE", "LK", "AU"],
@@ -327,10 +452,10 @@
     },
     {
       "@type": "WebSite",
-      "@id": "https://wholesale.ashabooks.com/#website",
-      "url": "https://wholesale.ashabooks.com/",
+      "@id": "https://www.ashabookswholesale.com/#website",
+      "url": "https://www.ashabookswholesale.com/",
       "name": "Asha Books Wholesale",
-      "publisher": { "@id": "https://wholesale.ashabooks.com/#organization" }
+      "publisher": { "@id": "https://www.ashabookswholesale.com/#organization" }
     },
     {
       "@type": "FAQPage",
