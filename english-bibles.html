@@ -1109,5 +1109,52 @@
   </svg>
   <span class="wa-tooltip">Need help picking the right Bibles?<br>Talk to us at +91 9949475491</span>
 </a>
+
+<!-- ── ItemList schema — generated from PRODUCTS array ── -->
+<script>
+(function () {
+  if (typeof PRODUCTS === 'undefined' || !PRODUCTS.length) return;
+  var items = PRODUCTS.map(function (p, i) {
+    var item = {
+      '@type': 'ListItem',
+      'position': i + 1,
+      'item': {
+        '@type': 'Product',
+        'name': p.title,
+        'sku': p.isbn,
+        'image': 'https://www.ashabookswholesale.com/covers/' + p.isbn + '.jpg',
+        'offers': {
+          '@type': 'Offer',
+          'priceCurrency': 'INR',
+          'price': p.discounted.toFixed(2),
+          'availability': p.qty > 0
+            ? 'https://schema.org/InStock'
+            : 'https://schema.org/OutOfStock',
+          'itemCondition': 'https://schema.org/NewCondition',
+          'seller': { '@type': 'Organization', 'name': 'Asha Books' }
+        }
+      }
+    };
+    return item;
+  });
+  var schema = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    'name': 'English Bibles Wholesale — KJV, NIV, NKJV & More',
+    'url': 'https://www.ashabookswholesale.com/english-bibles.html',
+    'description': 'Buy English Bibles in bulk wholesale — KJV, NIV, NKJV, NASB, ESV and more. Multiple translations, sizes and bindings. Asha Books India.',
+    'mainEntity': {
+      '@type': 'ItemList',
+      'name': 'English Bible Wholesale Catalogue',
+      'numberOfItems': PRODUCTS.length,
+      'itemListElement': items
+    }
+  };
+  var s = document.createElement('script');
+  s.type = 'application/ld+json';
+  s.textContent = JSON.stringify(schema);
+  document.head.appendChild(s);
+})();
+</script>
 </body>
 </html>

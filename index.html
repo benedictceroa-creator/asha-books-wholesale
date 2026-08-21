@@ -180,6 +180,44 @@
       text-transform: uppercase; letter-spacing: .07em; line-height: 1.4;
     }
 
+    /* ── Testimonials ── */
+    .testimonials-section {
+      width: 100%; max-width: 920px;
+      border-top: 1px solid var(--border);
+      padding-top: 44px; margin-top: 44px;
+    }
+    .testimonials-title {
+      font-size: .72rem; font-weight: 700; color: var(--muted);
+      text-transform: uppercase; letter-spacing: .1em;
+      text-align: center; margin-bottom: 20px;
+    }
+    .testimonials-grid {
+      display: flex; gap: 18px; flex-wrap: wrap; justify-content: center;
+    }
+    .testimonial-card {
+      flex: 1; min-width: 240px; max-width: 280px;
+      background: var(--light); border: 1px solid var(--border);
+      border-radius: 14px; padding: 22px 20px 18px;
+      display: flex; flex-direction: column;
+    }
+    .testimonial-mark {
+      font-size: 2.8rem; line-height: .9; color: var(--red);
+      font-family: Georgia, serif; margin-bottom: 10px; opacity: .6;
+    }
+    .testimonial-text {
+      font-size: .83rem; color: var(--text); line-height: 1.75;
+      font-style: italic; flex: 1; margin-bottom: 18px;
+    }
+    .testimonial-author {
+      border-top: 1px solid var(--border); padding-top: 14px;
+    }
+    .testimonial-name {
+      font-size: .84rem; font-weight: 800; color: var(--dark);
+    }
+    .testimonial-org {
+      font-size: .75rem; color: var(--muted); margin-top: 3px;
+    }
+
     /* ── FAQ Section ── */
     .faq-section {
       width: 100%; max-width: 700px;
@@ -236,6 +274,9 @@
       .faq-section { margin-top: 28px; padding-top: 28px; }
       .faq-item summary { font-size: .83rem; padding: 15px 16px; }
       .faq-answer { padding: 0 16px 14px; font-size: .8rem; }
+      .testimonials-section { margin-top: 28px; padding-top: 28px; }
+      .testimonials-grid { gap: 12px; }
+      .testimonial-card { min-width: 100%; }
     }
   </style>
 </head>
@@ -416,6 +457,41 @@
       <p class="faq-answer">We serve churches, Bible colleges, Christian bookstores, mission organisations, and corporate gifting clients across India — and have done so for over 30 years. Whether you need 50 Bibles for a mission trip or 2,000 for a church anniversary, we can help.</p>
     </details>
 
+  </div>
+
+  <!-- ── Testimonials ── -->
+  <div class="testimonials-section">
+    <p class="testimonials-title">What Our Customers Say</p>
+    <div class="testimonials-grid">
+
+      <div class="testimonial-card">
+        <div class="testimonial-mark">"</div>
+        <p class="testimonial-text">I received the Bible in very good condition. I'm so happy with my purchase! Thank you for providing Bibles at such affordable prices. May God bless the work you do and expand your ministry. I would definitely recommend Asha Books to others.</p>
+        <div class="testimonial-author">
+          <p class="testimonial-name">Verified Customer</p>
+          <p class="testimonial-org">Medak, Telangana</p>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-mark">"</div>
+        <p class="testimonial-text">Ordered Our Daily Bread from Asha Books and I'm genuinely impressed — great service, careful packaging, and such a lovely read to add to my shelf.</p>
+        <div class="testimonial-author">
+          <p class="testimonial-name">Verified Customer</p>
+          <p class="testimonial-org">Lucknow, Uttar Pradesh</p>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-mark">"</div>
+        <p class="testimonial-text">Received my order earlier than expected. Thank you for the excellent service. God bless you and the wonderful ministry you are involved in. Thanks once again.</p>
+        <div class="testimonial-author">
+          <p class="testimonial-name">Verified Customer</p>
+          <p class="testimonial-org">Mumbai, Maharashtra</p>
+        </div>
+      </div>
+
+    </div>
   </div>
 
   <div class="home-footer">
