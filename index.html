@@ -253,6 +253,142 @@
       font-size: .83rem; color: var(--muted); line-height: 1.75;
     }
 
+    /* ── Download Strip ── */
+    .dl-strip {
+      width: 100%; max-width: 1160px;
+      background: linear-gradient(135deg, #1A1A1A 0%, #2d2d2d 100%);
+      border-radius: 16px; padding: 22px 28px;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 20px; flex-wrap: wrap; margin-top: 36px;
+    }
+    .dl-strip-text strong {
+      display: block; font-size: 1rem; font-weight: 800; color: #fff; margin-bottom: 4px;
+    }
+    .dl-strip-text span { font-size: .82rem; color: rgba(255,255,255,.55); }
+    .dl-btn {
+      background: var(--red); color: #fff; border: none;
+      border-radius: 8px; padding: 12px 22px;
+      font-size: .9rem; font-weight: 700; cursor: pointer;
+      white-space: nowrap; transition: background .18s; flex-shrink: 0;
+    }
+    .dl-btn:hover { background: var(--red-dark); }
+
+    /* ── Lead Modal (shared by download + exit intent) ── */
+    .lead-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,.55);
+      z-index: 2000; display: none; align-items: center; justify-content: center;
+      padding: 20px;
+    }
+    .lead-overlay.open { display: flex; }
+    .lead-box {
+      background: var(--bg); border-radius: 18px;
+      padding: 32px 28px; width: 100%; max-width: 500px;
+      position: relative; box-shadow: 0 24px 64px rgba(0,0,0,.28);
+      animation: slideUp .22s ease;
+    }
+    @keyframes slideUp { from { transform: translateY(16px); opacity: 0; } to { transform: none; opacity: 1; } }
+    .lead-close {
+      position: absolute; top: 14px; right: 16px;
+      background: none; border: none; font-size: 1.3rem; cursor: pointer;
+      color: var(--muted); line-height: 1;
+    }
+    .lead-close:hover { color: var(--dark); }
+    .lead-icon { font-size: 2rem; margin-bottom: 10px; }
+    .lead-box h3 { font-size: 1.1rem; font-weight: 800; color: var(--dark); margin-bottom: 6px; }
+    .lead-box p { font-size: .84rem; color: var(--muted); line-height: 1.6; margin-bottom: 20px; }
+    .lead-success {
+      display: none; text-align: center;
+      background: #f0faf4; border: 1px solid #a8d5b5;
+      border-radius: 12px; padding: 24px 20px; margin-top: 4px;
+    }
+    .lead-success p { margin: 0; color: #2d6a4f; }
+
+    /* ── Exit Intent Popup ── */
+    .exit-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,.55);
+      z-index: 2000; display: none; align-items: flex-start; justify-content: center;
+      padding: 60px 20px 20px;
+    }
+    .exit-overlay.open { display: flex; }
+    .exit-box {
+      background: var(--bg); border-radius: 18px;
+      padding: 28px 24px; width: 100%; max-width: 420px;
+      position: relative; box-shadow: 0 24px 64px rgba(0,0,0,.28);
+      animation: slideDown .22s ease;
+    }
+    @keyframes slideDown { from { transform: translateY(-12px); opacity: 0; } to { transform: none; opacity: 1; } }
+    .exit-box h3 { font-size: 1rem; font-weight: 800; color: var(--dark); margin-bottom: 6px; }
+    .exit-box p { font-size: .82rem; color: var(--muted); line-height: 1.6; margin-bottom: 16px; }
+
+    /* ── Quote Form ── */
+    .quote-section {
+      width: 100%; max-width: 680px;
+      border-top: 1px solid var(--border);
+      padding-top: 44px; margin-top: 44px;
+    }
+    .quote-title {
+      font-size: 1.15rem; font-weight: 800; color: var(--dark);
+      text-align: center; margin-bottom: 6px;
+    }
+    .quote-sub {
+      font-size: .84rem; color: var(--muted); text-align: center;
+      margin-bottom: 28px; line-height: 1.6;
+    }
+    .quote-form {
+      display: flex; flex-direction: column; gap: 14px;
+    }
+    .quote-row { display: flex; gap: 14px; }
+    .quote-row .quote-field { flex: 1; }
+    .quote-field { display: flex; flex-direction: column; gap: 5px; }
+    .quote-field label {
+      font-size: .74rem; font-weight: 700; color: var(--muted);
+      text-transform: uppercase; letter-spacing: .06em;
+    }
+    .quote-field input,
+    .quote-field textarea,
+    .quote-field select {
+      padding: 11px 14px; font-size: .9rem;
+      border: 1px solid var(--border); border-radius: 8px;
+      outline: none; font-family: inherit; color: var(--text);
+      background: var(--bg); transition: border-color .18s;
+    }
+    .quote-field input:focus,
+    .quote-field textarea:focus,
+    .quote-field select:focus { border-color: var(--red); }
+    .quote-field textarea { resize: vertical; min-height: 80px; }
+    .quote-submit {
+      background: var(--red); color: #fff; border: none;
+      border-radius: 8px; padding: 13px 28px;
+      font-size: .95rem; font-weight: 700; cursor: pointer;
+      transition: background .18s; align-self: flex-start;
+    }
+    .quote-submit:hover { background: var(--red-dark); }
+    .quote-submit:disabled { opacity: .6; cursor: not-allowed; }
+    .quote-success {
+      display: none; text-align: center;
+      background: #f0faf4; border: 1px solid #a8d5b5;
+      border-radius: 12px; padding: 28px 24px;
+    }
+    .quote-success-icon {
+      font-size: 2rem; margin-bottom: 10px;
+    }
+    .quote-success h3 {
+      font-size: 1rem; font-weight: 800; color: #1a4d2e; margin-bottom: 6px;
+    }
+    .quote-success p {
+      font-size: .84rem; color: #2d6a4f; line-height: 1.6;
+    }
+
+    /* ── Referral Banner ── */
+    .referral-banner {
+      display: none; width: 100%; max-width: 640px;
+      background: #fff8e1; border: 1px solid #f0c040;
+      border-radius: 12px; padding: 14px 20px;
+      text-align: center; margin-bottom: 24px;
+      font-size: .84rem; color: #5a4000; line-height: 1.6;
+    }
+    .referral-banner strong { font-weight: 800; }
+
     @media (max-width: 640px) {
       body { padding: 28px 14px 24px; }
       .home-logo { height: 52px; }
@@ -277,10 +413,21 @@
       .testimonials-section { margin-top: 28px; padding-top: 28px; }
       .testimonials-grid { gap: 12px; }
       .testimonial-card { min-width: 100%; }
+      .quote-row { flex-direction: column; gap: 14px; }
+      .quote-submit { width: 100%; align-self: stretch; }
     }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+  <script src="products.js"></script>
 </head>
 <body>
+
+  <!-- ── Referral Banner (shown when coming from ashabooks.com) ── -->
+  <div class="referral-banner" id="referralBanner">
+    <strong>Welcome from Asha Books!</strong> You're browsing our wholesale portal — get bulk pricing on Bibles and Christian literature for your church, college or organisation.
+  </div>
 
   <img src="ashabookslogo.JPG" alt="Asha Books" class="home-logo">
   <h1 class="home-title">Asha Books Wholesale</h1>
@@ -353,6 +500,57 @@
       </div>
     </a>
 
+  </div>
+
+  <!-- ── Download Price List Strip ── -->
+  <div class="dl-strip">
+    <div class="dl-strip-text">
+      <strong>Download our Wholesale Price List</strong>
+      <span>552 English Bible titles with wholesale pricing &mdash; instant PDF download</span>
+    </div>
+    <button class="dl-btn" id="dlStripBtn">Download Price List &rarr;</button>
+  </div>
+
+  <!-- ── Request a Wholesale Quote ── -->
+  <div class="quote-section" id="quoteSection">
+    <p class="quote-title">Request a Wholesale Quote</p>
+    <p class="quote-sub">Tell us what you need — our team will respond within 24 hours with pricing and availability.</p>
+
+    <div id="quoteFormWrap">
+      <form class="quote-form" id="quoteForm" novalidate>
+        <div class="quote-row">
+          <div class="quote-field">
+            <label for="qName">Full Name</label>
+            <input type="text" id="qName" placeholder="e.g. John Samuel" required autocomplete="name">
+          </div>
+          <div class="quote-field">
+            <label for="qOrg">Church / Organisation</label>
+            <input type="text" id="qOrg" placeholder="e.g. Grace Community Church">
+          </div>
+        </div>
+        <div class="quote-row">
+          <div class="quote-field">
+            <label for="qPhone">Phone Number</label>
+            <input type="tel" id="qPhone" placeholder="e.g. +91 98765 43210" required autocomplete="tel">
+          </div>
+          <div class="quote-field">
+            <label for="qEmail">Email Address</label>
+            <input type="email" id="qEmail" placeholder="e.g. john@church.org" required autocomplete="email">
+          </div>
+        </div>
+        <div class="quote-field">
+          <label for="qNeed">What do you need?</label>
+          <textarea id="qNeed" placeholder="e.g. 200 NIV Bibles, pocket size — for a church anniversary gift…" required></textarea>
+        </div>
+        <button type="submit" class="quote-submit" id="quoteSubmitBtn">Send Quote Request &rarr;</button>
+      </form>
+    </div>
+
+    <div class="quote-success" id="quoteSuccess">
+      <div class="quote-success-icon">&#10003;</div>
+      <h3>Quote Request Received!</h3>
+      <p>Thank you — our team will be in touch within 24 hours.<br>You can also reach us on WhatsApp at +91 9949475491.</p>
+    </div>
   </div>
 
   <!-- ── Who We Serve ── -->
@@ -508,21 +706,66 @@
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "Organization",
+      "@type": ["Organization", "LocalBusiness"],
       "@id": "https://www.ashabookswholesale.com/#organization",
-      "name": "Asha Books",
+      "name": "Asha Books Wholesale",
+      "alternateName": "Asha Books",
       "url": "https://www.ashabookswholesale.com/",
       "logo": "https://www.ashabookswholesale.com/ashabookslogo.JPG",
-      "description": "India's trusted wholesale Bible and Christian literature supplier for over 30 years. Serving churches, Bible colleges, mission organisations, Christian bookstores and corporate gifting.",
+      "image": "https://www.ashabookswholesale.com/ashabookslogo.JPG",
+      "description": "India's trusted wholesale Bible and Christian literature supplier for over 30 years. Asha Books Wholesale supplies English Bibles (KJV, NIV, NKJV, NASB, ESV), Indian Language Bibles (Telugu, Tamil, Hindi, Assamese and more), faith-inspired T-shirts and Christian home decor to churches, Bible colleges, mission organisations, Christian bookstores and corporate gifting clients across India. Minimum wholesale order is ₹25,000. Quote responses within 24 hours.",
       "telephone": "+919949475491",
+      "email": "bened.john@gmail.com",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+919949475491",
+        "contactType": "customer service",
+        "availableLanguage": ["English", "Telugu", "Tamil", "Hindi"],
+        "contactOption": "TollFree"
+      },
+      "foundingDate": "1995",
       "areaServed": ["IN", "AE", "LK", "AU"],
+      "currenciesAccepted": "INR",
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
-        "name": "Wholesale Bible & Apparel Catalogue",
+        "name": "Wholesale Bible & Christian Literature Catalogue",
         "itemListElement": [
-          { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "English Bibles" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Indian Language Bibles" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Faith-Inspired T-Shirts" } }
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "English Bibles Wholesale",
+              "description": "KJV, NIV, NKJV, NASB, ESV and more — pocket, standard, large print, study, journaling and thinline editions. Wholesale pricing for orders of ₹25,000 or more.",
+              "url": "https://www.ashabookswholesale.com/english-bibles.html"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "Indian Language Bibles Wholesale",
+              "description": "Telugu, Tamil, Hindi, Assamese, Malayalam and other regional language Bibles. 10% wholesale discount on orders of ₹25,000 or more.",
+              "url": "https://www.ashabookswholesale.com/indian-bibles.html"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "Christian T-Shirts Wholesale",
+              "description": "Shop For Asha faith-inspired T-shirts — Box Fit and Crew Neck, 100% cotton, 200–220 GSM, sizes S–2XL. 25% wholesale discount.",
+              "url": "https://www.ashabookswholesale.com/tshirts.html"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "Christian Home Decor Wholesale",
+              "description": "Minimalist Bible verse frames, canvas prints and scripture wall art. Wholesale pricing for orders of ₹25,000 or more.",
+              "url": "https://www.ashabookswholesale.com/home-decor.html"
+            }
+          }
         ]
       }
     },
@@ -538,34 +781,102 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "What is the minimum order for wholesale Bibles?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Wholesale discounted prices are applicable for orders of ₹25,000 or more." }
+          "name": "What is the minimum order for wholesale Bibles from Asha Books?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Wholesale discounted prices are applicable for orders of ₹25,000 or more. Contact us and we'll confirm the best pricing for your order size. Our team responds to all enquiries within 24 hours." }
         },
         {
           "@type": "Question",
           "name": "What types of Bibles does Asha Books supply wholesale?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Asha Books supplies English Bibles (KJV, NIV, NKJV, NASB, ESV and more) and Indian Language Bibles including Telugu, Tamil, Hindi, and Assamese editions in multiple bindings and sizes." }
+          "acceptedAnswer": { "@type": "Answer", "text": "Asha Books supplies English Bibles in major translations — KJV, NIV, NKJV, NASB, ESV and more — across pocket, standard, large print, giant print, study, journaling, thinline and leathersoft editions. We also supply Indian Language Bibles including Telugu, Tamil, Hindi, Assamese, Malayalam and other regional languages." }
         },
         {
           "@type": "Question",
-          "name": "Who does Asha Books serve?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Asha Books serves churches, Bible colleges, Christian bookstores, mission organisations and corporate gifting clients across India for over 30 years." }
+          "name": "Who does Asha Books Wholesale serve?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Asha Books serves churches, Bible colleges, Christian bookstores, mission organisations and corporate gifting clients across India — and has done so for over 30 years. Whether you need 50 Bibles for a mission trip or 2,000 for a church anniversary, we can help." }
         },
         {
           "@type": "Question",
-          "name": "How do I place a wholesale Bible order?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Browse our catalogue, add items to your order list, and submit an enquiry. Our team will confirm availability and pricing within 24 hours. You can also contact us at +91 9949475491." }
+          "name": "How do I place a wholesale Bible order with Asha Books?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Browse our catalogue at ashabookswholesale.com, add items to your order list, and submit an enquiry. Alternatively, fill in the quote request form on our homepage or contact us directly on WhatsApp at +91 9949475491. Our team will confirm availability and pricing within 24 hours." }
         },
         {
           "@type": "Question",
-          "name": "What wholesale discounts are available?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Indian Language Bibles carry a 10% wholesale discount. Shop For Asha faith-inspired T-Shirts carry a 25% wholesale discount. English Bible pricing is already at wholesale rates." }
+          "name": "What wholesale discounts does Asha Books offer?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Indian Language Bibles carry a 10% wholesale discount. Shop For Asha faith-inspired T-Shirts carry a 25% wholesale discount. English Bible pricing is offered at wholesale rates for qualifying orders of ₹25,000 or more." }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Asha Books supply Bibles wholesale outside India?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes — Asha Books has supplied customers in the UAE, Sri Lanka, Australia and other countries. Contact us at +91 9949475491 or via WhatsApp to discuss international shipping for your order." }
+        },
+        {
+          "@type": "Question",
+          "name": "How long has Asha Books been supplying Bibles wholesale?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Asha Books has been supplying Bibles and Christian literature wholesale for over 30 years, serving thousands of churches, Bible colleges, mission organisations and Christian bookstores across India." }
+        },
+        {
+          "@type": "Question",
+          "name": "How quickly does Asha Books respond to wholesale enquiries?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Our team responds to all wholesale enquiries within 24 hours. You can submit an enquiry via our website catalogue, the quote request form on our homepage, or contact us directly on WhatsApp at +91 9949475491." }
         }
       ]
     }
   ]
 }
 </script>
+
+<!-- ── Lead Capture Modal (Download Price List) ── -->
+<div class="lead-overlay" id="leadOverlay">
+  <div class="lead-box">
+    <button class="lead-close" id="leadClose" aria-label="Close">&times;</button>
+    <div class="lead-icon">&#128203;</div>
+    <h3>Download Wholesale Price List</h3>
+    <p>Enter your details to download our full English Bible catalogue (552 titles) as a PDF — with wholesale pricing.</p>
+    <div id="leadFormWrap">
+      <form class="quote-form" id="leadForm" novalidate>
+        <div class="quote-row">
+          <div class="quote-field">
+            <label for="dlName">Name</label>
+            <input type="text" id="dlName" placeholder="e.g. John Samuel" required autocomplete="name">
+          </div>
+          <div class="quote-field">
+            <label for="dlEmail">Email</label>
+            <input type="email" id="dlEmail" placeholder="e.g. john@church.org" required autocomplete="email">
+          </div>
+        </div>
+        <div class="quote-field">
+          <label for="dlPhone">Phone (optional)</label>
+          <input type="tel" id="dlPhone" placeholder="e.g. +91 98765 43210" autocomplete="tel">
+        </div>
+        <button type="submit" class="quote-submit" id="dlSubmitBtn">Download PDF &rarr;</button>
+      </form>
+    </div>
+    <div class="lead-success" id="leadSuccess">
+      <p>&#10003;&nbsp; <strong>Generating your PDF…</strong><br>It will download automatically in a moment.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── Exit Intent Popup ── -->
+<div class="exit-overlay" id="exitOverlay">
+  <div class="exit-box">
+    <button class="lead-close" id="exitClose" aria-label="Close">&times;</button>
+    <h3>Before you go &mdash;</h3>
+    <p>Download our wholesale price list: 552 English Bible titles with pricing, ready to share with your team.</p>
+    <div id="exitFormWrap">
+      <form class="quote-form" id="exitForm" novalidate>
+        <div class="quote-field">
+          <label for="exitEmail">Email Address</label>
+          <input type="email" id="exitEmail" placeholder="e.g. john@church.org" required autocomplete="email">
+        </div>
+        <button type="submit" class="quote-submit" style="width:100%;margin-top:4px;">Get Price List &rarr;</button>
+      </form>
+    </div>
+    <div class="lead-success" id="exitSuccess">
+      <p>&#10003;&nbsp; <strong>Generating your PDF…</strong><br>It will download automatically.</p>
+    </div>
+  </div>
+</div>
 
 <!-- ── WhatsApp Float ── -->
 <style>
@@ -593,11 +904,245 @@
   }
   .wa-float:hover .wa-tooltip { opacity: 1; }
 </style>
-<a href="https://wa.me/919949475491?text=Need%20help%20picking%20the%20right%20Bibles%3F%20Talk%20to%20us!" class="wa-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+<a href="https://wa.me/919949475491?text=Need%20help%20picking%20the%20right%20Bibles%3F%20Talk%20to%20us!" class="wa-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp" onclick="gtag('event','whatsapp_click',{event_category:'engagement',event_label:'float_button'})">
   <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
     <path d="M16 2C8.268 2 2 8.268 2 16c0 2.478.678 4.8 1.86 6.793L2 30l7.417-1.83A13.94 13.94 0 0 0 16 30c7.732 0 14-6.268 14-14S23.732 2 16 2zm0 25.6a11.56 11.56 0 0 1-5.9-1.615l-.422-.252-4.403 1.087 1.115-4.28-.277-.44A11.6 11.6 0 0 1 4.4 16C4.4 9.59 9.59 4.4 16 4.4S27.6 9.59 27.6 16 22.41 27.6 16 27.6zm6.29-8.687c-.346-.173-2.044-1.008-2.361-1.123-.317-.115-.548-.173-.778.173-.23.346-.892 1.123-1.094 1.354-.201.23-.403.259-.749.086-.346-.173-1.46-.538-2.782-1.717-1.028-.917-1.722-2.05-1.924-2.395-.201-.346-.021-.533.151-.705.155-.155.346-.403.519-.605.173-.201.23-.346.346-.577.115-.23.058-.432-.029-.605-.086-.173-.778-1.876-1.066-2.568-.28-.673-.566-.582-.778-.593l-.663-.011c-.23 0-.605.086-.922.432-.317.346-1.21 1.182-1.21 2.883s1.239 3.344 1.412 3.574c.173.23 2.438 3.72 5.907 5.217.825.356 1.469.569 1.97.728.828.263 1.582.226 2.177.137.664-.1 2.044-.835 2.332-1.642.288-.806.288-1.497.201-1.642-.086-.144-.317-.23-.663-.403z"/>
   </svg>
   <span class="wa-tooltip">Need help picking the right Bibles?<br>Talk to us at +91 9949475491</span>
 </a>
+<script>
+  // ── Shared config ──────────────────────────────────────────
+  const _EJS_KEY  = 'bmSMC1DYj9ZV_N8fd';
+  const _EJS_SVC  = 'service_6dv3lhe';
+  const _EJS_TMPL = 'template_rzsvyax';
+  const _BIZ_EMAIL = 'bened.john@gmail.com';
+  const _SHEET_URL = 'https://script.google.com/macros/s/AKfycbxR5bY0xMin1HC0U6LdX9febSBP3rMzAxc8q90MvaypLbM0gWzSXKllWYW_C9QpZSfi/exec';
+
+  // ── PDF generation ─────────────────────────────────────────
+  function generatePriceListPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
+    const pageW = doc.internal.pageSize.getWidth();
+    const dateStr = new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(15);
+    doc.setTextColor(200, 32, 53);
+    doc.text('Asha Books — Wholesale Price List', 14, 15);
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(8);
+    doc.setTextColor(100);
+    doc.text('Generated: ' + dateStr + '  |  All prices in INR  |  Min. order Rs. 25,000  |  WhatsApp: +91 9949475491  |  ashabookswholesale.com', 14, 22);
+    doc.setDrawColor(200, 32, 53);
+    doc.setLineWidth(0.5);
+    doc.line(14, 25, pageW - 14, 25);
+
+    doc.autoTable({
+      startY: 29,
+      head: [['#', 'Title', 'ISBN', 'MRP (Rs.)', 'Wholesale (Rs.)', 'Stock']],
+      body: PRODUCTS.map(function(p, i) {
+        return [
+          i + 1,
+          p.title,
+          p.isbn,
+          'Rs. ' + p.mrp.toLocaleString('en-IN'),
+          'Rs. ' + p.discounted.toFixed(0),
+          p.qty > 10 ? 'Available' : p.qty > 0 ? 'Low stock' : '—'
+        ];
+      }),
+      styles: { fontSize: 7, cellPadding: [1.5, 2] },
+      headStyles: { fillColor: [200, 32, 53], textColor: 255, fontStyle: 'bold', fontSize: 7.5 },
+      columnStyles: {
+        0: { cellWidth: 8, halign: 'center' },
+        1: { cellWidth: 128 },
+        2: { cellWidth: 33 },
+        3: { cellWidth: 22, halign: 'right' },
+        4: { cellWidth: 26, halign: 'right' },
+        5: { cellWidth: 22, halign: 'center' },
+      },
+      alternateRowStyles: { fillColor: [250, 250, 250] },
+      margin: { left: 14, right: 14 },
+      didDrawPage: function(data) {
+        doc.setFontSize(6.5);
+        doc.setTextColor(160);
+        doc.text(
+          'Page ' + data.pageNumber + '  •  Asha Books Wholesale  •  ashabookswholesale.com  •  +91 9949475491  •  Prices subject to change without notice',
+          14, doc.internal.pageSize.getHeight() - 7
+        );
+        doc.setTextColor(0);
+      }
+    });
+
+    doc.save('Asha-Books-Wholesale-Price-List.pdf');
+  }
+
+  // ── Send lead to EmailJS + Google Sheet ────────────────────
+  function captureLead(name, email, phone, source) {
+    const dateStr = new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+    const params = {
+      to_email:         _BIZ_EMAIL,
+      customer_name:    name || '(not provided)',
+      customer_phone:   phone || '—',
+      customer_email:   email,
+      customer_address: '—',
+      order_items:      'PRICE LIST DOWNLOAD — source: ' + source,
+      order_total:      'N/A',
+      order_date:       dateStr,
+    };
+    emailjs.init(_EJS_KEY);
+    emailjs.send(_EJS_SVC, _EJS_TMPL, params).catch(function() {});
+    fetch(_SHEET_URL, {
+      method: 'POST',
+      body: JSON.stringify({ order_date: dateStr, customer_name: params.customer_name, customer_phone: params.customer_phone, customer_email: email, customer_address: '—', order_items: params.order_items, order_total: 'N/A' }),
+    }).catch(function() {});
+    gtag('event', 'price_list_download', { event_category: 'lead', event_label: source });
+  }
+
+  // ── Lead Modal (Download Price List) ───────────────────────
+  (function() {
+    var overlay  = document.getElementById('leadOverlay');
+    var formWrap = document.getElementById('leadFormWrap');
+    var success  = document.getElementById('leadSuccess');
+    var form     = document.getElementById('leadForm');
+    var submitBtn = document.getElementById('dlSubmitBtn');
+
+    function openModal() { overlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
+    function closeModal() { overlay.classList.remove('open'); document.body.style.overflow = ''; }
+
+    document.getElementById('dlStripBtn').addEventListener('click', openModal);
+    document.getElementById('leadClose').addEventListener('click', closeModal);
+    overlay.addEventListener('click', function(e) { if (e.target === overlay) closeModal(); });
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var name  = document.getElementById('dlName').value.trim();
+      var email = document.getElementById('dlEmail').value.trim();
+      var phone = document.getElementById('dlPhone').value.trim();
+      if (!name || !email) return;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Generating…';
+      captureLead(name, email, phone, 'homepage_strip');
+      formWrap.style.display = 'none';
+      success.style.display = 'block';
+      setTimeout(function() { generatePriceListPDF(); closeModal(); formWrap.style.display = ''; success.style.display = ''; submitBtn.disabled = false; submitBtn.textContent = 'Download PDF →'; form.reset(); }, 800);
+    });
+
+    // Auto-download if redirected from a sub-page with ?dl=1
+    if (new URLSearchParams(window.location.search).get('dl') === '1') {
+      setTimeout(generatePriceListPDF, 800);
+    }
+  })();
+
+  // ── Exit Intent Popup ──────────────────────────────────────
+  (function() {
+    var overlay  = document.getElementById('exitOverlay');
+    var formWrap = document.getElementById('exitFormWrap');
+    var success  = document.getElementById('exitSuccess');
+    var form     = document.getElementById('exitForm');
+    var shown    = false;
+
+    function showPopup() {
+      if (shown || sessionStorage.getItem('ashaExitShown')) return;
+      shown = true;
+      sessionStorage.setItem('ashaExitShown', '1');
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closePopup() { overlay.classList.remove('open'); document.body.style.overflow = ''; }
+
+    document.getElementById('exitClose').addEventListener('click', closePopup);
+    overlay.addEventListener('click', function(e) { if (e.target === overlay) closePopup(); });
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closePopup(); });
+
+    document.addEventListener('mouseleave', function(e) {
+      if (e.clientY < 10) showPopup();
+    });
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var email = document.getElementById('exitEmail').value.trim();
+      if (!email) return;
+      captureLead('', email, '', 'exit_intent');
+      formWrap.style.display = 'none';
+      success.style.display = 'block';
+      setTimeout(function() { generatePriceListPDF(); closePopup(); formWrap.style.display = ''; success.style.display = ''; form.reset(); }, 800);
+    });
+  })();
+
+  // ── Referral banner: show when coming from ashabooks.com ──
+  (function() {
+    const ref = document.referrer;
+    if (ref && ref.includes('ashabooks.com')) {
+      document.getElementById('referralBanner').style.display = 'block';
+    }
+  })();
+
+  // ── Quote form ──────────────────────────────────────────────
+  (function() {
+    const EMAILJS_PUBLIC_KEY  = 'bmSMC1DYj9ZV_N8fd';
+    const EMAILJS_SERVICE_ID  = 'service_6dv3lhe';
+    const EMAILJS_TEMPLATE_ID = 'template_rzsvyax';
+    const BUSINESS_EMAIL      = 'bened.john@gmail.com';
+    const DRIVE_SCRIPT_URL    = 'https://script.google.com/macros/s/AKfycbxR5bY0xMin1HC0U6LdX9febSBP3rMzAxc8q90MvaypLbM0gWzSXKllWYW_C9QpZSfi/exec';
+
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+
+    const form      = document.getElementById('quoteForm');
+    const btn       = document.getElementById('quoteSubmitBtn');
+    const successEl = document.getElementById('quoteSuccess');
+    const formWrap  = document.getElementById('quoteFormWrap');
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const name  = document.getElementById('qName').value.trim();
+      const org   = document.getElementById('qOrg').value.trim();
+      const phone = document.getElementById('qPhone').value.trim();
+      const email = document.getElementById('qEmail').value.trim();
+      const need  = document.getElementById('qNeed').value.trim();
+
+      if (!name || !phone || !email || !need) return;
+
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+
+      const orderDate = new Date().toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' });
+      const params = {
+        to_email:         BUSINESS_EMAIL,
+        customer_name:    name,
+        customer_phone:   phone,
+        customer_email:   email,
+        customer_address: org || '—',
+        order_items:      'QUOTE REQUEST: ' + need,
+        order_total:      'N/A – Quote Request',
+        order_date:       orderDate,
+      };
+
+      try {
+        await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params);
+      } catch (_) {}
+
+      // Also save to Google Sheet
+      try {
+        fetch(DRIVE_SCRIPT_URL, {
+          method: 'POST',
+          body: JSON.stringify({
+            order_date:       orderDate,
+            customer_name:    name,
+            customer_phone:   phone,
+            customer_email:   email,
+            customer_address: org || '—',
+            order_items:      'QUOTE REQUEST: ' + need,
+            order_total:      'N/A',
+          }),
+        });
+      } catch (_) {}
+
+      gtag('event', 'quote_request', { event_category: 'lead', event_label: 'homepage_form' });
+
+      formWrap.style.display = 'none';
+      successEl.style.display = 'block';
+    });
+  })();
+</script>
 </body>
 </html>
