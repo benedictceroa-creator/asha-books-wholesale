@@ -392,9 +392,14 @@
 
   <!-- ── Catalogue ── -->
   <div class="cat-wrapper">
-    <p style="font-size:.85rem;color:#777;line-height:1.75;max-width:780px;margin-bottom:20px;">
-      Asha Books has supplied English Bibles wholesale across India for over 30 years, serving churches, Bible colleges, Christian bookstores, and mission organisations. We carry <strong>KJV, NIV, NKJV, NASB, ESV</strong> and other major translations in every format — pocket Bibles, standard, large print, giant print, study, journaling, thinline, and leathersoft editions. Wholesale pricing applies to orders of <strong>₹25,000 or more</strong>; our team responds to every enquiry within 24 hours.
-    </p>
+    <div style="max-width:780px;margin-bottom:20px;">
+      <p style="font-size:.85rem;color:#777;line-height:1.75;margin-bottom:10px;">
+        Asha Books has supplied English Bibles wholesale across India for over 30 years, serving churches, Bible colleges, Christian bookstores, and mission organisations. We carry <strong>KJV, NIV, NKJV, NASB, ESV</strong> and other major translations in every format — pocket Bibles, standard, large print, giant print, study, journaling, thinline, and leathersoft editions. Wholesale pricing applies to orders of <strong>₹25,000 or more</strong>; our team responds to every enquiry within 24 hours.
+      </p>
+      <p style="font-size:.85rem;color:#777;line-height:1.75;">
+        Whether you need <strong>KJV Bibles for a church anniversary gift</strong>, <strong>NIV Bibles for a Bible college intake</strong>, pocket Bibles for a mission trip, or large print Bibles for elderly members, we'll match you with the right edition at the right bulk price. Popular wholesale titles include the NIV Life Application Bible, KJV Personal Size Reference Bible, NKJV Study Bible, and ESV Classic Reference Bible.
+      </p>
+    </div>
     <div class="cat-controls">
       <div class="search-wrap">
         <label class="ctrl-label" for="catSearch">Search</label>
@@ -500,6 +505,186 @@
     <div class="book-grid" id="bookGrid"></div>
     <p class="cat-empty" id="catEmpty">No products match your filters.</p>
   </div>
+
+  <!-- ── Popular Titles + FAQ ── -->
+  <style>
+    .eb-extra { max-width: 1160px; margin: 0 auto; padding: 0 28px 64px; }
+    .eb-section-label {
+      font-size: .72rem; font-weight: 700; color: var(--muted);
+      text-transform: uppercase; letter-spacing: .1em; margin-bottom: 16px;
+    }
+    .eb-section-title {
+      font-size: 1.15rem; font-weight: 800; color: var(--dark); margin-bottom: 6px;
+    }
+    .eb-section-sub {
+      font-size: .84rem; color: var(--muted); margin-bottom: 24px; line-height: 1.6;
+    }
+    .eb-popular-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px; margin-bottom: 52px;
+    }
+    .eb-popular-card {
+      background: var(--light); border: 1px solid var(--border);
+      border-radius: 12px; padding: 20px;
+    }
+    .eb-popular-name {
+      font-size: .9rem; font-weight: 800; color: var(--dark); margin-bottom: 8px;
+    }
+    .eb-popular-desc { font-size: .8rem; color: var(--muted); line-height: 1.65; }
+    .eb-faq-item {
+      border: 1px solid var(--border); border-radius: 12px;
+      margin-bottom: 10px; background: var(--bg);
+    }
+    .eb-faq-item[open] { border-color: #e8b4bc; }
+    .eb-faq-item summary {
+      list-style: none; cursor: pointer; padding: 18px 20px;
+      font-size: .88rem; font-weight: 700; color: var(--dark);
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 12px; user-select: none;
+    }
+    .eb-faq-item summary::-webkit-details-marker { display: none; }
+    .eb-faq-chevron {
+      width: 20px; height: 20px; flex-shrink: 0;
+      color: var(--red); transition: transform .22s ease;
+    }
+    .eb-faq-item[open] .eb-faq-chevron { transform: rotate(180deg); }
+    .eb-faq-answer {
+      padding: 0 20px 18px;
+      font-size: .83rem; color: var(--muted); line-height: 1.75;
+    }
+    .eb-divider {
+      border: none; border-top: 1px solid var(--border); margin: 0 0 44px;
+    }
+    @media (max-width: 640px) {
+      .eb-extra { padding: 0 16px 48px; }
+      .eb-popular-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+
+  <div class="eb-extra">
+
+    <hr class="eb-divider">
+
+    <!-- Popular Titles -->
+    <p class="eb-section-label">Popular Wholesale Titles</p>
+    <h2 class="eb-section-title">Frequently Ordered by Churches &amp; Colleges</h2>
+    <p class="eb-section-sub">These titles are among the most commonly ordered by our wholesale customers across India.</p>
+    <div class="eb-popular-grid">
+      <div class="eb-popular-card">
+        <p class="eb-popular-name">NIV Life Application Study Bible</p>
+        <p class="eb-popular-desc">The most widely used study Bible in India — extensive application notes, concordance, and maps. Available in hardcover, leathersoft, and bonded leather at wholesale pricing.</p>
+      </div>
+      <div class="eb-popular-card">
+        <p class="eb-popular-name">KJV Personal Size Reference Bible</p>
+        <p class="eb-popular-desc">Compact format with cross-references, red-letter text, and a complete concordance. A top choice for church anniversary gifts and congregation distribution.</p>
+      </div>
+      <div class="eb-popular-card">
+        <p class="eb-popular-name">NKJV Study Bible</p>
+        <p class="eb-popular-desc">Comprehensive study notes and book introductions in a modern English translation. Widely used by Bible colleges and theological institutions across India.</p>
+      </div>
+      <div class="eb-popular-card">
+        <p class="eb-popular-name">NIV Thinline Pocket Bible</p>
+        <p class="eb-popular-desc">Lightweight and easy to carry — ideal for mission trips, youth camps, and outreach programmes. Available in softcover and leathersoft bindings.</p>
+      </div>
+      <div class="eb-popular-card">
+        <p class="eb-popular-name">KJV Giant Print Reference Bible</p>
+        <p class="eb-popular-desc">Large, comfortable text with cross-references and maps. A popular choice for elderly congregation members and retirement home outreach ministries.</p>
+      </div>
+      <div class="eb-popular-card">
+        <p class="eb-popular-name">ESV Classic Reference Bible</p>
+        <p class="eb-popular-desc">A literal modern translation favoured by seminaries and Bible study groups. Available in hardcover, genuine leather, and TruTone editions at wholesale rates.</p>
+      </div>
+    </div>
+
+    <hr class="eb-divider">
+
+    <!-- FAQ -->
+    <p class="eb-section-label">Frequently Asked Questions</p>
+    <h2 class="eb-section-title">English Bibles Wholesale — FAQs</h2>
+
+    <details class="eb-faq-item">
+      <summary>What is the wholesale price of English Bibles in India?
+        <svg class="eb-faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </summary>
+      <p class="eb-faq-answer">Wholesale prices for English Bibles start from ₹118 per copy, depending on translation, size, and binding. Wholesale pricing applies to orders of ₹25,000 or more. Submit an enquiry and our team will respond with a firm price within 24 hours. You can also WhatsApp us at +91 9949475491 for a same-day quote.</p>
+    </details>
+
+    <details class="eb-faq-item">
+      <summary>Which English Bible translations are available wholesale?
+        <svg class="eb-faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </summary>
+      <p class="eb-faq-answer">We supply all major English translations wholesale, including KJV (King James Version), NIV (New International Version), NKJV (New King James Version), NASB (New American Standard Bible), and ESV (English Standard Version). We carry 552 titles across these translations in pocket, standard, large print, giant print, study, journaling, thinline, and leathersoft formats.</p>
+    </details>
+
+    <details class="eb-faq-item">
+      <summary>Can churches buy Bibles in bulk at a discounted price in India?
+        <svg class="eb-faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </summary>
+      <p class="eb-faq-answer">Yes. Asha Books offers wholesale pricing on English Bible orders of ₹25,000 or more — whether you're a church, Bible college, Christian bookstore, or mission organisation. We've served thousands of churches across India for over 30 years, from small congregations ordering 25 Bibles for an anniversary to large churches ordering 2,000 Bibles for outreach.</p>
+    </details>
+
+    <details class="eb-faq-item">
+      <summary>What is the difference between KJV, NIV, NKJV, and ESV for church use?
+        <svg class="eb-faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </summary>
+      <p class="eb-faq-answer">The KJV (1611) is preferred by many traditional churches for its historic language and familiarity. The NIV is a widely readable modern translation popular in contemporary churches and colleges. The NKJV updates the KJV language while retaining its style — a popular middle ground. The ESV is a precise modern translation favoured by seminaries and Reformed traditions. Unsure which is right for your congregation? Contact our team and we'll help you choose.</p>
+    </details>
+
+    <details class="eb-faq-item">
+      <summary>How do I order English Bibles wholesale from Asha Books?
+        <svg class="eb-faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </summary>
+      <p class="eb-faq-answer">Browse the catalogue above, add titles to your order list, and proceed to the order enquiry form. Alternatively, WhatsApp us at +91 9949475491 with a list of what you need and we'll send a quote within the same day. Our team will confirm stock availability and final pricing before dispatch.</p>
+    </details>
+
+    <details class="eb-faq-item">
+      <summary>Does Asha Books supply English Bibles to customers outside India?
+        <svg class="eb-faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </summary>
+      <p class="eb-faq-answer">Yes — we have supplied Bibles wholesale to customers in the UAE, Sri Lanka, Australia, New Zealand, and other countries with significant Indian Christian communities. Contact us to discuss international shipping options and pricing for your order.</p>
+    </details>
+
+  </div>
+
+  <!-- ── FAQ Schema ── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the wholesale price of English Bibles in India?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Wholesale prices for English Bibles start from ₹118 per copy, depending on translation, size, and binding. Wholesale pricing applies to orders of ₹25,000 or more. Submit an enquiry and our team will respond with a firm price within 24 hours." }
+      },
+      {
+        "@type": "Question",
+        "name": "Which English Bible translations are available wholesale?",
+        "acceptedAnswer": { "@type": "Answer", "text": "We supply KJV, NIV, NKJV, NASB, and ESV — 552 titles across pocket, standard, large print, giant print, study, journaling, thinline, and leathersoft formats." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can churches buy Bibles in bulk at a discounted price in India?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Asha Books offers wholesale pricing on English Bible orders of ₹25,000 or more — for churches, Bible colleges, Christian bookstores, and mission organisations. We've served thousands of churches across India for over 30 years." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between KJV, NIV, NKJV, and ESV for church use?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The KJV is preferred by traditional churches for its historic language. The NIV is a widely readable modern translation popular in contemporary churches. The NKJV updates KJV language while retaining its style. The ESV is a precise modern translation favoured by seminaries and Reformed traditions." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I order English Bibles wholesale from Asha Books?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Browse the catalogue, add titles to your order list, and submit an enquiry. Alternatively, WhatsApp us at +91 9949475491 with a list of what you need and we'll send a quote within the same day." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Asha Books supply English Bibles to customers outside India?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — we have supplied Bibles wholesale to customers in the UAE, Sri Lanka, Australia, New Zealand, and other countries with significant Indian Christian communities." }
+      }
+    ]
+  }
+  </script>
 
   <!-- ── Order Panel ── -->
   <aside class="order-panel" id="orderPanel">
