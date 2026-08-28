@@ -379,6 +379,13 @@
       font-size: .84rem; color: #2d6a4f; line-height: 1.6;
     }
 
+    /* ── Pricing Anchor ── */
+    .pricing-anchor {
+      font-size: .78rem; color: var(--muted); text-align: center;
+      margin-bottom: 28px; line-height: 1.8;
+    }
+    .pricing-anchor strong { color: var(--red); font-weight: 700; }
+
     /* ── Referral Banner ── */
     .referral-banner {
       display: none; width: 100%; max-width: 640px;
@@ -418,8 +425,6 @@
     }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
   <script src="products.js"></script>
 </head>
 <body>
@@ -437,6 +442,8 @@
     <em>Let us know what you need and we will offer you our lowest Wholesale pricing!</em>
   </p>
   <div class="divider"></div>
+
+  <p class="pricing-anchor">English Bibles from <strong>₹118/copy</strong> &nbsp;&middot;&nbsp; 10% off Indian Language Bibles &nbsp;&middot;&nbsp; 25% off Apparel &nbsp;&middot;&nbsp; Min. order ₹25,000</p>
 
   <!-- ── Trust Stats Strip ── -->
   <div class="trust-strip">
@@ -911,6 +918,28 @@
   <span class="wa-tooltip">Need help picking the right Bibles?<br>Talk to us at +91 9949475491</span>
 </a>
 <script>
+  // ── Lazy-load jsPDF libs on first use ─────────────────────
+  var _pdfLibsReady = false, _pdfLibsLoading = false, _pdfLibsCbs = [];
+  function loadPDFLibs(cb) {
+    if (_pdfLibsReady) { cb(); return; }
+    _pdfLibsCbs.push(cb);
+    if (_pdfLibsLoading) return;
+    _pdfLibsLoading = true;
+    var s1 = document.createElement('script');
+    s1.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+    s1.onload = function() {
+      var s2 = document.createElement('script');
+      s2.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js';
+      s2.onload = function() {
+        _pdfLibsReady = true;
+        _pdfLibsCbs.forEach(function(fn) { fn(); });
+        _pdfLibsCbs = [];
+      };
+      document.head.appendChild(s2);
+    };
+    document.head.appendChild(s1);
+  }
+
   // ── Shared config ──────────────────────────────────────────
   const _EJS_KEY  = 'bmSMC1DYj9ZV_N8fd';
   const _EJS_SVC  = 'service_6dv3lhe';
@@ -1024,12 +1053,12 @@
       captureLead(name, email, phone, 'homepage_strip');
       formWrap.style.display = 'none';
       success.style.display = 'block';
-      setTimeout(function() { generatePriceListPDF(); closeModal(); formWrap.style.display = ''; success.style.display = ''; submitBtn.disabled = false; submitBtn.textContent = 'Download PDF →'; form.reset(); }, 800);
+      loadPDFLibs(function() { generatePriceListPDF(); closeModal(); formWrap.style.display = ''; success.style.display = ''; submitBtn.disabled = false; submitBtn.textContent = 'Download PDF →'; form.reset(); });
     });
 
     // Auto-download if redirected from a sub-page with ?dl=1
     if (new URLSearchParams(window.location.search).get('dl') === '1') {
-      setTimeout(generatePriceListPDF, 800);
+      loadPDFLibs(generatePriceListPDF);
     }
   })();
 
@@ -1065,7 +1094,7 @@
       captureLead('', email, '', 'exit_intent');
       formWrap.style.display = 'none';
       success.style.display = 'block';
-      setTimeout(function() { generatePriceListPDF(); closePopup(); formWrap.style.display = ''; success.style.display = ''; form.reset(); }, 800);
+      loadPDFLibs(function() { generatePriceListPDF(); closePopup(); formWrap.style.display = ''; success.style.display = ''; form.reset(); });
     });
   })();
 
