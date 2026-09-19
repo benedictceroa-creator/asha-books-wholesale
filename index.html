@@ -509,6 +509,16 @@
 
   </div>
 
+  <!-- ── International Banner ── -->
+  <div style="width:100%;max-width:1160px;background:#f0f7ff;border:1px solid #c2d9f5;border-radius:14px;padding:18px 24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:24px;">
+    <span style="font-size:1.4rem;">🌍</span>
+    <div style="flex:1;min-width:200px;">
+      <strong style="display:block;font-size:.9rem;font-weight:800;color:#1a1a1a;margin-bottom:3px;">Ordering from the UAE, USA or Australia?</strong>
+      <span style="font-size:.82rem;color:#555;">We ship internationally to Indian churches and ministries worldwide.</span>
+    </div>
+    <a href="international.html" style="background:#1a1a1a;color:#fff;border-radius:8px;padding:10px 20px;font-size:.84rem;font-weight:700;text-decoration:none;white-space:nowrap;flex-shrink:0;transition:background .18s;" onmouseover="this.style.background='#333'" onmouseout="this.style.background='#1a1a1a'">International orders &rarr;</a>
+  </div>
+
   <!-- ── Download Price List Strip ── -->
   <div class="dl-strip">
     <div class="dl-strip-text">
@@ -543,6 +553,27 @@
           <div class="quote-field">
             <label for="qEmail">Email Address</label>
             <input type="email" id="qEmail" placeholder="e.g. john@church.org" required autocomplete="email">
+          </div>
+        </div>
+        <div class="quote-row">
+          <div class="quote-field">
+            <label for="qCountry">Country</label>
+            <select id="qCountry" autocomplete="country">
+              <option value="India" selected>India</option>
+              <option value="United Arab Emirates">United Arab Emirates</option>
+              <option value="United States">United States</option>
+              <option value="Australia">Australia</option>
+              <option value="United Kingdom">United Kingdom</option>
+              <option value="Canada">Canada</option>
+              <option value="New Zealand">New Zealand</option>
+              <option value="Sri Lanka">Sri Lanka</option>
+              <option value="Singapore">Singapore</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="quote-field">
+            <label for="qCity">City</label>
+            <input type="text" id="qCity" placeholder="e.g. Dubai, Colombo, Toronto" autocomplete="address-level2">
           </div>
         </div>
         <div class="quote-field">
@@ -660,6 +691,14 @@
         <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
       </summary>
       <p class="faq-answer">We serve churches, Bible colleges, Christian bookstores, mission organisations, and corporate gifting clients across India — and have done so for over 30 years. Whether you need 50 Bibles for a mission trip or 2,000 for a church anniversary, we can help.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>
+        Does Asha Books supply Bibles internationally?
+        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </summary>
+      <p class="faq-answer">Yes — we regularly supply wholesale Bibles to Indian churches and ministries in the UAE, USA, Australia, and other countries. We supply English Bibles as well as Telugu, Tamil, and other Indian language Bibles to diaspora congregations abroad. <a href="international.html" style="color:var(--red);font-weight:700;">Learn more about our international supply &rarr;</a></p>
     </details>
 
   </div>
@@ -813,8 +852,8 @@
         },
         {
           "@type": "Question",
-          "name": "Does Asha Books supply Bibles wholesale outside India?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Yes — Asha Books has supplied customers in the UAE, Sri Lanka, Australia and other countries. Contact us at +91 9949475491 or via WhatsApp to discuss international shipping for your order." }
+          "name": "Does Asha Books supply Bibles internationally?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes — Asha Books regularly supplies wholesale Bibles to Indian churches and ministries in the UAE, USA, Australia, and other countries. We supply English Bibles as well as Telugu, Tamil, and other Indian language Bibles to diaspora congregations abroad. Contact us at +91 9949475491 or via WhatsApp to discuss international shipping for your order." }
         },
         {
           "@type": "Question",
@@ -1123,25 +1162,28 @@
 
     form.addEventListener('submit', async function(e) {
       e.preventDefault();
-      const name  = document.getElementById('qName').value.trim();
-      const org   = document.getElementById('qOrg').value.trim();
-      const phone = document.getElementById('qPhone').value.trim();
-      const email = document.getElementById('qEmail').value.trim();
-      const need  = document.getElementById('qNeed').value.trim();
+      const name    = document.getElementById('qName').value.trim();
+      const org     = document.getElementById('qOrg').value.trim();
+      const phone   = document.getElementById('qPhone').value.trim();
+      const email   = document.getElementById('qEmail').value.trim();
+      const country = document.getElementById('qCountry').value;
+      const city    = document.getElementById('qCity').value.trim();
+      const need    = document.getElementById('qNeed').value.trim();
 
       if (!name || !phone || !email || !need) return;
 
       btn.disabled = true;
       btn.textContent = 'Sending…';
 
+      const location = [city, country].filter(Boolean).join(', ');
       const orderDate = new Date().toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' });
       const params = {
         to_email:         BUSINESS_EMAIL,
         customer_name:    name,
         customer_phone:   phone,
         customer_email:   email,
-        customer_address: org || '—',
-        order_items:      'QUOTE REQUEST: ' + need,
+        customer_address: [org, location].filter(Boolean).join(' | ') || '—',
+        order_items:      'QUOTE REQUEST [' + country + ']: ' + need,
         order_total:      'N/A – Quote Request',
         order_date:       orderDate,
       };
@@ -1159,8 +1201,8 @@
             customer_name:    name,
             customer_phone:   phone,
             customer_email:   email,
-            customer_address: org || '—',
-            order_items:      'QUOTE REQUEST: ' + need,
+            customer_address: [org, location].filter(Boolean).join(' | ') || '—',
+            order_items:      'QUOTE REQUEST [' + country + ']: ' + need,
             order_total:      'N/A',
           }),
         });
